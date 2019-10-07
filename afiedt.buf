@@ -1,0 +1,5 @@
+create table empleado_simple (
+empleado_id numeric(10,0) not null,
+nombre varchar2(40) not null
+)
+/

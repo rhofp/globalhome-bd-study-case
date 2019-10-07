@@ -1,0 +1,75 @@
+-SQL> connect SYS as sysdba
+Connected to an idle instance.
+SYS-SQL> startup
+ORACLE instance started.
+
+Total System Global Area  822083584 bytes                                       
+Fixed Size                  8663040 bytes                                       
+Variable Size             322961408 bytes                                       
+Database Buffers          482344960 bytes                                       
+Redo Buffers                8114176 bytes                                       
+Database mounted.
+Database opened.
+SYS-SQL> show user
+USER is "SYS"
+SYS-SQL> select count(*) from user_objects;
+
+  COUNT(*)                                                                      
+----------                                                                      
+     51258                                                                      
+
+SYS-SQL> drop user jorge0307 cascade; -- borra todo los objetos asociados al user
+  2  ;
+drop user jorge0307 cascade; -- borra todo los objetos asociados al user
+                           *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SYS-SQL> 
+SYS-SQL> create user rodrigo0307 identified by bases123
+  2  quota unlimited on users;
+
+User created.
+
+SYS-SQL> grant create table, create session to rodrigo0307;
+
+Grant succeeded.
+
+SYS-SQL> connect rodrigo0307
+Connected.
+RODRIGO0307-SQL> selectr count(*) fro user_objects;
+SP2-0734: unknown command beginning "selectr co..." - rest of line ignored.
+RODRIGO0307-SQL> 
+RODRIGO0307-SQL> select count(*) from user_objects;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         0                                                                      
+
+RODRIGO0307-SQL> clear
+RODRIGO0307-SQL> create table empleado_simple (
+  2  empleado_id numeric(10,0) not null,
+  3  nombre varchar2(40) not null;
+nombre varchar2(40) not null
+                           *
+ERROR at line 3:
+ORA-00907: missing right parenthesis 
+
+
+RODRIGO0307-SQL> edit
+Wrote file afiedt.buf
+
+  1  create table empleado_simple (
+  2  empleado_id numeric(10,0) not null,
+  3  nombre varchar2(40) not null
+  4* )
+RODRIGO0307-SQL> run
+  1  create table empleado_simple (
+  2  empleado_id numeric(10,0) not null,
+  3  nombre varchar2(40) not null
+  4* )
+
+Table created.
+
+RODRIGO0307-SQL> spool off
