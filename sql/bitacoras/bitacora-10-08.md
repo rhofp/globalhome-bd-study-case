@@ -2,19 +2,51 @@
 
 ## Tema 07
 
-### Autentificandose
+### Tablas virtuales
 
-Si se ejecuta 
+No se puden generar tablas virtuales de tablas virtuales.
 
-```shell
-sqlplus sys as sysdba
+### Default
+
+Si es `default` usualmente se declaran como opcionales.
+
+Pero, aunque se le ponga como `not null` no hay problema.
+
+### col
+
+Es una sentencia de **sqlplus** y por lo tanto **no** lleva `;`
+
+```sql
+col <nombre_columna> format a<tamaño>
 ```
 
-como otro usuario, sqlplus utiliza un archivo de contraseñas que sirve para que nuestros usuarios se autentifiquen.
+### run
 
-### Tablas temporales
+* Te ejecuta la última sentencia SQL
+* Corre un script editado por `edit`
 
-* Session. Espacio de memoria done se guarda la información del usuario conectado. Aqui se guardan las tablas temporales.
+### constraints
 
-* Usualmente las **tablas temporales** se usan para implmentar los carritos de compras.
-* Se usan para aplicar estadística, los datos a procesar se desnormalizan.
+¿Como consultar los constraints?
+
+Para ello podemos consultar el *diccionario de datos*
+
+### Ver constraints (están en el dictionary)
+
+```sql
+desc dictionary
+
+desc user_tables
+select table_name from user_tables;
+
+desc user_constraints
+select constraint_name, constraint_type, 
+	search_condition
+	from user_constraints	
+	where table_name='PUESTO';
+```
+
+Internamente Oracle implementa un `not null` con un `check`
+
+*¿Puedo hacer ref. a una columna que no sea pk, en la llave primaria? Solo si la columna tiene `unique`*
+
