@@ -25,9 +25,14 @@ create table cuenta(
 		(es_ahorro =1 and es_inversion=1 and num_cuenta='INAH%')
 	),
 	constraint cuenta_saldo_chk check ( saldo >= 1500 ),
-
+	constraint cuenta_fecha_baja_chk check (fecha_baja > fecha_baja + 30)
 
 );
+
+create unique index cuenta_rfc_titular_iuk on cuenta(rfc,titular);
+create index cuenta_titular_ix on cuenta(titular);
+
+
 create table movimiento_cuenta(
 	num_movimiento numeric(18,0) constraint movimiento_cuenta_num_movimiento_pk 
 		primary key,
@@ -60,7 +65,9 @@ create table cuenta_inversion(
 
 	cuenta_id not null constraint cuenta_inversion_cuenta_id_fk 
 		references cuenta(cuenta_id),
-	constraint cuenta_inversion_cuenta_id_pk primary key(cuenta_id)
+	constraint cuenta_inversion_cuenta_id_pk primary key(cuenta_id),
+	constraint cuenta_inversion_dia_retiro_chk 
+		check (dia_retiro not in('1','2','3','4','5','26','27','28','29','30','31'))
 );
 
 create sequence seq_cuenta
