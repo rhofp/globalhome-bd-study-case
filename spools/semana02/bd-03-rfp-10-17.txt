@@ -1,0 +1,396 @@
+RODRIGO0307-SQL> !ls
+
+RODRIGO0307-SQL> create table salon(
+  2  salon id number(10,0) constraint salon_pk primary key );
+salon id number(10,0) constraint salon_pk primary key )
+         *
+ERROR at line 2:
+ORA-00907: missing right parenthesis 
+
+
+RODRIGO0307-SQL> edit
+Wrote file afiedt.buf
+
+  1  create table salon(
+  2* salon id number(10,0) constraint salon_pk primary key )
+RODRIGO0307-SQL> create table salon(
+  2  salon id number(10,0) constraint salon_pk primary key );
+salon id number(10,0) constraint salon_pk primary key )
+         *
+ERROR at line 2:
+ORA-00907: missing right parenthesis 
+
+
+RODRIGO0307-SQL> edit
+Wrote file afiedt.buf
+
+  1  create table salon(
+  2* salon id number(10,0) constraint salon_pk primary key )
+RODRIGO0307-SQL> create table cliente(
+  2  cliente_id number(10,0) constraint cliente_pk primary key,
+  3  nombre varchar2(40) not null );
+
+Table created.
+
+RODRIGO0307-SQL> create table salon(
+  2  salon_id number(10,0) constraint salon_pk constraint primary key );
+salon_id number(10,0) constraint salon_pk constraint primary key )
+                      *
+ERROR at line 2:
+ORA-02253: constraint specification not allowed here 
+
+
+RODRIGO0307-SQL> create table salon(
+  2  salon_id number(10,0) constraint salon_pk primary key );
+
+Table created.
+
+RODRIGO0307-SQL> create table boleto(
+  2  boleto_id number(10,0) constraint boleto_pk primary key,
+  3  num_asiento number(5,0) not null,
+  4  seccion varchar2(5) not null,
+  5  salon_id constraint boleto_salon_id_fk references salon(salon_id),
+  6  cliente_id constraint boleto_cliente_id_fk references
+  7  cliente(cliente_id));
+
+Table created.
+
+RODRIGO0307-SQL> create unique indez boleto_iuk on
+  2  boleto(num_asiento,seccion,salon_id);
+create unique indez boleto_iuk on
+              *
+ERROR at line 1:
+ORA-00968: missing INDEX keyword 
+
+
+RODRIGO0307-SQL> create unique index boleto_iuk on
+  2  boleto(num_asiento,seccion,salon_id);
+
+Index created.
+
+RODRIGO0307-SQL> create index boleto_cliente_id_ix on
+  2  boleto(cliente_id);
+
+Index created.
+
+RODRIGO0307-SQL> create index cliente_nombre_ix on
+  2  cliente( upper(nombre));
+
+Index created.
+
+RODRIGO0307-SQL> desc user_indexes
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ INDEX_NAME                                NOT NULL VARCHAR2(128)
+ INDEX_TYPE                                         VARCHAR2(27)
+ TABLE_OWNER                               NOT NULL VARCHAR2(128)
+ TABLE_NAME                                NOT NULL VARCHAR2(128)
+ TABLE_TYPE                                         VARCHAR2(11)
+ UNIQUENESS                                         VARCHAR2(9)
+ COMPRESSION                                        VARCHAR2(13)
+ PREFIX_LENGTH                                      NUMBER
+ TABLESPACE_NAME                                    VARCHAR2(30)
+ INI_TRANS                                          NUMBER
+ MAX_TRANS                                          NUMBER
+ INITIAL_EXTENT                                     NUMBER
+ NEXT_EXTENT                                        NUMBER
+ MIN_EXTENTS                                        NUMBER
+ MAX_EXTENTS                                        NUMBER
+ PCT_INCREASE                                       NUMBER
+ PCT_THRESHOLD                                      NUMBER
+ INCLUDE_COLUMN                                     NUMBER
+ FREELISTS                                          NUMBER
+ FREELIST_GROUPS                                    NUMBER
+ PCT_FREE                                           NUMBER
+ LOGGING                                            VARCHAR2(3)
+ BLEVEL                                             NUMBER
+ LEAF_BLOCKS                                        NUMBER
+ DISTINCT_KEYS                                      NUMBER
+ AVG_LEAF_BLOCKS_PER_KEY                            NUMBER
+ AVG_DATA_BLOCKS_PER_KEY                            NUMBER
+ CLUSTERING_FACTOR                                  NUMBER
+ STATUS                                             VARCHAR2(8)
+ NUM_ROWS                                           NUMBER
+ SAMPLE_SIZE                                        NUMBER
+ LAST_ANALYZED                                      DATE
+ DEGREE                                             VARCHAR2(40)
+ INSTANCES                                          VARCHAR2(40)
+ PARTITIONED                                        VARCHAR2(3)
+ TEMPORARY                                          VARCHAR2(1)
+ GENERATED                                          VARCHAR2(1)
+ SECONDARY                                          VARCHAR2(1)
+ BUFFER_POOL                                        VARCHAR2(7)
+ FLASH_CACHE                                        VARCHAR2(7)
+ CELL_FLASH_CACHE                                   VARCHAR2(7)
+ USER_STATS                                         VARCHAR2(3)
+ DURATION                                           VARCHAR2(15)
+ PCT_DIRECT_ACCESS                                  NUMBER
+ ITYP_OWNER                                         VARCHAR2(128)
+ ITYP_NAME                                          VARCHAR2(128)
+ PARAMETERS                                         VARCHAR2(1000)
+ GLOBAL_STATS                                       VARCHAR2(3)
+ DOMIDX_STATUS                                      VARCHAR2(12)
+ DOMIDX_OPSTATUS                                    VARCHAR2(6)
+ FUNCIDX_STATUS                                     VARCHAR2(8)
+ JOIN_INDEX                                         VARCHAR2(3)
+ IOT_REDUNDANT_PKEY_ELIM                            VARCHAR2(3)
+ DROPPED                                            VARCHAR2(3)
+ VISIBILITY                                         VARCHAR2(9)
+ DOMIDX_MANAGEMENT                                  VARCHAR2(14)
+ SEGMENT_CREATED                                    VARCHAR2(3)
+ ORPHANED_ENTRIES                                   VARCHAR2(3)
+ INDEXING                                           VARCHAR2(7)
+
+RODRIGO0307-SQL> select index_name,index_type,uniqueness from user_indexes;
+
+INDEX_NAME                                                                      
+--------------------------------------------------------------------------------
+INDEX_TYPE                  UNIQUENES                                           
+--------------------------- ---------                                           
+PUESTO_PK                                                                       
+NORMAL                      UNIQUE                                              
+                                                                                
+PUESTO_CLAVE_UK                                                                 
+NORMAL                      UNIQUE                                              
+                                                                                
+PUESTO_TC_PK                                                                    
+NORMAL                      UNIQUE                                              
+                                                                                
+
+INDEX_NAME                                                                      
+--------------------------------------------------------------------------------
+INDEX_TYPE                  UNIQUENES                                           
+--------------------------- ---------                                           
+PUESTO_TC_CLAVE_UK                                                              
+NORMAL                      UNIQUE                                              
+                                                                                
+EMPLEADO_PK                                                                     
+NORMAL                      UNIQUE                                              
+                                                                                
+EMPLEADO_TC_PK                                                                  
+NORMAL                      UNIQUE                                              
+                                                                                
+
+INDEX_NAME                                                                      
+--------------------------------------------------------------------------------
+INDEX_TYPE                  UNIQUENES                                           
+--------------------------- ---------                                           
+PENSIONADA_PK                                                                   
+NORMAL                      UNIQUE                                              
+                                                                                
+PENSIONADA_EMPLEADO_PK                                                          
+NORMAL                      UNIQUE                                              
+                                                                                
+QUINCENA_PK                                                                     
+NORMAL                      UNIQUE                                              
+                                                                                
+
+INDEX_NAME                                                                      
+--------------------------------------------------------------------------------
+INDEX_TYPE                  UNIQUENES                                           
+--------------------------- ---------                                           
+NOMINA_PK                                                                       
+NORMAL                      UNIQUE                                              
+                                                                                
+CLIENTE_PK                                                                      
+NORMAL                      UNIQUE                                              
+                                                                                
+CLIENTE_NOMBRE_IX                                                               
+FUNCTION-BASED NORMAL       NONUNIQUE                                           
+                                                                                
+
+INDEX_NAME                                                                      
+--------------------------------------------------------------------------------
+INDEX_TYPE                  UNIQUENES                                           
+--------------------------- ---------                                           
+SALON_PK                                                                        
+NORMAL                      UNIQUE                                              
+                                                                                
+BOLETO_PK                                                                       
+NORMAL                      UNIQUE                                              
+                                                                                
+BOLETO_IUK                                                                      
+NORMAL                      UNIQUE                                              
+                                                                                
+
+INDEX_NAME                                                                      
+--------------------------------------------------------------------------------
+INDEX_TYPE                  UNIQUENES                                           
+--------------------------- ---------                                           
+BOLETO_CLIENTE_ID_IX                                                            
+NORMAL                      NONUNIQUE                                           
+                                                                                
+
+16 rows selected.
+
+RODRIGO0307-SQL> edit
+Wrote file afiedt.buf
+
+  1  select index_name,index_type,uniqueness 
+  2  from user_indexes
+  3* where table_name in ('CLIENTE','BOLETO','SALON')
+RODRIGO0307-SQL> run
+  1  select index_name,index_type,uniqueness 
+  2  from user_indexes
+  3* where table_name in ('CLIENTE','BOLETO','SALON')
+
+INDEX_NAME                                                                      
+--------------------------------------------------------------------------------
+INDEX_TYPE                  UNIQUENES                                           
+--------------------------- ---------                                           
+BOLETO_PK                                                                       
+NORMAL                      UNIQUE                                              
+                                                                                
+BOLETO_IUK                                                                      
+NORMAL                      UNIQUE                                              
+                                                                                
+BOLETO_CLIENTE_ID_IX                                                            
+NORMAL                      NONUNIQUE                                           
+                                                                                
+
+INDEX_NAME                                                                      
+--------------------------------------------------------------------------------
+INDEX_TYPE                  UNIQUENES                                           
+--------------------------- ---------                                           
+CLIENTE_PK                                                                      
+NORMAL                      UNIQUE                                              
+                                                                                
+CLIENTE_NOMBRE_IX                                                               
+FUNCTION-BASED NORMAL       NONUNIQUE                                           
+                                                                                
+SALON_PK                                                                        
+NORMAL                      UNIQUE                                              
+                                                                                
+
+6 rows selected.
+
+RODRIGO0307-SQL> col index_name format a20
+RODRIGO0307-SQL> col index_type format a15
+RODRIGO0307-SQL> run
+  1  select index_name,index_type,uniqueness 
+  2  from user_indexes
+  3* where table_name in ('CLIENTE','BOLETO','SALON')
+
+INDEX_NAME           INDEX_TYPE      UNIQUENES                                  
+-------------------- --------------- ---------                                  
+BOLETO_PK            NORMAL          UNIQUE                                     
+BOLETO_IUK           NORMAL          UNIQUE                                     
+BOLETO_CLIENTE_ID_IX NORMAL          NONUNIQUE                                  
+CLIENTE_PK           NORMAL          UNIQUE                                     
+CLIENTE_NOMBRE_IX    FUNCTION-BASED  NONUNIQUE                                  
+                     NORMAL                                                     
+                                                                                
+SALON_PK             NORMAL          UNIQUE                                     
+
+6 rows selected.
+
+RODRIGO0307-SQL> select table_name from user_tables;
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+EMPLEADO_SIMPLE                                                                 
+EMPLEADO_TEMP                                                                   
+PUESTO                                                                          
+CALCULO_SUELDO                                                                  
+INCIDENCIA                                                                      
+PUESTO_TC                                                                       
+EMPLEADO                                                                        
+EMPLEADO_TC                                                                     
+PENSIONADA                                                                      
+PENSIONADA_EMPLEADO                                                             
+QUINCENA                                                                        
+
+TABLE_NAME                                                                      
+--------------------------------------------------------------------------------
+NOMINA                                                                          
+MY_TABLE                                                                        
+EMPLEADO_EXT                                                                    
+EMPLEADO_EXT2                                                                   
+CLIENTE                                                                         
+SALON                                                                           
+BOLETO                                                                          
+
+18 rows selected.
+
+RODRIGO0307-SQL> col table_name format a20
+RODRIGO0307-SQL> select table_name from user_tables;
+
+TABLE_NAME                                                                      
+--------------------                                                            
+EMPLEADO_SIMPLE                                                                 
+EMPLEADO_TEMP                                                                   
+PUESTO                                                                          
+CALCULO_SUELDO                                                                  
+INCIDENCIA                                                                      
+PUESTO_TC                                                                       
+EMPLEADO                                                                        
+EMPLEADO_TC                                                                     
+PENSIONADA                                                                      
+PENSIONADA_EMPLEADO                                                             
+QUINCENA                                                                        
+
+TABLE_NAME                                                                      
+--------------------                                                            
+NOMINA                                                                          
+MY_TABLE                                                                        
+EMPLEADO_EXT                                                                    
+EMPLEADO_EXT2                                                                   
+CLIENTE                                                                         
+SALON                                                                           
+BOLETO                                                                          
+
+18 rows selected.
+
+RODRIGO0307-SQL> connect sys as sysdba
+Connected.
+SYS-SQL> grant create view to rodrigo0307
+  2  ;
+
+Grant succeeded.
+
+SYS-SQL> disconnect
+Disconnected from Oracle Database 18c Enterprise Edition Release 18.0.0.0.0 - Production
+Version 18.3.0.0.0
+-SQL> connect rodrigo0307
+Connected.
+RODRIGO0307-SQL> ls
+SP2-0042: unknown command "ls" - rest of line ignored.
+RODRIGO0307-SQL> create or replace view v_empleado as
+  2  select e.empleado_id, e.nombre,pe.porcentaje
+  3  from empleado e, pensionada_empleado pe
+  4  where e.empleado = pe.empleado_id;
+where e.empleado = pe.empleado_id
+      *
+ERROR at line 4:
+ORA-00904: "E"."EMPLEADO": invalid identifier 
+
+
+RODRIGO0307-SQL> edit
+Wrote file afiedt.buf
+
+  1  create or replace view v_empleado as
+  2  select e.empleado_id, e.nombre,pe.porcentaje
+  3  from empleado e, pensionada_empleado pe
+  4* where e.empleado_id = pe.empleado_id
+RODRIGO0307-SQL> run
+  1  create or replace view v_empleado as
+  2  select e.empleado_id, e.nombre,pe.porcentaje
+  3  from empleado e, pensionada_empleado pe
+  4* where e.empleado_id = pe.empleado_id
+
+View created.
+
+RODRIGO0307-SQL> des v_empleado
+SP2-0734: unknown command beginning "des v_empl..." - rest of line ignored.
+RODRIGO0307-SQL> desc v_empleado
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPLEADO_ID                               NOT NULL NUMBER(10)
+ NOMBRE                                    NOT NULL VARCHAR2(40)
+ PORCENTAJE                                         NUMBER(5,2)
+
+RODRIGO0307-SQL> select * from v_empleado;
+
+no rows selected
+
+RODRIGO0307-SQL> spool off
