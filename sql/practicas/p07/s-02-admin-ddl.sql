@@ -3,20 +3,20 @@
 --@Descripcion: Creador de usuarios
 
 prompt Conectandose al usuario rfp_p0703_admin:
-connect rfp_p0703_admin
+connect rfp_p0703_admin/bases123
 
 create table cuenta(
-	cuenta_id number(38,0) constraint cuenta_pk primary key );
-	-- titular varchar2(100) not null,
-	-- rfc varchar2(13) not null,
-	-- num_cuenta varchar2(18) not null constraint cta_num_cuenta_uk unique,
-	-- clave_sucursal varchar2(5) not null,
-	-- fecha_registro date not null default sysdate,
-	-- fecha_baja date,
-	-- saldo number(18,2) not null,
-	-- es_ahorro number(1,0) not null,
-	-- es_inversion number(1,0) not null
-	-- cuenta_aval_id constraint cta_cuenta_aval_id_fk references cuenta(cuenta_id),
+	cuenta_id number(38,0) constraint cuenta_pk primary key,
+	titular varchar2(100) not null, 
+	rfc varchar2(13) not null,
+	num_cuenta varchar2(18) not null constraint cta_num_cuenta_uk unique,
+	clave_sucursal varchar2(5) not null,
+	fecha_registro date default sysdate not null,
+	fecha_baja date,
+	saldo number(18,2) not null,
+	es_ahorro number(1,0) not null,
+	es_inversion number(1,0) not null,
+	cuenta_aval_id constraint cta_cuenta_aval_id_fk references cuenta(cuenta_id) );
 
 	-- constraint cta_es_ahorro_o_es_inv_chk check( es_ahorro > 0 or es_inversion > 0 ),
 	-- constraint cta_num_cuenta_chk check(
