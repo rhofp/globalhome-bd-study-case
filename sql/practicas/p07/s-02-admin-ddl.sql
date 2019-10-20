@@ -19,9 +19,9 @@ create table cuenta(
 	cuenta_aval_id constraint cta_cuenta_aval_id_fk references cuenta(cuenta_id),
 	constraint cta_es_ahorro_o_es_inv_chk check( es_ahorro > 0 or es_inversion > 0 ),
 	constraint cta_num_cuenta_chk check(
-		(es_ahorro =1 and es_inversion=0 and num_cuenta='AH%')	or
-		(es_ahorro =0 and es_inversion=1 and num_cuenta='IN%')	or
-		(es_ahorro =1 and es_inversion=1 and num_cuenta='INAH%')
+		(es_ahorro=1 and es_inversion=0 and num_cuenta like 'AH%') or
+		(es_ahorro=0 and es_inversion=1 and num_cuenta like 'IN%') or
+		(es_ahorro=1 and es_inversion=1 and num_cuenta like 'INAH%')
 	),
 	constraint cta_saldo_chk check ( saldo >= 1500 ),
 	constraint cta_fecha_baja_chk check (fecha_baja > ADD_MONTHS(fecha_registro,1) )
@@ -60,7 +60,7 @@ create table cuenta_inversion(
 	cuenta_id not null constraint cta_inversion_cuenta_id_fk 
 		references cuenta(cuenta_id),
 	porcentaje_interes number(5,2) not null,
-	dia_retiro char not null,
+	dia_retiro char(2) not null,
 	constraint cuenta_inversion_pk primary key(cuenta_id),
 	constraint cta_inversion_dia_retiro_chk 
 		check (dia_retiro not in('1','2','3','4','26','27','28','29','30','31'))
