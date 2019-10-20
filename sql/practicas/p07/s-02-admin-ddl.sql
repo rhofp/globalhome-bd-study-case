@@ -77,3 +77,10 @@ select seq_cuenta.nextval from dual;
 
 prompt Imprimiendo el valor de la secuencia seq_cuenta sin incrementar ...
 select seq_cuenta.currval from dual;
+
+prompt Creando vista v_cuenta_movimiento
+create or replace view v_cuenta_movimiento(
+	num_cuenta,num_movimiento,importe,concepto,tipo_movimiento,fecha_baja
+) as select num_cuenta,fecha_baja,num_movimiento,importe,concepto,tipo_movimiento
+from cuenta c, movimiento_cuenta mc
+where c.cuenta_id = mc.cuenta_id;
