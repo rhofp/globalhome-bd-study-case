@@ -11,14 +11,15 @@ grant create session to rfp_p0703_admin;
 
 Prompt creando al usuario rfp_p0703_invitado
 --completar
-create user rfp_p0703_invitado identified by invitado123 quota 0m on users;
+create user rfp_p0703_invitado identified by invitado123;
 grant create session to rfp_p0703_invitado;
 
 Prompt creando roles
 --Completar
 create role p0703_admin_rol;
 grant create table, create view, create synonym, 
-	create sequence, create trigger, create procedure to p0703_admin_rol;	
+	create sequence, create trigger, create procedure to 
+	p0703_admin_rol with admin option;	
 
 Prompt Asignar el rol p0703_admin_rol a rfp_p0703_admin
 grant p0703_admin_rol to rfp_p0703_admin;

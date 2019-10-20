@@ -24,7 +24,7 @@ create table cuenta(
 		(es_ahorro =1 and es_inversion=1 and num_cuenta='INAH%')
 	),
 	constraint cta_saldo_chk check ( saldo >= 1500 ),
-	constraint cta_fecha_baja_chk check (fecha_baja > fecha_baja + 30)
+	constraint cta_fecha_baja_chk check (fecha_baja > ADD_MONTHS(fecha_registro,1) )
 );
 create unique index cta_rfc_titular_iuk on cuenta(rfc,titular);
 create index cta_titular_iuk on cuenta(lower(titular));

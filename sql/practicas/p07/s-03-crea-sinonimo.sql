@@ -9,8 +9,8 @@ grant select on cuenta to rfp_p0703_invitado;
 grant create synonym to rfp_p0703_invitado;
 
 connect rfp_p0703_invitado/invitado123
-create or replace private synonym s_cuenta_cliente for rfp_p0703_admin.cuenta;
+create or replace synonym s_cuenta_cliente for rfp_p0703_admin.cuenta;
 
-select * from cuenta;	
+select * from s_cuenta_cliente;
 
 disconnect

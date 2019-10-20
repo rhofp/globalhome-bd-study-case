@@ -12,16 +12,16 @@
 define sys_pwd=system
 
 --username del usuario del previo
-define p7_previo_usr=jrc_p07_previo
+define p7_previo_usr=rfp_p07_previo
 --password del usuario del previo
-define p7_previo_usr_pwd=jorge
+define p7_previo_usr_pwd=bases123
 
 --username del usuario admin
-define p7_usr_admin=jrc_p0703_admin
+define p7_usr_admin=rfp_p0703_admin
 --password del usuario admin
-define p7_usr_admin_pwd=jorge
+define p7_usr_admin_pwd=bases123
 
 --username del usuario invitado
-define p7_usr_invitado=jrc_p0703_invitado
+define p7_usr_invitado=rfp_p0703_invitado
 --password del usuario invitado
-define p7_usr_invitado_pwd=jorge
+define p7_usr_invitado_pwd=invitado123
