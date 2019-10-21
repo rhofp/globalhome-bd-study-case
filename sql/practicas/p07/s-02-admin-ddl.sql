@@ -37,7 +37,7 @@ create table movimiento_cuenta(
 	importe number(18,2) not null,
 	tipo_movimiento char not null,
 	concepto varchar2(50),
-	comprobante blob, --checar tipo de dato
+	comprobante blob, 
 	fecha_movimiento date not null,
 	constraint movimiento_cuenta_pk primary key(cuenta_id,num_movimiento)
 );
@@ -61,7 +61,7 @@ create table cuenta_inversion(
 		references cuenta(cuenta_id),
 	porcentaje_interes number(5,2) not null,
 	dia_retiro char(2) not null,
-	constraint cuenta_inversion_pk primary key(cuenta_id),
+	constraint cta_inversion_pk primary key(cuenta_id),
 	constraint cta_inversion_dia_retiro_chk 
 		check (dia_retiro not in('1','2','3','4','26','27','28','29','30','31'))
 );
