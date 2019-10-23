@@ -1,3 +1,0 @@
-insert into puesto(puesto_id,nivel,clave,sueldo)
-values(10,'a','li',30000)
-/
