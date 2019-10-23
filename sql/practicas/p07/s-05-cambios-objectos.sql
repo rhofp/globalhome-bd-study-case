@@ -17,14 +17,13 @@ alter table cuenta add constraint cta_tipo_cuenta_chk
 	check( tipo_cuenta in ('I','A'));
 alter table cuenta rename column titular to nombre_titular;
 alter table movimiento_cuenta rename to operacion_cuenta;
------------------- NOQUEDA LO DE LA PK -------------------------------------
-alter table operacion_cuenta rename 
-	constraint movimiento_cuenta_pk to operacion_cuenta_pk;
-alter table operacion_cuenta add operacion_cuenta_id number(18,0);
-alter table operacion_cuenta modify constraint operacion_cuenta_pk 
-	primary key(operacion_cuenta_id);	
--- agregar uk a cuenta_id y a num_movimiento	
-----------------------------------------------------------------------------
+
+alter table operacion_cuenta drop constraint movimiento_cuenta_pk;
+alter table operacion_cuenta add operacion_cuenta_id number(18,0)
+	constraint operacion_cuenta_pk primary key;	
+-- agregar uk a cuenta_id y a num_movimiento ?
+alter table operacion_cuenta add 
+	constraint op_cta_cuenta_id_num_mov_uk unique(cuenta_id,num_movimiento);
 
 alter table operacion_cuenta modify importe number(20,2);
 
