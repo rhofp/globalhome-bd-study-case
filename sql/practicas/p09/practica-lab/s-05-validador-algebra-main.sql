@@ -1,9 +1,9 @@
 --@Autor(es):       Jorge Rodríguez
 --@Fecha creación:  dd/mm/yyyy
---@Descripción:    Práctica 9 Complementaria - Validador, script inicial.
+--@Descripción:    Práctica 9 - Validador, script inicial.
 
-define p_archivo_validador_main='s-05-validador-fx-main.sql'
-define p_archivo_validador ='s-05p-validador-fx-consultas.plb'
+define p_archivo_validador_main='s-05-validador-algebra-main.sql'
+define p_archivo_validador ='s-05p-validador-algebra-relacional.plb'
 
 --Modificar las siguientes variables en caso de ser necesario.
 --En scripts reales no debeń incluirse passwords. Solo se hace para
@@ -13,7 +13,7 @@ define p_archivo_validador ='s-05p-validador-fx-consultas.plb'
 --
 -- Nombre del usuario empleado en esta práctica
 --
-define p_usuario='jrc_p0903_fx'
+define p_usuario='jrc_p0903_algebra'
 
 --
 -- Password del usuario empleado en esta práctica
@@ -28,14 +28,12 @@ define p_sys_password='system'
 --
 -- Nombre del archivo de respuestas
 --
-define p_archivo_respuestas='s-04-fx-respuestas.sql'
+define p_archivo_respuestas='s-04-algebra-respuestas.sql'
 
 --Invocando validador
 whenever sqlerror exit rollback
 set serveroutput on
 set verify off
-set feedback off
---set echo off
 
 @@&&p_archivo_validador
 
