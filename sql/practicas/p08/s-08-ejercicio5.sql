@@ -18,4 +18,4 @@ when not matched then insert
 	(ci.cliente_id,ci.nombre,ci.ap_paterno,ci.ap_materno,ci.curp,ci.fecha_nacimiento,
 	ci.email);
 
---commit;	
+commit;	
