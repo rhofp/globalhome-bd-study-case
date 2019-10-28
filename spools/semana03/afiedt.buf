@@ -1,0 +1,4 @@
+update prod set cantidad = 100 + (
+select cantidad from prod where prod_id = 1001)
+where prod_id = 1001
+/

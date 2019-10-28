@@ -1,0 +1,355 @@
+RODRIGO0308-SQL> -----------------------------------------------------------
+RODRIGO0308-SQL> ------------      TRANSACCION 1       ---------------------
+RODRIGO0308-SQL> -----------------------------------------------------------
+RODRIGO0308-SQL> select * prod;
+select * prod
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001                                                                      
+      1002         20                                                           
+      1003         15                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> update prod set cantidad = 300 where prod_id = 1001;
+
+1 row updated.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001        300                                                           
+      1002         20                                                           
+      1003         15                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> update prod set cantidad = 500 where prod_id = 1002;
+
+1 row updated.
+
+RODRIGO0308-SQL> update prod set cantidad = 700 where prod_id = 1003;
+
+1 row updated.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001        300                                                           
+      1002        500                                                           
+      1003        700                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> update prod set cantidad = 100 where prod_id = 1001;
+
+1 row updated.
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001        100                                                           
+      1002        500                                                           
+      1003        700                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> update prod
+  2  set cantidad = 150
+  3  where prod_id = 1002;
+
+1 row updated.
+
+RODRIGO0308-SQL> rollback;
+
+Rollback complete.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001        100                                                           
+      1002        500                                                           
+      1003        700                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001        200                                                           
+      1002        500                                                           
+      1003        600                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> update prod set cantidad = 100 where prod_id = 1001;
+
+1 row updated.
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001        100                                                           
+      1002        500                                                           
+      1003        600                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> set transaction isolation
+  2  level serializable;
+
+Transaction set.
+
+RODRIGO0308-SQL> -- otro nivel de aislamiento ;)
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001        100                                                           
+      1002        500                                                           
+      1003        600                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> select cantidad from prod where prod_id = 1001;
+
+  CANTIDAD                                                                      
+----------                                                                      
+       100                                                                      
+
+RODRIGO0308-SQL> select cantidad from prod where prod_id = 1001;
+
+  CANTIDAD                                                                      
+----------                                                                      
+       100                                                                      
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001         35                                                           
+      1002        500                                                           
+      1003        600                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> set transaction isolation level serializable;
+
+Transaction set.
+
+RODRIGO0308-SQL> select * from prod where cantidad = 35;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001         35                                                           
+
+RODRIGO0308-SQL> select * from prod where cantidad = 35;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001         35                                                           
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from prod where cantidad = 35;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1006         35                                                           
+      1001         35                                                           
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> update prod set cantidad = 5 where prod_id = 1001;
+
+1 row updated.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1006         35                                                           
+      1001          5                                                           
+      1002        500                                                           
+      1003        600                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+6 rows selected.
+
+RODRIGO0308-SQL> select * from prod where prod_id = 1001;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001          5                                                           
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from prod where prod_id = 1001;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001          5                                                           
+
+RODRIGO0308-SQL> delete from prod where prod != 1001;
+delete from prod where prod != 1001
+                       *
+ERROR at line 1:
+ORA-00904: "PROD": invalid identifier 
+
+
+RODRIGO0308-SQL> delete from prod where prod_id!= 1001;
+
+5 rows deleted.
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * prod;
+select * prod
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001          5                                                           
+
+RODRIGO0308-SQL> 
+RODRIGO0308-SQL> update prod set cantidad = 50 where prod_id = 1001;
+
+1 row updated.
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001         50                                                           
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001         20                                                           
+
+RODRIGO0308-SQL> select * from concierto;
+
+NUM_ASIENTO    OCUPADO NOMBRE                                                   
+----------- ---------- --------------------                                     
+          1          0                                                          
+          2          0                                                          
+          3          0                                                          
+
+RODRIGO0308-SQL> select ocupado from concierto where num_asiento =1;
+
+   OCUPADO                                                                      
+----------                                                                      
+         0                                                                      
+
+RODRIGO0308-SQL> update concierto set ocupado = 1, nombre='Karina'
+  2  where num_asiento=1;
+
+1 row updated.
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from concierto;
+
+NUM_ASIENTO    OCUPADO NOMBRE                                                   
+----------- ---------- --------------------                                     
+          1          1 Karina                                                   
+          2          0                                                          
+          3          0                                                          
+
+RODRIGO0308-SQL> select * from concierto;
+
+NUM_ASIENTO    OCUPADO NOMBRE                                                   
+----------- ---------- --------------------                                     
+          1          1 KarinaFuriosa                                            
+          2          0                                                          
+          3          0                                                          
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select ocupado from concierto where num_asiento=2;
+
+   OCUPADO                                                                      
+----------                                                                      
+         0                                                                      
+
+RODRIGO0308-SQL> select ocupado from concierto where num_asiento=2
+  2  for update;
+
+   OCUPADO                                                                      
+----------                                                                      
+         0                                                                      
+
+RODRIGO0308-SQL> update concierto set ocupado=1, nombre='pato'
+  2  where num_asiento=2;
+
+1 row updated.
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from concierto;
+
+NUM_ASIENTO    OCUPADO NOMBRE                                                   
+----------- ---------- --------------------                                     
+          1          1 KarinaFuriosa                                            
+          2          1 pato                                                     
+          3          0                                                          
+
+RODRIGO0308-SQL> spool off

@@ -1,0 +1,20 @@
+RODRIGO0308-SQL> update prod
+  2  set cantidad = 100 where prod_id = 1001;
+
+1 row updated.
+
+RODRIGO0308-SQL> commit;
+
+Commit complete.
+
+RODRIGO0308-SQL> select * from prod;
+
+   PROD_ID   CANTIDAD                                                           
+---------- ----------                                                           
+      1001        100                                                           
+      1002         20                                                           
+      1003         15                                                           
+      1004          5                                                           
+      1005         12                                                           
+
+RODRIGO0308-SQL> spool off
