@@ -1,0 +1,205 @@
+-SQL> connect rodrigo0309
+Connected.
+RODRIGO0309-SQL> select 1+1;
+select 1+1
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+RODRIGO0309-SQL> select 1+1 from dual;
+
+       1+1                                                                      
+----------                                                                      
+         2                                                                      
+
+RODRIGO0309-SQL> select cos(90) from dual;
+
+   COS(90)                                                                      
+----------                                                                      
+-.44807362                                                                      
+
+RODRIGO0309-SQL> select cos(3.1415/2) from dual;
+
+COS(3.1415/2)                                                                   
+-------------                                                                   
+   .000046327                                                                   
+
+RODRIGO0309-SQL> select sysdate from dual;
+
+SYSDATE                                                                         
+------------------                                                              
+29-OCT-19                                                                       
+
+RODRIGO0309-SQL> select upper('hola') from dual;
+
+UPPE                                                                            
+----                                                                            
+HOLA                                                                            
+
+RODRIGO0309-SQL> desc dual;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DUMMY                                              VARCHAR2(1)
+
+RODRIGO0309-SQL> select * from dual;
+
+D                                                                               
+-                                                                               
+X                                                                               
+
+RODRIGO0309-SQL> create table test(id number);
+
+Table created.
+
+RODRIGO0309-SQL> select 1+1 from test;
+
+no rows selected
+
+RODRIGO0309-SQL> insert into test values(1);
+
+1 row created.
+
+RODRIGO0309-SQL> insert into test values(2);
+
+1 row created.
+
+RODRIGO0309-SQL> insert into test values(3);
+
+1 row created.
+
+RODRIGO0309-SQL> insert into test values(4);
+
+1 row created.
+
+RODRIGO0309-SQL> insert into test values(5);
+
+1 row created.
+
+RODRIGO0309-SQL> select 1+1 from test;
+
+       1+1                                                                      
+----------                                                                      
+         2                                                                      
+         2                                                                      
+         2                                                                      
+         2                                                                      
+         2                                                                      
+
+RODRIGO0309-SQL> select 5*id suma from test;
+
+      SUMA                                                                      
+----------                                                                      
+         5                                                                      
+        10                                                                      
+        15                                                                      
+        20                                                                      
+        25                                                                      
+
+RODRIGO0309-SQL> select * from test;
+
+        ID                                                                      
+----------                                                                      
+         1                                                                      
+         2                                                                      
+         3                                                                      
+         4                                                                      
+         5                                                                      
+
+RODRIGO0309-SQL> select id||' * 5 = '||5*id producto from test;
+
+PRODUCTO                                                                        
+--------------------------------------------------------------------------------
+1 * 5 = 5                                                                       
+2 * 5 = 10                                                                      
+3 * 5 = 15                                                                      
+4 * 5 = 20                                                                      
+5 * 5 = 25                                                                      
+
+RODRIGO0309-SQL> select id||' * 5 = '||5*id
+  2  "tabla del cinco" from test;
+
+tabla del cinco                                                                 
+--------------------------------------------------------------------------------
+1 * 5 = 5                                                                       
+2 * 5 = 10                                                                      
+3 * 5 = 15                                                                      
+4 * 5 = 20                                                                      
+5 * 5 = 25                                                                      
+
+RODRIGO0309-SQL> col "tabla del cinco" format a20
+RODRIGO0309-SQL> select id||' * 5 = '||5*id
+  2  "tabla del cinco" from test;
+
+tabla del cinco                                                                 
+--------------------                                                            
+1 * 5 = 5                                                                       
+2 * 5 = 10                                                                      
+3 * 5 = 15                                                                      
+4 * 5 = 20                                                                      
+5 * 5 = 25                                                                      
+
+RODRIGO0309-SQL> select id||' * 5 = '||5*id producto
+  2  from test order by producto desc;
+
+PRODUCTO                                                                        
+--------------------------------------------------------------------------------
+5 * 5 = 25                                                                      
+4 * 5 = 20                                                                      
+3 * 5 = 15                                                                      
+2 * 5 = 10                                                                      
+1 * 5 = 5                                                                       
+
+RODRIGO0309-SQL> select id||' * 5 = '||5*id producto
+  2  from test
+  3  where 5*id <= 15;
+
+PRODUCTO                                                                        
+--------------------------------------------------------------------------------
+1 * 5 = 5                                                                       
+2 * 5 = 10                                                                      
+3 * 5 = 15                                                                      
+
+RODRIGO0309-SQL> --- no podemos usar el alias en el wherer
+RODRIGO0309-SQL> --- solo en la clausula order by
+RODRIGO0309-SQL> select id as identificador
+  2  from test
+  3  where identificador = 1;
+where identificador = 1
+      *
+ERROR at line 3:
+ORA-00904: "IDENTIFICADOR": invalid identifier 
+
+
+RODRIGO0309-SQL> select id as identificador
+  2  from test
+  3  where id > 1;
+
+IDENTIFICADOR                                                                   
+-------------                                                                   
+            2                                                                   
+            3                                                                   
+            4                                                                   
+            5                                                                   
+
+RODRIGO0309-SQL> edit
+Wrote file afiedt.buf
+
+  1  select id as identificador
+  2  from test
+  3  where id > 1
+  4* order by identificador
+RODRIGO0309-SQL> run
+  1  select id as identificador
+  2  from test
+  3  where id > 1
+  4* order by identificador
+
+IDENTIFICADOR                                                                   
+-------------                                                                   
+            2                                                                   
+            3                                                                   
+            4                                                                   
+            5                                                                   
+
+RODRIGO0309-SQL> spool off

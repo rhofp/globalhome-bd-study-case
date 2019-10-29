@@ -36,3 +36,35 @@ where region_iso='MX-OAX';
 select id,clave,nombre,municipio,codigo_gps, 
 codigo_iata, ultima_revision from aeropuerto
 where region_iso='MX-CHP';
+
+--CONSULTA 7
+
+select decode(
+	tipo,	
+	'seaplane_base','B',
+	'medium_airport','M',
+	'small_airport','S',
+	'closed','C',
+	'large_airport','L',
+	'heliport', 'H'
+) clave_tipo,upper(tipo)
+from aeropuerto;
+
+-- CONSULTA 9
+-- Creo que esta consulta es una modificación de la 8
+select nvl(municipio,'NN') municipio from aeropuerto;
+
+-- CONSULTA 11
+select nombre, municipio,path,
+nvl(length(nombre),0)+
+nvl(length(municipio),0)+
+nvl(length(path),0) total_longitud from (
+	select nombre, municipio, 
+	substr(
+		wikipedia_link, 
+		instr(wikipedia_link,'/',1,4),
+		length(wikipedia_link)-1
+	) path
+	from aeropuerto 
+	where tipo='small_airport' and region_iso='MX-BCS'
+);
