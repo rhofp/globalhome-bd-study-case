@@ -45,7 +45,6 @@ from aeropuerto
 where region_iso='MX-CHP';
 
 --CONSULTA 7
-
 select decode(
 	tipo,	
 	'seaplane_base','B',
@@ -54,7 +53,7 @@ select decode(
 	'closed','C',
 	'large_airport','L',
 	'heliport', 'H'
-) clave_tipo,upper(tipo)
+) "CLAVE_TIPO", upper(tipo) "TIPO"
 from aeropuerto;
 
 -- CONSULTA 9
