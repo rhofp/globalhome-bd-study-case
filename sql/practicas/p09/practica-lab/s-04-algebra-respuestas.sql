@@ -31,7 +31,7 @@ select clave_grupo, asignatura_id from curso where cupo_maximo = 30);
 create table consulta_4 as(
 select * from profesor where apellido_paterno='FLORES'
 union all
-select  * from profesor where apellido_materno='GUTIERREZ'
+select  * from profesor where apellido_paterno='GUTIERREZ'
 union all
 select * from profesor where nombre='HUGO');
 -- No estoy seguro de que se deba agregar HUGO
