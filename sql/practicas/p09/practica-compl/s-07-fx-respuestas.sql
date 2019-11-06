@@ -22,11 +22,12 @@ intersect
 select id,nombre,clave,municipio, 
 to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
 from aeropuerto where tipo='closed'	;
+
 -- CONSULTA 3
 select 
 nombre,
-to_char(Abs(latitud*10002.29/90),'99999D9999') as lat_cartesiana, 
-to_char(Abs(longitud*10002.29/90),'99999D9999') as long_cartesiana,
+to_char(abs(latitud*10002.29/90),'99999D9999') as lat_cartesiana, 
+to_char(abs(longitud*10002.29/90),'99999D9999') as long_cartesiana,
 latitud,
 longitud
 from aeropuerto
