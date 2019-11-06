@@ -21,11 +21,11 @@ select * from plan_estudios where fecha_fin is not null;
 
 -- CONSULTA 3
 create table consulta_3 as(
-select clave_grupo from curso where asignatura_id = 13
-union
-select clave_grupo from curso where asignatura_id = 11
+select clave_grupo, asignatura_id from curso where asignatura_id = 13
+union all
+select clave_grupo, asignatura_id from curso where asignatura_id = 11
 intersect
-select clave_grupo from curso where cupo_maximo = 30);
+select clave_grupo, asignatura_id from curso where cupo_maximo = 30);
 
 --CONSULTA 4
 create table consulta_4 as(
