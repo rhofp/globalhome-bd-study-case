@@ -4,7 +4,7 @@
 --@Descripcion: Consultas SQL
 
 prompt Conectando como el usuario kfrf_p09_algebra 
-connect kfrf_p09_algebra /practica9
+connect kfrf_p09_algebra/practica9
 
 -- AUN NO IMPLEMENTO LAS TABLAS QUE INDICA LA PRÁCTICA
 
@@ -34,6 +34,7 @@ union all
 select  * from profesor where apellido_materno='GUTIERREZ'
 union all
 select * from profesor where nombre='HUGO');
+-- No estoy seguro de que se deba agregar HUGO
 
 -- CONSULTA 5
 create table consulta_5 as(
