@@ -46,7 +46,7 @@ select estudiante_id from estudiante where plan_estudios_id =2);
 create table consulta_6 as
 select lower(nombre) nombre,creditos, creditos+2 "creditos_propuestos" from asignatura where
 asignatura_requerida_id is not null 
-minus
+minus -- se puede hacer con un instersect y se cambia el predicado del segundo where
 select lower(nombre) nombre,creditos , creditos+2 "creditos_propuestos" from asignatura where 
 creditos>8 order by creditos;
 --alter table consulta_6 rename column NOMBRE to nombre;
