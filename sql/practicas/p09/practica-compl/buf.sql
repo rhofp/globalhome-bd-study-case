@@ -7,15 +7,17 @@ prompt Conectando como el usuario kfrf_p0903_fx
 connect kfrf_p0903_fx/practica9
 
 --col path format a20
-col nombre format a15
-col municipio format a15
+col nombre format a10
+col municipio format a10
+col ultima_revision format a40
 
--- CONSULTA 3
-select 
-nombre,
-to_char(abs(latitud*10002.29/90),'99999D9999') as lat_cartesiana, 
-to_char(abs(longitud*10002.29/90),'99999D9999') as long_cartesiana,
-latitud,
-longitud
+-- CONSULTA 5
+select id,clave,nombre,municipio,codigo_gps, codigo_iata, 
+trim(to_char(ultima_revision,'day' ))||', '||
+trim(to_char(ultima_revision,'month'))||' '|| 
+to_char(ultima_revision,'dd')||' of ' ||
+trim(to_char(ultima_revision,'yyyy'))||' at '||
+trim(to_char(ultima_revision,'hh24:mi:ss'))
+"ULTIMA_REVISION"
 from aeropuerto
-where region_iso='MX-OAX';
+where region_iso='MX-CHP';
