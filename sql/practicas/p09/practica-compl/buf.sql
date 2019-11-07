@@ -6,10 +6,10 @@
 prompt Conectando como el usuario kfrf_p0903_fx 
 connect kfrf_p0903_fx/practica9
 
---col path format a20
---col nombre format a10
---col municipio format a10
---col ultima_revision format a40
+col path format a20
+col nombre format a10
+col municipio format a10
+col ultima_revision format a30
 --col CLAVE_TIPO format a10
 col path format a15
 -- CONSULTA 11

@@ -9,21 +9,26 @@ connect kfrf_p0903_fx/practica9
 -- AUN NO IMPLEMENTO LAS TABLAS QUE INDICA LA PRÁCTICA
 
 -- CONSULTA 1
+create table consulta_1 as(
 select id,nombre,clave,municipio, 
 to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
 from aeropuerto where 
-	ultima_revision>=to_date('08/2012','mm/yyyy') 
-intersect
-select id,nombre,clave,municipio, 
-to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
-from aeropuerto where 	
+	ultima_revision>=to_date('08/2012','mm/yyyy') and	
 	ultima_revision<=to_date('03/2015','mm/yyyy')
 intersect
 select id,nombre,clave,municipio, 
 to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
-from aeropuerto where tipo='closed'	;
+from aeropuerto where tipo='closed'	
+);
+
+--CONSULTA 2  (FUNCIONA)
+create table consulta_2 as(
+Select id,nombre,municipio,region_iso, trunc(((elevacion)/(1/3.281)),3) "elevacion_metros"
+from aeropuerto where pais_iso='MX' and tipo='large_airport');
+
 
 -- CONSULTA 3
+create table consulta_3 as(
 select 
 nombre,
 to_char(abs(latitud*10002.29/90),'99999D9999') as lat_cartesiana, 
@@ -31,9 +36,14 @@ to_char(abs(longitud*10002.29/90),'99999D9999') as long_cartesiana,
 latitud,
 longitud
 from aeropuerto
-where region_iso='MX-OAX';
+where region_iso='MX-OAX'
+);
+
+
+--CONSULTA 4
 
 -- CONSULTA 5
+create table consulta_5 as(
 select id,clave,nombre,municipio,codigo_gps, codigo_iata, 
 trim(to_char(ultima_revision,'day' ))||', '||
 trim(to_char(ultima_revision,'month'))||' '|| 
@@ -42,9 +52,20 @@ trim(to_char(ultima_revision,'yyyy'))||' at '||
 trim(to_char(ultima_revision,'hh24:mi:ss'))
 "ULTIMA_REVISION"
 from aeropuerto
-where region_iso='MX-CHP';
+where region_iso='MX-CHP'
+);
+
+
+--CONSULTA 6 (LISTA) 
+create table consulta_6 as
+select id, ultima_revision, to_date('01-JAN-18')-TRUNC(ultima_revision) "faltan"
+from aeropuerto where(EXTRACT(DAY from ultima_revision)=10 
+or EXTRACT(DAY from ultima_revision)=15) and EXTRACT(MONTH from ultima_revision)=12 
+order by "faltan" desc;
+
 
 --CONSULTA 7
+create table consulta_7 as(
 select decode(
 	tipo,	
 	'seaplane_base','B',
@@ -54,13 +75,52 @@ select decode(
 	'large_airport','L',
 	'heliport', 'H'
 ) "CLAVE_TIPO", upper(tipo) "TIPO"
-from aeropuerto;
+from aeropuerto
+);
+
+
+-- CONSULTA 8 CREO QUE YA SIRVE 
+create table consulta_8 as(
+select "folio", region_iso,municipio,wikipedia_link from(
+	select '00'||to_char(id)||'-'||substr(region_iso,4)||'-'||substr(upper(municipio),-2) 
+	"folio",region_iso,municipio,wikipedia_link from aeropuerto where length(id)=4 
+	union
+	select '0'||to_char(id)||'-'||substr(region_iso,4)||'-'||substr(upper(municipio),-2) 
+	"folio", region_iso,municipio,wikipedia_link from aeropuerto where length(id)=5
+	union
+	select ''||to_char(id)||'-'||substr(region_iso,4)||'-'||substr(upper(municipio),-2)
+	 "folio" , region_iso,municipio,wikipedia_link from aeropuerto where length(id)=6	
+) where wikipedia_link is not null);
+
+--select '00'||id||'-'||substr(region_iso,4)||'-'||substr(upper(municipio),-2) "folio" from aeropuerto where length(id)=4 
+--union
+--select '0'||id||'-'||substr(region_iso,4)||'-'||substr(upper(municipio),-2)  "folio" from aeropuerto where length(id)=5
+--union
+--select ''||id||'-'||substr(region_iso,4)||'-'||substr(upper(municipio),-2)  "folio" from aeropuerto where length(id)=6;
+--select substr(region_iso,4) "region" from aeropuerto;
 
 -- CONSULTA 9
 -- Creo que esta consulta es una modificación de la 8
-select nvl(municipio,'NN') municipio from aeropuerto;
+--select nvl(municipio,'NN') municipio from aeropuerto;
+
+
+--CONSULTA 10 (FUNCIONA)
+create table consulta_10 as(
+select nombre, pagina_web, "parametros" from(
+select nombre, pagina_web, substr(pagina_web,instr(pagina_web,'?',-1,1)+1) "parametros" from aeropuerto where pagina_web is not null and instr(pagina_web,'?',-1,1) > 0
+union all
+select nombre, pagina_web, '(null)' "parametros" from aeropuerto where pagina_web is not null and nullif(instr(pagina_web,'?',-1,1),0) is null)
+);
+
+
+--select nombre, pagina_web, "parametros" from(
+--	select nombre, pagina_web, substr(pagina_web,instr(pagina_web,'?',-1,1)+1) "parametros" from aeropuerto where pagina_web is not null and instr(pagina_web,'?',-1,1) > 0
+--	union all
+--	select nombre, pagina_web, '(null)' "parametros" from aeropuerto where pagina_web is not null and nullif(instr(pagina_web,'?',-1,1),0) is null
+--);
 
 -- CONSULTA 11
+create table consulta_11 as(
 select nombre, municipio,path,
 nvl(length(nombre),0)+
 nvl(length(municipio),0)+
@@ -72,5 +132,6 @@ nvl(length(path),0) total_longitud from (
 		length(wikipedia_link)-1
 	) path
 	from aeropuerto 
-	where tipo='small_airport' and region_iso='MX-BCS'
+	where tipo='small_airport' and region_iso='MX-BCS')
 );
+
