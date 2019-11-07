@@ -6,10 +6,15 @@
 prompt Conectando como el usuario kfrf_p0903_fx 
 connect kfrf_p0903_fx/practica9
 
-col nombre format a10
-col municipio format a10
-col ULTIMA_REVISION format a22
-
---select * from CONSULTA_3 
---minus 
---select * from CONSULTA_R3;
+-- CONSULTA 5
+create table consulta_5 as(
+select id,clave,nombre,municipio,codigo_gps, codigo_iata, 
+trim(to_char(ultima_revision,'day' ))||', '||
+trim(to_char(ultima_revision,'month'))||' '|| 
+trim(to_char(ultima_revision,'dd'))||' of ' ||
+trim(to_char(ultima_revision,'yyyy'))||' at '||
+trim(to_char(ultima_revision,'hh24:mi:ss'))
+"ULTIMA_REVISION"
+from aeropuerto
+where region_iso='MX-CHP'
+);
