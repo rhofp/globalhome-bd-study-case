@@ -6,21 +6,9 @@
 prompt Conectando como el usuario kfrf_p0903_fx 
 connect kfrf_p0903_fx/practica9
 
---col path format a20
---col nombre format a10
---col municipio format a10
-col ultima_revision format a20
---col CLAVE_TIPO format a10
---col path format a15
-col tipo format a10
-
-select id,nombre,clave,municipio,tipo,
-to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
-from aeropuerto where 
-	ultima_revision>=to_date('08/2012','mm/yyyy') and	
-	ultima_revision<=to_date('03/2015','mm/yyyy')
---intersect
---select id,nombre,clave,municipio,tipo,
---to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
---from aeropuerto where 
-and tipo='closed';
+drop table consulta_1;
+drop table consulta_2;
+drop table consulta_3;
+drop table consulta_4;
+drop table consulta_5;
+drop table consulta_6;

@@ -13,7 +13,11 @@ create table consulta_1 as(
 select id,nombre,clave,municipio, 
 to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
 from aeropuerto where 
-	ultima_revision>=to_date('08/2012','mm/yyyy') and	
+	ultima_revision>=to_date('08/2012','mm/yyyy') 
+intersect
+select id,nombre,clave,municipio, 
+to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
+from aeropuerto where 	
 	ultima_revision<=to_date('03/2015','mm/yyyy')
 intersect
 select id,nombre,clave,municipio, 
@@ -23,7 +27,7 @@ from aeropuerto where tipo='closed'
 
 --CONSULTA 2  (FUNCIONA)
 create table consulta_2 as(
-Select id,nombre,municipio,region_iso, trunc(((elevacion)/(1/3.281)),3) "elevacion_metros"
+Select id,nombre,municipio,region_iso, trunc((elevacion/57.785),3) "elevacion_metros"
 from aeropuerto where pais_iso='MX' and tipo='large_airport');
 
 
@@ -58,10 +62,10 @@ where region_iso='MX-CHP'
 
 --CONSULTA 6 (LISTA) 
 create table consulta_6 as
-select id, ultima_revision, to_date('01-JAN-18')-TRUNC(ultima_revision) "faltan"
+select id, EXTRACT(DAY from ultima_revision)||'/diciembre/'||EXTRACT(YEAR from ultima_revision) as ULTIMA_REVISION, to_date('01-JAN-18')-TRUNC(ultima_revision) "FALTAN"
 from aeropuerto where(EXTRACT(DAY from ultima_revision)=10 
 or EXTRACT(DAY from ultima_revision)=15) and EXTRACT(MONTH from ultima_revision)=12 
-order by "faltan" desc;
+order by "FALTAN" desc;
 
 
 --CONSULTA 7
@@ -109,7 +113,7 @@ create table consulta_10 as(
 select nombre, pagina_web, "parametros" from(
 select nombre, pagina_web, substr(pagina_web,instr(pagina_web,'?',-1,1)+1) "parametros" from aeropuerto where pagina_web is not null and instr(pagina_web,'?',-1,1) > 0
 union all
-select nombre, pagina_web, '(null)' "parametros" from aeropuerto where pagina_web is not null and nullif(instr(pagina_web,'?',-1,1),0) is null)
+select nombre, pagina_web, null "parametros" from aeropuerto where pagina_web is not null and nullif(instr(pagina_web,'?',-1,1),0) is null)
 );
 
 

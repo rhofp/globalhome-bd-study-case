@@ -1,7 +1,7 @@
 --@Autor(es):       Jorge Rodríguez
 --@Fecha creación:  dd/mm/yyyy
 --@Descripción:    Práctica 09 complementaria - DDL
-
+connect kfrf_p0903_fx/practica9
 
 create table aeropuerto(
     id                  number(8, 0)      not null,
