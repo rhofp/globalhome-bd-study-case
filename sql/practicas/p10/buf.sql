@@ -6,18 +6,14 @@
 prompt Conectando como el usuario flfr_p1001_subastas 
 connect flfr_p1001_subastas/practica10
 
--- CONSULTA 1
--- Genere un reporte que muestre 
---		nombre del artículo, clave, clave del status 
---		de todos los artículos donados por el artista ‘William Harvey’. 
---	Emplear sintaxis estándar.
+col clave format a15
 
-col nombre format a20
-col clave_articulo format a20
-col clave format a20
+select articulo_id,nombre,clave_articulo
+from articulo a
+join articulo_donado ad using (articulo_id)
+join status_articulo sa using (status_articulo_id)
+join pais p using (pais_id)
+where sa.clave='ENTREGADO' and p.descripcion='BELGICA';
 
-select a.nombre, a.clave_articulo, sa.clave
-from articulo a 
-join status_articulo sa
-on a.status_articulo_id = sa.status_articulo_id;
-where 
+
+
