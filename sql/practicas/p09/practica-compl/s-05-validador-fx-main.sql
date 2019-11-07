@@ -28,7 +28,7 @@ define p_sys_password='system'
 --
 -- Nombre del archivo de respuestas
 --
-define p_archivo_respuestas='s-04-fx-respuestas.sql'
+define p_archivo_respuestas='s-07-fx-respuestas.sql'
 
 --Invocando validador
 whenever sqlerror exit rollback

@@ -10,4 +10,6 @@ col nombre format a10
 col municipio format a10
 --col municipio format a10
 
-select * from CONSULTA_1 minus select * from CONSULTA_R1;
+select * from CONSULTA_3 
+minus 
+select * from CONSULTA_R3;

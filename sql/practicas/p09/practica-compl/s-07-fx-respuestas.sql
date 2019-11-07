@@ -35,10 +35,10 @@ from aeropuerto where pais_iso='MX' and tipo='large_airport');
 create table consulta_3 as(
 select 
 nombre,
-to_char(abs(latitud*10002.29/90),'99999D9999') as lat_cartesiana, 
-to_char(abs(longitud*10002.29/90),'99999D9999') as long_cartesiana,
-latitud,
-longitud
+trunc(abs(latitud*10002.29/90),4) "LAT_CARTESIANA", 
+trunc(abs(longitud*10002.29/90),4) "LONG_CARTESINA",
+trunc(latitud,4) "LATITUD_GRADOS",
+trunc(longitud,4) "LONGITUD_GRADOS"
 from aeropuerto
 where region_iso='MX-OAX'
 );
