@@ -51,7 +51,7 @@ create table consulta_5 as(
 select id,clave,nombre,municipio,codigo_gps, codigo_iata, 
 trim(to_char(ultima_revision,'day' ))||', '||
 trim(to_char(ultima_revision,'month'))||' '|| 
-to_char(ultima_revision,'dd')||' of ' ||
+trim(to_char(ultima_revision,'dd'))||' of ' ||
 trim(to_char(ultima_revision,'yyyy'))||' at '||
 trim(to_char(ultima_revision,'hh24:mi:ss'))
 "ULTIMA_REVISION"
