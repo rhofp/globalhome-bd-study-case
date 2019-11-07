@@ -27,8 +27,11 @@ from aeropuerto where tipo='closed'
 
 --CONSULTA 2  (FUNCIONA)
 create table consulta_2 as(
-Select id,nombre,municipio,region_iso, trunc((elevacion/57.785),3) "elevacion_metros"
-from aeropuerto where pais_iso='MX' and tipo='large_airport');
+Select id,nombre,municipio,region_iso, 
+trunc((elevacion*3.281),3) "elevacion_metros"
+from aeropuerto where pais_iso='MX' and 
+tipo='large_airport'
+);
 
 
 -- CONSULTA 3
@@ -45,6 +48,9 @@ where region_iso='MX-OAX'
 
 
 --CONSULTA 4
+create table consulta_4 as (
+	
+);
 
 -- CONSULTA 5
 create table consulta_5 as(
@@ -57,9 +63,13 @@ where region_iso='MX-CHP'
 
 --CONSULTA 6 (LISTA) 
 create table consulta_6 as
-select id, EXTRACT(DAY from ultima_revision)||'/diciembre/'||EXTRACT(YEAR from ultima_revision) as ULTIMA_REVISION, to_date('01-JAN-18')-TRUNC(ultima_revision) "FALTAN"
-from aeropuerto where(EXTRACT(DAY from ultima_revision)=10 
-or EXTRACT(DAY from ultima_revision)=15) and EXTRACT(MONTH from ultima_revision)=12 
+select id, EXTRACT(DAY from ultima_revision)||
+'/diciembre/'||EXTRACT(YEAR from ultima_revision)
+as ULTIMA_REVISION, TRUNC(to_date('01-JAN-18')-ultima_revision) 
+"FALTAN" from aeropuerto 
+where(EXTRACT(DAY from ultima_revision)=10 
+or EXTRACT(DAY from ultima_revision)=15) and 
+EXTRACT(MONTH from ultima_revision)=12 
 order by "FALTAN" desc;
 
 
