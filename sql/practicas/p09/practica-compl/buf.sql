@@ -6,9 +6,8 @@
 prompt Conectando como el usuario kfrf_p0903_fx 
 connect kfrf_p0903_fx/practica9
 
-drop table consulta_1;
-drop table consulta_2;
-drop table consulta_3;
-drop table consulta_4;
-drop table consulta_5;
-drop table consulta_6;
+col nombre format a10
+col municipio format a10
+--col municipio format a10
+
+select * from CONSULTA_1 minus select * from CONSULTA_R1;

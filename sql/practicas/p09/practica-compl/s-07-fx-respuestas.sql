@@ -11,17 +11,17 @@ connect kfrf_p0903_fx/practica9
 -- CONSULTA 1
 create table consulta_1 as(
 select id,nombre,clave,municipio, 
-to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
+to_char(ultima_revision,'dd/mm/yyyy hh24:mi:ss')||' hrs.' "ULTIMA_REVISION"
 from aeropuerto where 
-	ultima_revision>=to_date('08/2012','mm/yyyy') 
+	ultima_revision>=to_date('10/2012','mm/yyyy') 
 intersect
 select id,nombre,clave,municipio, 
-to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
+to_char(ultima_revision,'dd/mm/yyyy hh24:mi:ss')||' hrs.' "ULTIMA_REVISION"
 from aeropuerto where 	
 	ultima_revision<=to_date('03/2015','mm/yyyy')
 intersect
 select id,nombre,clave,municipio, 
-to_char(ultima_revision,'dd/mm/yyyy hh:mi:ss')||' hrs.' "ULTIMA_REVISION"
+to_char(ultima_revision,'dd/mm/yyyy hh24:mi:ss')||' hrs.' "ULTIMA_REVISION"
 from aeropuerto where tipo='closed'	
 );
 
