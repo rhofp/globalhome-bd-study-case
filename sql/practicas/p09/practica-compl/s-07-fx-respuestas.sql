@@ -65,7 +65,7 @@ where region_iso='MX-CHP'
 create table consulta_6 as
 select id, EXTRACT(DAY from ultima_revision)||
 '/diciembre/'||EXTRACT(YEAR from ultima_revision)
-as ULTIMA_REVISION, TRUNC(to_date('01-JAN-18')-ultima_revision) 
+as ULTIMA_REVISION, to_date('01-JAN-18')-trunc(ultima_revision) 
 "FALTAN" from aeropuerto 
 where(EXTRACT(DAY from ultima_revision)=10 
 or EXTRACT(DAY from ultima_revision)=15) and 
