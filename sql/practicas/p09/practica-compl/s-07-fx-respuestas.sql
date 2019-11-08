@@ -48,9 +48,7 @@ where region_iso='MX-OAX'
 
 
 --CONSULTA 4
-create table consulta_4 as (
-	
-);
+
 
 -- CONSULTA 5
 create table consulta_5 as(
@@ -65,9 +63,8 @@ where region_iso='MX-CHP'
 create table consulta_6 as
 select id, EXTRACT(DAY from ultima_revision)||
 '/diciembre/'||EXTRACT(YEAR from ultima_revision)
-as ULTIMA_REVISION, to_date('01-JAN-18')-trunc(ultima_revision) 
-"FALTAN" from aeropuerto 
-where(EXTRACT(DAY from ultima_revision)=10 
+as ULTIMA_REVISION, to_date('01-JAN-18')-TRUNC(ultima_revision) 
+"FALTAN" from aeropuerto where(EXTRACT(DAY from ultima_revision)=10 
 or EXTRACT(DAY from ultima_revision)=15) and 
 EXTRACT(MONTH from ultima_revision)=12 
 order by "FALTAN" desc;
