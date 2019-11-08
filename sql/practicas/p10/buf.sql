@@ -6,14 +6,7 @@
 prompt Conectando como el usuario flfr_p1001_subastas 
 connect flfr_p1001_subastas/practica10
 
-col clave format a15
 
-select articulo_id,nombre,clave_articulo
-from articulo a
-join articulo_donado ad using (articulo_id)
-join status_articulo sa using (status_articulo_id)
-join pais p using (pais_id)
-where sa.clave='ENTREGADO' and p.descripcion='BELGICA';
 
 
 
