@@ -48,7 +48,24 @@ where region_iso='MX-OAX'
 
 
 --CONSULTA 4
-
+create table consulta_4 as 
+select a2.nombre,a2.tipo, a1.latitud "LATITUD_BENITO",
+a1.longitud "LONGITUD_BENITO",a2.latitud "LATITUD_OTRO", 
+a2.longitud "LONGITUD_OTRO",
+	round(sqrt(
+	power(abs(a1.latitud*10002.29/90)-abs(a2.latitud*10002.29/90),2)+
+	power(abs(a1.longitud*10002.29/90)-abs(a2.longitud*10002.29/90),2)
+	),5) as distancia
+from aeropuerto a1, aeropuerto a2
+where a1.id =4731
+--aeropuerto Benito Juárez.
+and a2.region_iso='MX-DIF'
+and a2.id <> 4731
+--a2 no debe ser el mismo aeropuerto Benito Juarez ya que la
+--distancia sería cero.
+and a2.tipo <>'closed'
+--excluir a los aeropuertos cerrados.
+order by distancia asc;
 
 -- CONSULTA 5
 create table consulta_5 as(

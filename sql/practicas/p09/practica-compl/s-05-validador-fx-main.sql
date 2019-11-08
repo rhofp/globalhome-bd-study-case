@@ -18,7 +18,7 @@ define p_usuario='kfrf_p0903_fx'
 --
 -- Password del usuario empleado en esta práctica
 --
-define p_usuario_pass='rodrigo'
+define p_usuario_pass='practica9'
 
 --
 -- Password del usuario sys

@@ -50,3 +50,34 @@ begin
 end
 ```
 
+### Triggers
+
+#### Statement trigger
+
+```plsql
+create or replace trigger t
+before
+insert or
+update of nombre, status_libro_id or
+delete
+on libro
+begin
+case
+when inserting then
+dbms_output.put_line('insertando libro');
+when updating('nombre') then
+dbms_output.put_line('Actualizando el nombre');
+when updating('status_libro_id') then
+dbms_output.put_line('Actualizando status');
+when deleting then
+dbms_output.put_line('Eliminando');
+end case;
+end;
+/
+```
+
+Los cambios de los trigger se unen a la transacción en donde el trigger se disparó.
+
+Entonces no es recomendable hacer commit en trigger. 
+
+No puede hacer consulta a la misma tabla que provocó el evento.
