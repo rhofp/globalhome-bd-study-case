@@ -101,3 +101,29 @@ create table consulta_5 as (
 	on a.articulo_id = sv.articulo_id
 	where a.precio_inicial > 800000.00
 );
+
+--CONSULTA 6
+--Generar un reporte que muestre 
+--nombre, apellidos, email, de todos los clientes 
+--cuya ocupación sea ABOGADO, 
+--y en caso de tener registrado una omás tarjetas de crédito, 
+--incluir el tipo de tarjeta. 
+--Emplear notación SQL anterior compatible con Oracle.
+--R: Se deben obtener 5 clientes, uno de ellos cuenta con 2 tarjetas.
+create table consulta_6 as (
+	select c.nombre,c.apellido_paterno,c.apellido_materno,c.email,c.ocupacion,
+	tc.tipo_tarjeta from cliente c, tarjeta_cliente tc
+	where c.cliente_id=tc.cliente_id(+)
+	and c.ocupacion='ABOGADO'
+);
+
+--CONSULTA 7
+--Suponga que se desea retirar del catálogo a 
+--todos los artículos que tengan un precio inicial de más de 900,000, 
+--siempre y cuando el artículo todavía no inicie el proceso de subasta, 
+--es decir, el artículo no debe tener status EN SUBASTA, ENTREGADO O VENDIDO. 
+--Empleando operadores del álgebra relacional 
+--(operadores SET: union, intersection, minus), 
+--determine el id, nombre, clave, precio inicial 
+--y e identificador del status de los artículos que se deben retirar.
+--R: Se deben obtener 6 artículos, verificar su precio.

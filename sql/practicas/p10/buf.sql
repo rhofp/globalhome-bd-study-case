@@ -6,17 +6,22 @@
 prompt Conectando como el usuario flfr_p1001_subastas 
 connect flfr_p1001_subastas/practica10
 
-col nombre format a10
---col nombre format a10
+-- col nombre format a10
+-- col nombre format a10
 -- col apellido_paterno format a10
 -- col apellido_materno format a10
 -- col tipo_tarjeta format a10
+-- col email format a10
+-- col ocupacion format a10
 
-select a.articulo_id,a.nombre,a.clave_articulo,a.tipo_articulo,
-aa.anio_hallazgo,a.precio_inicial,sv.precio_venta
-from articulo a
-join articulo_arqueologico aa
-on a.articulo_id = aa.articulo_id
-left join subasta_venta sv
-on a.articulo_id = sv.articulo_id
-where a.precio_inicial > 800000.00;
+--CONSULTA 7
+--Suponga que se desea retirar del catálogo a 
+--todos los artículos que tengan un precio inicial de más de 900,000, 
+--siempre y cuando el artículo todavía no inicie el proceso de subasta, 
+--es decir, el artículo no debe tener status EN SUBASTA, ENTREGADO O VENDIDO. 
+--Empleando operadores del álgebra relacional 
+--(operadores SET: union, intersection, minus), 
+--determine el id, nombre, clave, precio inicial 
+--y e identificador del status de los artículos que se deben retirar.
+--R: Se deben obtener 6 artículos, verificar su precio.
+
