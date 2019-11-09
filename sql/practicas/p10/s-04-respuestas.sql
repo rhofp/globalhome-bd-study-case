@@ -54,3 +54,50 @@ create table consulta_3 as(
 	and c.apellido_materno='MARTINEZ'
 	and to_char(s.fecha_inicio,'yyyy')='2010'
 );
+
+--CONSULTA 4
+--Generar un reporte que muestre los datos de los clientes 
+--(id, nombre y apellidos) 
+--y los datos de sus tarjetas 
+--(número de tarjeta, tipo, año de vigencia,mes de vigencia) 
+--que ya hayan expirado. Notas:
+--a. para validar si ya la tarjeta expiró emplear el mes y año de vigencia.
+--b. Considerar que la consulta se ejecuta en noviembre del 2011
+--c. Si una tarjeta tiene momo año y mes de expiración los valores 11/11, 
+--la tarjeta aún se considera como vigente.
+--R: Se deben obtener 16 registros.
+
+create table consulta_4 as (
+	select c.cliente_id, c.nombre, c.apellido_paterno, c.apellido_materno,
+	tc.numero_tarjeta,tc.tipo_tarjeta,tc.anio_vigencia,tc.mes_vigencia
+	from cliente c, tarjeta_cliente tc
+	where c.cliente_id = tc.cliente_id
+	and to_number(tc.anio_vigencia) < 11
+	union
+	select c.cliente_id, c.nombre, c.apellido_paterno, c.apellido_materno,
+	tc.numero_tarjeta,tc.tipo_tarjeta,tc.anio_vigencia,tc.mes_vigencia
+	from cliente c, tarjeta_cliente tc
+	where c.cliente_id = tc.cliente_id
+	and to_number(tc.anio_vigencia) = 11
+	and to_number(tc.mes_vigencia) < 11
+);
+
+-- CONSULTA 5
+--Generar un reporte que muestre: 
+--identificador del artículo, nombre, clave, tipo, 
+--año de hallazgo precio inicial y 
+--precio venta (para los que ya fueron vendidos o entregados) de todos los artículos 
+--que sean de tipo arqueológico, 
+--y que tengan un precio inicial mayor a $800,000.
+-- Emplear notación SQL estándar.
+--R: Se deben obtener 10 registros de los cuales 3 ya fueron vendidos.
+create table consulta_5 as (
+	select a.articulo_id,a.nombre,a.clave_articulo,a.tipo_articulo,
+	aa.anio_hallazgo,a.precio_inicial,sv.precio_venta
+	from articulo a
+	join articulo_arqueologico aa
+	on a.articulo_id = aa.articulo_id
+	left join subasta_venta sv
+	on a.articulo_id = sv.articulo_id
+	where a.precio_inicial > 800000.00
+);
