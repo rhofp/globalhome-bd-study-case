@@ -149,3 +149,42 @@ create table consulta_7 as (
 	from articulo a, status_articulo sa
 	where sa.clave <> 'VENDIDO'
 );
+
+--CONSULTA 8
+--SUBMEX ha decido incrementar en un 10% el precio inicial 
+--de todos aquellos artículos arqueológicos que tengan más de 150 años de antigüedad 
+--y que aún no se han incluido en un proceso de subasta, 
+--es decir, solo se han registrado en la BD. 
+--Determine id, clave, nombre, id de status, año dehallazgo, 
+--y antigüedad en años de dichos artículos.
+--R: Se deben obtener al menos 7 artículos.
+
+create table consulta_8 as (
+	select a.articulo_id,a.clave_articulo,a.nombre,
+	sa.status_articulo_id,aa.anio_hallazgo, 
+	to_number(to_char(sysdate,'yyyy'))-to_number(aa.anio_hallazgo) 
+	antiguedad
+	from articulo a,status_articulo sa, articulo_arqueologico aa
+	where a.articulo_id=aa.articulo_id
+	and a.status_articulo_id=sa.status_articulo_id
+	and sa.clave='REGISTRADO'
+	and to_number(to_char(sysdate,'yyyy'))-to_number(aa.anio_hallazgo)  > 150
+);
+
+--CONSULTA 9
+--Suponga que un cliente decide realizar una consulta en el catálogo de artículos. 
+--El cliente está interesado por todos aquellos artículos cuyo 
+--nombre o descripción hagan referencia o hablen de la palabra “Colonial” 
+--que no han sido aún vendidos, y que el articulo este en proceso de ser subastado.
+--Generar la sentencia SQL que muestre el nombre 
+--y tipo de todos los artículos que cumplan con los criterios de búsqueda.
+--R: Se debe obtener 1 registro.
+
+create table consulta_9 as (
+	select a.nombre,a.tipo_articulo
+	from articulo a, status_articulo sa
+	where a.status_articulo_id=sa.status_articulo_id
+	and sa.clave = 'EN SUBASTA'
+	and a.nombre like '%Colonial%' 
+	or a.descripcion like '%Colonial%'
+);
