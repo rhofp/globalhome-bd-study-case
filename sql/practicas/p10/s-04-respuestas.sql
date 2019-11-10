@@ -132,8 +132,20 @@ create table consulta_7 as (
 	select a.articulo_id,a.nombre,a.clave_articulo,a.precio_inicial,sa.status_articulo_id
 	from articulo a, status_articulo sa
 	where a.status_articulo_id=sa.status_articulo_id
-	and a.precio_inicial > 900000.00
-	and sa.clave <> 'EN SUBASTA'
-	and sa.clave <> 'ENTREGADO'
-	and sa.clave <> 'VENDIDO'
+	intersect
+	select a.articulo_id,a.nombre,a.clave_articulo,a.precio_inicial,sa.status_articulo_id
+	from articulo a, status_articulo sa
+	where a.precio_inicial > 900000.00
+	intersect
+	select a.articulo_id,a.nombre,a.clave_articulo,a.precio_inicial,sa.status_articulo_id
+	from articulo a, status_articulo sa
+	where sa.clave <> 'EN SUBASTA'
+	intersect
+	select a.articulo_id,a.nombre,a.clave_articulo,a.precio_inicial,sa.status_articulo_id
+	from articulo a, status_articulo sa
+	where sa.clave <> 'ENTREGADO'
+	intersect
+	select a.articulo_id,a.nombre,a.clave_articulo,a.precio_inicial,sa.status_articulo_id
+	from articulo a, status_articulo sa
+	where sa.clave <> 'VENDIDO'
 );
