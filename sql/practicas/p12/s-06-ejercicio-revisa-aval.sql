@@ -40,7 +40,8 @@ begin
 			if v_status_inmueble_id is null then
 				insert into asignacion_pendiente(asignacion_pendiente_id,
 				descripcion,fecha_registro,inmueble_id,cliente_sin_aval_id)
-				values();
+				values(seq_asignacion_pendiente,'El cliente no cuenta con un aval válido',
+				sysdate,:new.inmueble_id,:new.cliente_id);
 			end if;
 
 		-- en caso contrario, registrar al cliente en asignacion_pendiente y posteriomente lanzar
