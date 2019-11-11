@@ -21,8 +21,10 @@ create or replace procedure sp_crea_inmueble (
 	v_seq_hist_status_inmueble historico_status_inmueble.historico_status_inmueble_id%type;
 	v_fecha_status inmueble.fecha_status%type;
 begin
-
+	-- Inicializando p_inuemble_id
 	select seq_inmueble.nextval into p_inmueble_id from dual;
+	-- Inicializando v_fecha_status
+	select sysdate into v_fecha_status from dual;
 
 	insert into inmueble(inmueble_id,direccion,latitud,longitud,tipo_inmueble,
 		foto,fecha_status,status_inmueble_id)
