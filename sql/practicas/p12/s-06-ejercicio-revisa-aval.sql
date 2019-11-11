@@ -47,5 +47,5 @@ begin
 		-- en caso contrario, registrar al cliente en asignacion_pendiente y posteriomente lanzar
 		-- error
 		end if;
-
 end;
+/
