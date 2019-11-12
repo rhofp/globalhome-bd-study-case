@@ -11,4 +11,7 @@ prestamo_id, libro_id from detalle_prestamo;
 
 select detalle_prestamo_id,num_dias,multa_por_pagar,
 prestamo_id, libro_id from detalle_prestamo
-where prestamo_id=475;
+where prestamo_id=103;
+
+select fecha_vencimiento from detalle_prestamo
+where prestamo_id=103;
