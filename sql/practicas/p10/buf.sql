@@ -32,20 +32,31 @@ col apellido_materno format a10
 -- j. Año de hallazgo, en caso de que el artículo sea arqueológico.
 -- k. Clave del país, en caso de que el articulo haya sido donado por dicho país.
 
-select fc.fecha_factura,tc.numero_tarjeta,
-c.nombre,c.apellido_paterno,c.apellido_materno
---sv.precio_venta, a.precio_inicial
---(a.precio_inicial-sv.precio_venta) as diferencia
---a.nombre,a.clave_articulo,a.tipo_articulo
---af.nombre_completo
---aa.anio_hallazgo
---p.clave
-from factura_cliente fc
-natural join tarjeta_cliente tc
-natural join cliente c
-natural join subasta_venta sv
-join articulo  a using(articulo_id)
---left join articulo_famoso af
---on af.articulo_id=a.articulo_id
-where tc.numero_tarjeta = '5681375824866375';
+select to_char(fc.fecha_factura,'dd/mm/yyyy') "FECHA_FACTURA",tc.numero_tarjeta,
+c.nombre "NOMBRE_CLIENTE",c.apellido_paterno,c.apellido_materno,
+sv.precio_venta, a.precio_inicial,
+(sv.precio_venta-a.precio_inicial) as diferencia,
+a.nombre "NOMBRE_ARTICULO",a.clave_articulo,a.tipo_articulo,
+af.nombre_completo,
+aa.anio_hallazgo,
+p.clave
+from factura_cliente fc,
+tarjeta_cliente tc,
+cliente c,
+subasta_venta sv,
+articulo a, 
+articulo_famoso af,
+articulo_arqueologico aa,
+articulo_donado ad,
+pais p
+where fc.tarjeta_cliente_id=tc.tarjeta_cliente_id
+and tc.cliente_id = c.cliente_id
+and c.cliente_id = sv.cliente_id
+and sv.articulo_id = a.articulo_id
+-- outer join
+and a.articulo_id = af.articulo_id (+)
+and a.articulo_id = aa.articulo_id (+)
+and a.articulo_id = ad.articulo_id (+)
+and ad.pais_id = p.pais_id (+)
+and tc.numero_tarjeta = '5681375824866375';
 

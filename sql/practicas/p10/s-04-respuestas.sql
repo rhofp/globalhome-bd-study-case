@@ -188,3 +188,60 @@ create table consulta_9 as (
 	and a.nombre like '%Colonial%' 
 	or a.descripcion like '%Colonial%'
 );
+
+create table consulta_10 as (
+	select to_char(fc.fecha_factura,'dd/mm/yyyy') "FECHA_FACTURA",tc.numero_tarjeta,
+	c.nombre "NOMBRE_CLIENTE",c.apellido_paterno,c.apellido_materno,
+	sv.precio_venta, a.precio_inicial,
+	(sv.precio_venta-a.precio_inicial) as diferencia,
+	a.nombre "NOMBRE_ARTICULO",a.clave_articulo,a.tipo_articulo,
+	af.nombre_completo,
+	aa.anio_hallazgo,
+	p.clave
+	from factura_cliente fc
+	natural join tarjeta_cliente tc
+	natural join cliente c
+	natural join subasta_venta sv
+	--join articulo  a using(articulo_id)
+	join articulo a 
+	on a.articulo_id=sv.articulo_id
+	left join articulo_famoso af
+	on a.articulo_id=af.articulo_id
+	left join articulo_arqueologico aa
+	on a.articulo_id=aa.articulo_id
+	left join articulo_donado ad
+	on a.articulo_id=ad.articulo_id
+	left join pais p
+	on ad.pais_id=p.pais_id
+	where tc.numero_tarjeta = '5681375824866375'
+);
+
+create table consulta_11 as (
+select to_char(fc.fecha_factura,'dd/mm/yyyy') "FECHA_FACTURA",tc.numero_tarjeta,
+c.nombre "NOMBRE_CLIENTE",c.apellido_paterno,c.apellido_materno,
+sv.precio_venta, a.precio_inicial,
+(sv.precio_venta-a.precio_inicial) as diferencia,
+a.nombre "NOMBRE_ARTICULO",a.clave_articulo,a.tipo_articulo,
+af.nombre_completo,
+aa.anio_hallazgo,
+p.clave
+from factura_cliente fc,
+tarjeta_cliente tc,
+cliente c,
+subasta_venta sv,
+articulo a, 
+articulo_famoso af,
+articulo_arqueologico aa,
+articulo_donado ad,
+pais p
+where fc.tarjeta_cliente_id=tc.tarjeta_cliente_id
+and tc.cliente_id = c.cliente_id
+and c.cliente_id = sv.cliente_id
+and sv.articulo_id = a.articulo_id
+-- outer join
+and a.articulo_id = af.articulo_id (+)
+and a.articulo_id = aa.articulo_id (+)
+and a.articulo_id = ad.articulo_id (+)
+and ad.pais_id = p.pais_id (+)
+and tc.numero_tarjeta = '5681375824866375'
+);
