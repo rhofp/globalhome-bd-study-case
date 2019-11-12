@@ -6,11 +6,11 @@
 prompt Conectando como el usuario flfr_p1001_subastas 
 connect flfr_p1001_subastas/practica10
 
---col nombre format a8
+col nombre format a8
 --col clave format a10
 --col descripcion format a20
--- col apellido_paterno format a10
--- col apellido_materno format a10
+col apellido_paterno format a10
+col apellido_materno format a10
 -- col tipo_tarjeta format a10
 -- col email format a10
 -- col ocupacion format a10
@@ -32,11 +32,20 @@ connect flfr_p1001_subastas/practica10
 -- j. Año de hallazgo, en caso de que el artículo sea arqueológico.
 -- k. Clave del país, en caso de que el articulo haya sido donado por dicho país.
 
-select fc.fecha_factura,tc.numero_tarjeta,c.nombre,c.apellido_paterno,
-c.apellido_materno,sv.precio_venta, a.precio_inicial, 
-a.precio_inicial-sv.precio_venta as diferencia,
-a.nombre,a.clave_articulo,a.tipo_articulo, af.nombre_completo,aa.anio_hallazgo,
-p.clave
-from cliente c
-join tarjeta_cliente tc
-on c.cliente_id=tc.cliente_id
+select fc.fecha_factura,tc.numero_tarjeta,
+c.nombre,c.apellido_paterno,c.apellido_materno
+--sv.precio_venta, a.precio_inicial
+--(a.precio_inicial-sv.precio_venta) as diferencia
+--a.nombre,a.clave_articulo,a.tipo_articulo
+--af.nombre_completo
+--aa.anio_hallazgo
+--p.clave
+from factura_cliente fc
+natural join tarjeta_cliente tc
+natural join cliente c
+natural join subasta_venta sv
+join articulo  a using(articulo_id)
+--left join articulo_famoso af
+--on af.articulo_id=a.articulo_id
+where tc.numero_tarjeta = '5681375824866375';
+

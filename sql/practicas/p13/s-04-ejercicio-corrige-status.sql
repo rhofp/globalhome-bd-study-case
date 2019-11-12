@@ -27,15 +27,15 @@ begin
 		if p.multa_por_pagar > 0 then
 			update prestamo set status_prestamo_id=5 where prestamo_id = p.prestamo_id,
 			fecha_status=sysdate;
-		end if;
-
-		-- Espera ... :o que esta pasando
-		if p.fecha_vencimiento < sysdate then
+			p_num_con_multa := p_num_con_multa + 1;
+		elif p.fecha_vencimiento < sysdate then
 			update prestamo set status_prestamo_id=4 where prestamo_id = p.prestamo_id,
 			fecha_status=sysdate;
+			p_num_expirado := p_num_expirado +1;
 		else
 			update prestamo set status_prestamo_id=2 where prestamo_id = p.prestamo_id,
 			fecha_status=sysdate;
+			p_num_en_curso := p_num_en_curso +1;
 		end if;
 
 		delete from t_detalle_prestamo;

@@ -3,24 +3,20 @@
 --@Fecha creación: 28/10/2019
 --@Descripcion: Consultas SQL
 
-col nombre format a10
-col tipo format a10
+col municipio format a15
+col wikipedia_link format a30
+col folio format a20
 
 prompt Conectando como el usuario kfrf_p0903_fx 
 connect kfrf_p0903_fx/practica9
 
-select a2.nombre,a2.tipo, a1.latitud,a1.longitud,a2.latitud,a2.longitud,
-	round(sqrt(
-	power(abs(a1.latitud*10002.29/90)-abs(a2.latitud*10002.29/90),2)+
-	power(abs(a1.longitud*10002.29/90)-abs(a2.longitud*10002.29/90),2)
-	),5) as distancia
-from aeropuerto a1, aeropuerto a2
-where a1.id =4731
---aeropuerto Benito Juárez.
-and a2.region_iso='MX-DIF'
-and a2.id <> 4731
---a2 no debe ser el mismo aeropuerto Benito Juarez ya que la
---distancia sería cero.
-and a2.tipo <>'closed'
---excluir a los aeropuertos cerrados.
-order by distancia asc;
+select "folio", region_iso,municipio,wikipedia_link from(
+	select '00'||to_char(id)||'-'||substr(region_iso,4)||'-'||nvl(substr(upper(municipio),-2),'NN') 
+	"folio",region_iso,municipio,wikipedia_link from aeropuerto where length(id)=4 
+	union
+	select '0'||to_char(id)||'-'||substr(region_iso,4)||'-'||nvl(substr(upper(municipio),-2),'NN') 
+	"folio", region_iso,municipio,wikipedia_link from aeropuerto where length(id)=5
+	union
+	select ''||to_char(id)||'-'||substr(region_iso,4)||'-'||nvl(substr(upper(municipio),-2),'NN')
+	 "folio" , region_iso,municipio,wikipedia_link from aeropuerto where length(id)=6	
+) where wikipedia_link is not null;

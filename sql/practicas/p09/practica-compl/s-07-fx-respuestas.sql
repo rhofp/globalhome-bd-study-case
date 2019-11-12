@@ -115,6 +115,20 @@ select "folio", region_iso,municipio,wikipedia_link from(
 	 "folio" , region_iso,municipio,wikipedia_link from aeropuerto where length(id)=6	
 ) where wikipedia_link is not null);
 
+create table consulta_9 as(
+select "folio", region_iso,municipio,wikipedia_link from(
+	select '00'||to_char(id)||'-'||substr(region_iso,4)||'-'||nvl(substr(upper(municipio),-2),'NN') 
+	"folio",region_iso,municipio,wikipedia_link from aeropuerto where length(id)=4 
+	union
+	select '0'||to_char(id)||'-'||substr(region_iso,4)||'-'||nvl(substr(upper(municipio),-2),'NN') 
+	"folio", region_iso,municipio,wikipedia_link from aeropuerto where length(id)=5
+	union
+	select ''||to_char(id)||'-'||substr(region_iso,4)||'-'||nvl(substr(upper(municipio),-2),'NN')
+	 "folio" , region_iso,municipio,wikipedia_link from aeropuerto where length(id)=6	
+) where wikipedia_link is not null);
+
+
+
 --select '00'||id||'-'||substr(region_iso,4)||'-'||substr(upper(municipio),-2) "folio" from aeropuerto where length(id)=4 
 --union
 --select '0'||id||'-'||substr(region_iso,4)||'-'||substr(upper(municipio),-2)  "folio" from aeropuerto where length(id)=5
