@@ -28,7 +28,7 @@ begin
 			update prestamo set status_prestamo_id=5 where prestamo_id = p.prestamo_id,
 			fecha_status=sysdate;
 			p_num_con_multa := p_num_con_multa + 1;
-		elif p.fecha_vencimiento < sysdate then
+		elsif p.fecha_vencimiento < sysdate then
 			update prestamo set status_prestamo_id=4 where prestamo_id = p.prestamo_id,
 			fecha_status=sysdate;
 			p_num_expirado := p_num_expirado +1;
