@@ -9,7 +9,7 @@ set serveroutput on
 create or replace procedure sp_corrige_pago_inmuebles(p_inmueble_id number,
 p_actualiado out number) is
 
-v_plazo compra_inmueble.plazo%type;
+v_plazo number;
 v_num_pagos_totales number;
 v_num_pagos_contador number;
 v_primer_fecha_pago date;
@@ -18,37 +18,29 @@ v_precio_importe pago_inmueble.importe%type;
 v_fecha_status date;
 
 begin
-
 	-- Inicializando v_fecha_status
 	select sysdate into v_fecha_status from dual;
-
 	-- Asignando v_plazo
-	select plazo into v_plazo from compra_inmueble 
-	where inmueble_id=p_inmueble_id;
-	
+	select avg(plazo) into v_plazo from compra_inmueble 
+	where inmueble_id=p_inmueble_id; -- para ejemplo retorna 252
 	--Select que cuenta el numero de pagos de determinado inmueble_id,
 	-- almacenar en v_num_pagos_totales
-	select count(*) into v_num_pagos_totales
-	from inmueble i, compra_inmueble ci,pago_inmueble pi
-	where i.inmueble_id = ci.inmueble_id 
-	and i.inmueble_id = pi.inmueble_id
-	and tipo_inmueble='C' 
-	and status_inmueble_id=5
-	and plazo = v_plazo
-	and pi.inmueble_id = p_inmueble_id;
+	select count(*) into v_num_pagos_totales from pago_inmueble
+	where inmueble_id = p_inmueble_id;
 
-	if v_plazo <> v_num_pagos_totales then
-		--logica para actualizar pagos.
+	select precio_venta into v_precio_venta from compra_inmueble
+	where inmueble_id = p_inmueble_id;
 
+	if v_plazo != v_num_pagos_totales then
+		--Logica para actualizar pagos.
 		-- 1. Eliminar los pagos existentes del inmueble_id
 		delete from pago_inmueble 
 		where inmueble_id = p_inmueble_id;
 		-- 2. Calcular la primera fecha de pago con 
-		--		add_months(fecha_status,-1*(plazo-1))
-		select add_months(fecha_status,-1*(v_plazo-1)) into v_primer_fecha_pago 
-		from inmueble,compra_inmueble;
+		--	  add_months(fecha_status,-1*(plazo-1))
+		v_primer_fecha_pago := add_months(v_fecha_status,-1*(v_plazo-1));
 		-- 3. Calcular el importe por mes
-		select trunc(precio_venta/v_plazo) into v_precio_importe from compra_inmueble;
+		v_precio_importe := trunc(v_precio_venta/v_plazo,2);
 		-- 4. Iterar desde 1 hasta plazo y hacer los inserts necesarios.
 		for v_num_pagos_contador in 1 .. v_plazo loop
 

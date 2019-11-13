@@ -18,3 +18,4 @@ begin
 	);
 end;
 /
+show errors
