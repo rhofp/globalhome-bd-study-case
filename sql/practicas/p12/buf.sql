@@ -28,10 +28,10 @@ connect fgfp_p1203_inmuebles/practica12
 --select fecha_status,plazo,add_months(fecha_status,-1*(plazo-1)) 
 --from inmueble,compra_inmueble;
 
-select i.inmueble_id,tipo_inmueble,i.cliente_id,i.status_inmueble_id,num_pago,importe,precio_venta
-	from inmueble i, compra_inmueble ci,pago_inmueble pi
-	where i.inmueble_id = ci.inmueble_id 
-	and i.inmueble_id = pi.inmueble_id
-	and tipo_inmueble='C' 
-	and status_inmueble_id=5
-	and pi.inmueble_id = 207;
+select i.inmueble_id,i.cliente_id,plazo,num_pago,importe,precio_venta
+from inmueble i, compra_inmueble ci,pago_inmueble pi
+where i.inmueble_id = ci.inmueble_id 
+and i.inmueble_id = pi.inmueble_id
+and tipo_inmueble='C' 
+and status_inmueble_id=5
+and pi.inmueble_id = 207;

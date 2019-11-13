@@ -7,7 +7,7 @@
 --se sale de SQL *Plus
 whenever sqlerror exit rollback
 
-Prompt creando usuario jrc_p1203_inmuebles
+Prompt creando usuario flfp_p1203_inmuebles
 @s-01-creacion-usuario.sql
 
 Prompt conectando como usuario fgfp_p1203_inmuebles

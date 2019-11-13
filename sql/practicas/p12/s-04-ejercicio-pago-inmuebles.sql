@@ -22,7 +22,7 @@ begin
 	select sysdate into v_fecha_status from dual;
 	-- Asignando v_plazo
 	select avg(plazo) into v_plazo from compra_inmueble 
-	where inmueble_id=p_inmueble_id; -- para ejemplo retorna 252
+	where inmueble_id=p_inmueble_id; -- para ejemplo retorna 163
 	--Select que cuenta el numero de pagos de determinado inmueble_id,
 	-- almacenar en v_num_pagos_totales
 	select count(*) into v_num_pagos_totales from pago_inmueble
@@ -45,7 +45,9 @@ begin
 		for v_num_pagos_contador in 1 .. v_plazo loop
 
 			if v_num_pagos_contador = v_plazo then
-				v_precio_importe := v_precio_importe + 0.04;
+
+				v_precio_importe := round(v_precio_importe 
+				+ (v_precio_venta-v_precio_importe*v_plazo),2);
 			end if;
 
 			insert into pago_inmueble(inmueble_id,num_pago,fecha_pago,importe)
