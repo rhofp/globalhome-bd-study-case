@@ -18,7 +18,7 @@ v_precio_importe pago_inmueble.importe%type;
 v_fecha_status date;
 
 begin
-	-- Inicializando v_fecha_status
+	-- Inicializando v_fecha_status CREO AQUI HAY ERROR
 	select sysdate into v_fecha_status from dual;
 	-- Asignando v_plazo
 	select avg(plazo) into v_plazo from compra_inmueble 
@@ -45,7 +45,6 @@ begin
 		for v_num_pagos_contador in 1 .. v_plazo loop
 
 			if v_num_pagos_contador = v_plazo then
-
 				v_precio_importe := round(v_precio_importe 
 				+ (v_precio_venta-v_precio_importe*v_plazo),2);
 			end if;
@@ -53,10 +52,8 @@ begin
 			insert into pago_inmueble(inmueble_id,num_pago,fecha_pago,importe)
 			values(p_inmueble_id,v_num_pagos_contador,v_primer_fecha_pago,v_precio_importe);
 
-			v_primer_fecha_pago := v_primer_fecha_pago+1;
+			v_primer_fecha_pago := add_months(v_primer_fecha_pago,1);
 		end loop;
-		-- Solo falta agregarle los centavos perdidos al último pago.
-		-- indicamos que si hubo actualizacion
 		p_actualiado := 1;
 
 	else
