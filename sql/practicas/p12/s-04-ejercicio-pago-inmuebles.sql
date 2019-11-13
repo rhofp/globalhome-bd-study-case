@@ -23,16 +23,19 @@ begin
 	select sysdate into v_fecha_status from dual;
 
 	-- Asignando v_plazo
-	select plazo into v_plazo from compra_inmueble where inmueble_id=p_inmueble_id;
+	select plazo into v_plazo from compra_inmueble 
+	where inmueble_id=p_inmueble_id;
 	
 	--Select que cuenta el numero de pagos de determinado inmueble_id,
 	-- almacenar en v_num_pagos_totales
-	select count(num_pago) into v_num_pagos_totales
+	select count(*) into v_num_pagos_totales
 	from inmueble i, compra_inmueble ci,pago_inmueble pi
-	where i.inmueble_id=ci.inmueble_id 
-	and i.inmueble_id=pi.inmueble_id
-	and tipo_inmueble='C' and status_inmueble_id=5
-	and i.inmueble_id = p_inmueble_id;
+	where i.inmueble_id = ci.inmueble_id 
+	and i.inmueble_id = pi.inmueble_id
+	and tipo_inmueble='C' 
+	and status_inmueble_id=5
+	and plazo = v_plazo
+	and pi.inmueble_id = p_inmueble_id;
 
 	if v_plazo <> v_num_pagos_totales then
 		--logica para actualizar pagos.
@@ -45,9 +48,14 @@ begin
 		select add_months(fecha_status,-1*(v_plazo-1)) into v_primer_fecha_pago 
 		from inmueble,compra_inmueble;
 		-- 3. Calcular el importe por mes
-		select precio_venta/v_plazo into v_precio_importe from compra_inmueble;
+		select trunc(precio_venta/v_plazo) into v_precio_importe from compra_inmueble;
 		-- 4. Iterar desde 1 hasta plazo y hacer los inserts necesarios.
 		for v_num_pagos_contador in 1 .. v_plazo loop
+
+			if v_num_pagos_contador = v_plazo then
+				v_precio_importe := v_precio_importe + 0.04;
+			end if;
+
 			insert into pago_inmueble(inmueble_id,num_pago,fecha_pago,importe)
 			values(p_inmueble_id,v_num_pagos_contador,v_primer_fecha_pago,v_precio_importe);
 

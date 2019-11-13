@@ -7,10 +7,10 @@ set serveroutput on
 
 create or replace trigger revision_avales
 	-- el triger se activa en insercion o actualizacion de cliente_id y status_inm...
-before insert or update of cliente,status_inmueble_id on inmueble
---declare
+before insert or update on inmueble
+declare
 	v_aval_cliente_id cliente.cliente_id%type;
-	v_status_inmueble_id inmueble.status_inmueble_id%type;
+	--v_status_inmueble_id inmueble.status_inmueble_id%type;
 begin
 	
 	if :new.cliente_id is null
@@ -34,10 +34,10 @@ begin
 
 		-- si hay aval, debe contar con al menos un inmueble pagado
 		if v_aval_cliente_id is not null then
-			select status_inmueble_id into v_status_inmueble_id from inmueble
-			where status_inmueble_id = 5 and cliente_id = v_aval_cliente_id;
+			--select status_inmueble_id into v_status_inmueble_id from inmueble
+			--where status_inmueble_id = 5 and cliente_id = v_aval_cliente_id;
 
-			if v_status_inmueble_id is null then
+			if :new.v_status_inmueble_id = 5 then
 				insert into asignacion_pendiente(asignacion_pendiente_id,
 				descripcion,fecha_registro,inmueble_id,cliente_sin_aval_id)
 				values(seq_asignacion_pendiente,'El cliente no cuenta con un aval válido',
