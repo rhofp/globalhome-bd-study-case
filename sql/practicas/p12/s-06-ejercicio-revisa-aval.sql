@@ -1,4 +1,4 @@
---@Autor: Flores García Karina
+--@Autor: Flores Garcia Karina
 --@Autor: Pablo Rodrigo Francisco
 --@Fecha creación: 04/11/2019
 --@Descripcion: Script encargado de crear trigger
@@ -13,19 +13,18 @@ before insert or update on inmueble
 for each row
 declare
 	v_aval_cliente_id cliente.cliente_id%type;
-	v_status_inmueble_id inmueble.status_inmueble_id%type;
 begin
 	
 	if :new.cliente_id is null
 	and :new.status_inmueble_id <> 1 then
 		raise_application_error(-20010,
-		'El inmueble debería estar disponible dado que el cliente es nulo');
+		'El inmueble deberia estar disponible dado que el cliente es nulo');
 	end if;	
 
 	if :new.cliente_id is not null
 	and :new.status_inmueble_id = 1 then
 		raise_application_error(-20010,
-		'El inmueble no debería estar disponible dado que el cliente no es nulo');
+		'El inmueble no deberia estar disponible dado que el cliente no es nulo');
 	end if;	
 
 	if :new.cliente_id is not null
@@ -37,14 +36,12 @@ begin
 
 		-- si hay aval, debe contar con al menos un inmueble pagado
 		if v_aval_cliente_id is not null then
-			select status_inmueble_id into v_status_inmueble_id from inmueble
-			where status_inmueble_id = 5 and cliente_id = v_aval_cliente_id;
 
 			if :new.status_inmueble_id = 5 then
 				insert into asignacion_pendiente(asignacion_pendiente_id,
 				descripcion,fecha_registro,inmueble_id,cliente_sin_aval_id)
 				values(seq_asignacion_pendiente.nextval,
-				'El cliente no cuenta con un aval válido',
+				'El cliente no cuenta con un aval valido',
 				sysdate,:new.inmueble_id,:new.cliente_id);
 			end if;
 
