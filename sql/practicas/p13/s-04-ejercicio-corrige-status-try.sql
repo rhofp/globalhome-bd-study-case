@@ -11,6 +11,7 @@ declare
 	p_num_con_multa number:=0; 
 	p_num_en_curso number:=0;
 begin
+	dbms_output.put_line('Prompt Iniciando correccion de status');
 	dbms_output.put_line('============ Resultados =================');
 	p_corrige_status (p_num_expirado,p_num_con_multa, p_num_en_curso);
 	dbms_output.put_line('Cambios a Expirados: '||p_num_expirado);

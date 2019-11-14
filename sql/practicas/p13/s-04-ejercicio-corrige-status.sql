@@ -5,6 +5,8 @@
 
 connect flfr_p1302_biblio/practica13
 
+Prompt creando bloque pl/sql para ejecutar Procedimiento p_corrige_status
+
 create or replace procedure p_corrige_status (p_num_expirado out number,
 p_num_con_multa out number, p_num_en_curso out number) is
 
@@ -61,3 +63,17 @@ begin
 end;
 /
 show errors
+
+declare
+	p_num_expirado number;
+	p_num_con_multa number; 
+	p_num_en_curso number;
+begin
+	dbms_output.put_line('Iniciando correccion de status');
+	dbms_output.put_line('============ Resultados =================');
+	p_corrige_status (p_num_expirado,p_num_con_multa, p_num_en_curso);
+	dbms_output.put_line('Cambios a Expirados: '||p_num_expirado);
+	dbms_output.put_line('Cambios a Multados: '||p_num_con_multa);
+	dbms_output.put_line('Cambios a En curso: '||p_num_en_curso);
+end;
+/
