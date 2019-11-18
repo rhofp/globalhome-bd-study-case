@@ -12,6 +12,22 @@ create table consulta_1 as (
 	)
 );
 
+create table consulta_3 as (
+	select min(precio_inicial) mas_barato_compra, 
+	max(precio_inicial) mas_caro_compra, 
+	min(precio_venta) mas_barato_venta,
+	max(precio_venta) mas_caro_venta 
+	from (
+		select sv.precio_venta, a.precio_inicial
+		from subasta s
+		join articulo a
+		on s.subasta_id = a.subasta_id
+		join subasta_venta sv
+		on sv.articulo_id = a. articulo_id
+		where s.nombre = 'EXPO-MAZATLAN' 
+	)
+);
+
 create table consulta_4 as (
 	select q1.cliente_id,email,numero_tarjeta from (
 		select c.cliente_id
