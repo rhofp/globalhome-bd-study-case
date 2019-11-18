@@ -7,7 +7,7 @@ col email format a10
 
 connect flfr_p1101_subastas/david
 
---EJERCICIO 8
+--EJERCICIO 8 (ya no la pude optimizar más :( )
 select q1.subasta_id, s.nombre,s.fecha_inicio,a.nombre,a.clave_articulo,
 max(q1.precio_venta) mas_caro from (
 	select s.subasta_id,sv.precio_venta
