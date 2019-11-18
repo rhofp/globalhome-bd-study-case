@@ -1,6 +1,7 @@
---@Autor González Acevedo David Jovani
+--@Autor Francisco Pablo Rodrigo
+--@Autor Flores García karina
 --@Fecha Creacion 18/11/2019
---@Descripcion Creacion de usuario PC11 y sus sinonimos a las tablas de PC10
+--@Descripcion Creacion de usuario y sinonimos
 
 prompt conectando con sys
 prompt Proporcionar el password del usuario sys:
@@ -8,7 +9,7 @@ prompt Proporcionar el password del usuario sys:
 connect sys as sysdba
 
 prompt creando usuario flfr_p1101_subastas
-create user flfr_p1101_subastas identified by david quota unlimited on users;
+create user flfr_p1101_subastas identified by practica11 quota unlimited on users;
 grant create session,create table, create synonym, create sequence, create procedure to flfr_p1101_subastas;
 
 prompt otorgando permisos a flfr_p1101_subastas para poder leer las tablas del usuario flfr_p1001_subastas.
