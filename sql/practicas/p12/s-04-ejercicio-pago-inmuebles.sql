@@ -33,7 +33,7 @@ begin
 
 	if v_plazo != v_num_pagos_totales then
 		--Logica para actualizar pagos.
-		-- 1. Eliminar los pagos existentes del inmueble_id
+		-- 1. Eliminar los pagos existentes
 		delete from pago_inmueble 
 		where inmueble_id = p_inmueble_id;
 		-- 2. Calcular la primera fecha de pago con 
