@@ -8,12 +8,9 @@ col email format a10
 connect flfr_p1101_subastas/david
 
 --EJERCICIO 8
-select q1.subasta_id,
---q1.nombre_subasta,q1.fecha_inicio,q1.nombre_articulo, q1.clave_articulo,
+select q1.subasta_id, s.nombre,s.fecha_inicio,a.nombre,a.clave_articulo,
 max(q1.precio_venta) mas_caro from (
-	select s.subasta_id,s.nombre nombre_subasta,
-	fecha_inicio,a.nombre nombre_articulo,a.clave_articulo,
-	sv.precio_venta
+	select s.subasta_id,sv.precio_venta
 	from subasta s,articulo a, subasta_venta sv
 	where s.subasta_id = a.subasta_id and sv.articulo_id = a.articulo_id
 	and (
@@ -27,7 +24,10 @@ max(q1.precio_venta) mas_caro from (
 		a.status_articulo_id = 3 
 		or a.status_articulo_id = 4
 	)
-	order by s.subasta_id
 ) q1
-group by  q1.subasta_id;
---q1.nombre_subasta,fecha_inicio,q1.nombre_articulo, q1.clave_articulo;
+join subasta s
+on q1.subasta_id = s.subasta_id
+join articulo a
+on a.articulo_id = s.subasta_id
+group by  q1.subasta_id, s.nombre,s.fecha_inicio,a.nombre,a.clave_articulo
+order by q1.subasta_id;
