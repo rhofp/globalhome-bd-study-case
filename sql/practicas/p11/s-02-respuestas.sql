@@ -17,7 +17,6 @@ create table consulta_1 as (
 	)
 );
 
-
 --Ejercicio 2
 create table consulta_2 as(
 	select count(*) total_vendidos from( 
@@ -34,9 +33,8 @@ create table consulta_2 as(
 	)
 ); 
 
-
 --EJERCICIO 3
-create table consulta_3 as ( -- totalmente copiada de David
+create table consulta_3 as ( 
 	select min(precio_inicial) mas_barato_compra, 
 	max(precio_inicial) mas_caro_compra, 
 	min(precio_venta) mas_barato_venta,
@@ -136,8 +134,30 @@ create table consulta_10 as(
 	group by s.subasta_id,s.nombre
 	having count(sv.articulo_id) > 3
 );
---EJERCICIO 12
 
+--EJERCICIO 11
+create table consulta_11 as (
+	select s.subasta_id,fecha_inicio,articulo_id,a.nombre nombre_articulo,
+	precio_inicial,(
+		select avg(precio_inicial) 
+		from articulo a
+		join subasta s
+		on s.subasta_id = a.subasta_id
+		where lower(a.nombre) like '%motocicleta%'
+		and extract(year from fecha_inicio) = 2010
+		and extract(year from fecha_fin) = 2010
+	) promedio
+	from subasta s, articulo a
+	where s.subasta_id = a.subasta_id
+	and extract(year from fecha_inicio) = 2010
+	and extract(year from fecha_fin) = 2010
+	and extract(month from fecha_inicio) = 7
+	and lower(a.nombre) like '%motocicleta%'
+	and (status_articulo_id = 3
+	or status_articulo_id = 4)
+);
+
+--EJERCICIO 12
 create table consulta_12 as(
 	select pais_id,clave,descripcion from(
 		select p.pais_id,p.clave, p.descripcion,
