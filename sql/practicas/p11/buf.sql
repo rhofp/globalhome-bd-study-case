@@ -1,18 +1,27 @@
--- col lugar format a10
+col lugar format a5
 col nombre_articulo format a10
-col nombre format a10
+col nombre format a5
 -- col nombre_subasta format a10
 -- col email format a10
 
 connect flfr_p1101_subastas/david
 
---consulta 13
-select s.subasta_id,s.nombre,s.fecha_inicio,sum(sv.precio_venta) total_ventas
-from subasta s, articulo a, subasta_venta sv
-where s.subasta_id = a.subasta_id
-and a.articulo_id = sv.articulo_id
-and extract(year from fecha_inicio) = 2010
-and extract(year from fecha_fin) = 2010
-group by s.subasta_id,s.nombre,s.fecha_inicio
-having sum(sv.precio_venta) >= 3000000
-order by s.subasta_id;
+--consulta 15
+select  s.*
+from subasta s
+join articulo a
+on s.SUBASTA_ID = a.subasta_id
+join  subasta_venta sv
+on sv.articulo_id = a.articulo_id
+group by s.SUBASTA_ID,s.nombre,s.fecha_inicio,
+s.fecha_fin,s.lugar,s.cupo
+having  count(*)  =  (
+	select max(num_articulos)
+	from(
+		select count(*)  as num_articulos
+		from subasta s, articulo a, subasta_venta sv
+		where s.SUBASTA_ID = a.SUBASTA_ID
+		and  a.ARTICULO_ID = sv.ARTICULO_ID
+		group by  s.SUBASTA_ID
+	)
+);

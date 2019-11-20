@@ -184,3 +184,25 @@ create table consulta_13 as(
 	group by s.subasta_id,s.nombre,s.fecha_inicio
 	having sum(sv.precio_venta) >= 3000000
 );
+
+--EJERCICIO 15
+create table consulta_15 as (
+	select  s.*
+	from subasta s
+	join articulo a
+	on s.SUBASTA_ID = a.subasta_id
+	join  subasta_venta sv
+	on sv.articulo_id = a.articulo_id
+	group by s.SUBASTA_ID,s.nombre,s.fecha_inicio,
+	s.fecha_fin,s.lugar,s.cupo
+	having  count(*)  =  (
+		select max(num_articulos)
+		from(
+			select count(*)  as num_articulos
+			from subasta s, articulo a, subasta_venta sv
+			where s.SUBASTA_ID = a.SUBASTA_ID
+			and  a.ARTICULO_ID = sv.ARTICULO_ID
+			group by  s.SUBASTA_ID
+		)
+	)
+);
