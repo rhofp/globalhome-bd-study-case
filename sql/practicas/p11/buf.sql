@@ -26,36 +26,25 @@ connect flfr_p1101_subastas/david
 -- 		from factura_cliente
 -- 	)
 -- );
--- select factura_cliente_id,max(fecha_factura) from (
--- 	select fc.factura_cliente_id,fecha_factura
--- 	from factura_cliente fc, subasta_venta sv, cliente c
--- 	where fc.factura_cliente_id = sv.factura_cliente_id
--- 	and c.cliente_id = sv.cliente_id
--- 	and c.nombre = 'GALILEA'
--- 	and c.apellido_paterno = 'GOMEZ'
--- 	and c.apellido_materno = 'GONZALEZ'
--- )
--- group by factura_cliente_id;
 
---consulta 7
-select q1.cliente_id,nombre,apellido_paterno,apellido_materno,num_articulos,total
-from (
-    select cliente_id--, count(articulo_id)
-    from subasta_venta
-    group by cliente_id
-    having count(articulo_id) > 5
-    union
-    select cliente_id--, sum(precio_venta)
-    from subasta_venta
-    group by cliente_id
-    having sum(precio_venta) > 3000000
-) q1
-join (
-    select cliente_id,count(articulo_id) as num_articulos, sum(precio_venta) as total
-    from subasta_venta
-    group by cliente_id
-    having count(articulo_id) > 5 or sum(precio_venta) > 3000000
-) q2
-on q1.cliente_id = q2.cliente_id
-join cliente c
-on c.cliente_id = q1.cliente_id;
+select fc.factura_cliente_id
+from factura_cliente fc, subasta_venta sv, cliente c
+where fc.factura_cliente_id = sv.factura_cliente_id
+and c.cliente_id = sv.cliente_id
+and c.nombre = 'GALILEA'
+and c.apellido_paterno = 'GOMEZ'
+and c.apellido_materno = 'GONZALEZ'
+and fecha_factura = (
+	select max(max_fecha) from (
+		select fc.factura_cliente_id,max(fecha_factura) max_fecha
+		from factura_cliente fc, subasta_venta sv, cliente c
+		where fc.factura_cliente_id = sv.factura_cliente_id
+		and c.cliente_id = sv.cliente_id
+		and c.nombre = 'GALILEA'
+		and c.apellido_paterno = 'GOMEZ'
+		and c.apellido_materno = 'GONZALEZ'
+		group by fc.factura_cliente_id,fecha_factura
+	)
+);
+
+
