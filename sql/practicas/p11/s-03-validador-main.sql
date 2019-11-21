@@ -18,7 +18,7 @@ define p_usuario='flfr_p1101_subastas'
 --
 -- Password del usuario empleado en esta práctica
 --
-define p_usuario_pass='practica11'
+define p_usuario_pass='david'
 
 --
 -- Password del usuario sys
