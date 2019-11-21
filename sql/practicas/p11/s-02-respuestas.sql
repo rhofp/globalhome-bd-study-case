@@ -92,6 +92,32 @@ create table consulta_6 as
 	group by s.nombre, s.fecha_inicio, s.lugar, a.tipo_articulo
 	order by total_venta desc;
 
+--EJERCICIO 7
+create table consulta_7 as(
+	select q1.cliente_id,nombre,apellido_paterno,apellido_materno,num_articulos,total
+	from (
+	    select cliente_id--, count(articulo_id)
+	    from subasta_venta
+	    group by cliente_id
+	    having count(articulo_id) > 5
+	    union
+	    select cliente_id--, sum(precio_venta)
+	    from subasta_venta
+	    group by cliente_id
+	    having sum(precio_venta) > 3000000
+	) q1
+	join (
+	    select cliente_id,count(articulo_id) as num_articulos, 
+	    sum(precio_venta) as total
+	    from subasta_venta
+	    group by cliente_id
+	    having count(articulo_id) > 5 or sum(precio_venta) > 3000000
+	) q2
+	on q1.cliente_id = q2.cliente_id
+	join cliente c
+	on c.cliente_id = q1.cliente_id
+);
+
 --EJERCICIO 8 (ya no la pude optimizar más :( )
 create table consulta_8 as
 	select q1.subasta_id,q1.nombre_subasta,fecha_inicio,
