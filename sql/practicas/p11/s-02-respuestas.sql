@@ -166,9 +166,6 @@ create table consulta_9 as(
 	group by fecha_factura,sv.cliente_id
 );
 
---EJERCICIO 9
-
-
 --EJERCICIO 10
 create table consulta_10 as(
 	select s.subasta_id,s.nombre,count(sv.articulo_id)
