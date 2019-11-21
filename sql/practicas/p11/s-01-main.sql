@@ -1,5 +1,5 @@
---@Autor Francisco Pablo Rodrigo
---@Autor Flores García karina
+--@Autor Flores Garcia Karina
+--@Autor Pablo Rodrigo 
 --@Fecha Creacion 18/11/2019
 --@Descripcion Creacion de usuario y sinonimos
 

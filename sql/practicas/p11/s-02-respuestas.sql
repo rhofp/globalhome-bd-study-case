@@ -17,6 +17,24 @@ create table consulta_1 as (
 	)
 );
 
+
+--Ejercicio 2
+create table consulta_2 as(
+	select count(*) total_vendidos from( 
+		select *
+		from subasta s
+		join articulo a
+		on s.subasta_id=a.subasta_id
+		join status_articulo st
+		on a.status_articulo_id=st.status_articulo_id
+		where to_char(fecha_inicio,'yyyy') = '2010'
+		and to_char(fecha_fin,'yyyy') = '2010' 
+		and a.status_articulo_id != 3
+		and a.status_articulo_id !=4
+	)
+); 
+
+
 --EJERCICIO 3
 create table consulta_3 as ( -- totalmente copiada de David
 	select min(precio_inicial) mas_barato_compra, 
@@ -49,6 +67,19 @@ create table consulta_4 as (
 	and c.cliente_id = q1.cliente_id
 );
 
+--ejercicio 5
+create table consulta_5 as(
+	select count(a.articulo_id) as num_articulos,
+	a.tipo_articulo as T, st.clave
+	from status_articulo st
+	join articulo a
+	on a.status_articulo_id=st.status_articulo_id
+	join subasta s
+	on a.subasta_id=s.subasta_id
+	where a.status_articulo_id=3 
+	or a.status_articulo_id=4
+	group by a.tipo_articulo, st.status_articulo_id, st.clave
+);
 --EJERCICIO 6
 create table consulta_6 as
 	select s.nombre, s.fecha_inicio, s.lugar, a.tipo_articulo, 
@@ -90,3 +121,34 @@ create table consulta_8 as
 		or a.status_articulo_id = 4
 	)
 	order by subasta_id;
+
+--EJERCICIO 10
+create table consulta_10 as(
+	select s.subasta_id,s.nombre,count(sv.articulo_id)
+	as vendidos
+	from subasta_venta sv
+	join articulo a
+	on sv.articulo_id=a.articulo_id
+	join subasta s
+	on s.subasta_id=a.subasta_id
+	where to_char(s.fecha_inicio,'YYYY')='2010'
+	and to_char(s.fecha_fin,'YYYY')='2010'
+	group by s.subasta_id,s.nombre
+	having count(sv.articulo_id) > 3
+);
+--EJERCICIO 12
+
+create table consulta_12 as(
+	select pais_id,clave,descripcion from(
+		select p.pais_id,p.clave, p.descripcion,
+		count(a.articulo_id)
+		from articulo a
+		join articulo_donado ad
+		on a.articulo_id=ad.articulo_id
+		join pais p
+		on ad.pais_id=p.pais_id
+		where a.precio_inicial>300000
+		group by p.pais_id,p.clave,p.descripcion
+		having count(a.articulo_id)>=3
+	)
+);
