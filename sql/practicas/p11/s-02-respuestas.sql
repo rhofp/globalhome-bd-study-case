@@ -146,6 +146,9 @@ create table consulta_8 as
 	)
 	order by subasta_id;
 
+--EJERCICIO 9
+
+
 --EJERCICIO 10
 create table consulta_10 as(
 	select s.subasta_id,s.nombre,count(sv.articulo_id)
@@ -209,6 +212,20 @@ create table consulta_13 as(
 	and extract(year from fecha_fin) = 2010
 	group by s.subasta_id,s.nombre,s.fecha_inicio
 	having sum(sv.precio_venta) >= 3000000
+);
+
+--EJERCICIO 14
+create table consulta_14 as(
+	select c.nombre, c.apellido_paterno, c.apellido_materno,
+	sum(sv.precio_venta) monto_total
+	from cliente c
+	join subasta_venta sv
+	on c.cliente_id=sv.cliente_id
+	join articulo a
+	on a.articulo_id=sv.articulo_id
+	where  factura_cliente_id is null
+	group by c.nombre, c.apellido_paterno, c.apellido_materno
+	having  sum(sv.precio_venta) >=1000000
 );
 
 --EJERCICIO 15
