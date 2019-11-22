@@ -145,6 +145,26 @@ create table consulta_8 as
 		or a.status_articulo_id = 4
 	)
 	order by subasta_id;
+--EJERCICIO 9
+create table consulta_9 as(
+	select sum(precio_venta) total
+	from factura_cliente fc, subasta_venta sv, cliente c
+	where fc.factura_cliente_id = sv.factura_cliente_id
+	and c.cliente_id = sv.cliente_id
+	and c.nombre = 'GALILEA'
+	and c.apellido_paterno = 'GOMEZ'
+	and c.apellido_materno = 'GONZALEZ'
+	and fecha_factura =(
+		select max(fecha_factura) max_fecha
+		from factura_cliente fc, subasta_venta sv, cliente c
+		where fc.factura_cliente_id = sv.factura_cliente_id
+		and c.cliente_id = sv.cliente_id
+		and c.nombre = 'GALILEA'
+		and c.apellido_paterno = 'GOMEZ'
+		and c.apellido_materno = 'GONZALEZ'
+	)
+	group by fecha_factura,sv.cliente_id
+);
 
 --EJERCICIO 9
 
