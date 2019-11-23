@@ -6,6 +6,9 @@
 @author: Francisco Pablo Rodrigo
 @author: Flores García Karina
 @Fecha : 23/11/12
+
+HTML 5 | js | css3 | bootstrap v4.1 | laravel 6.5.0 | php7.3 | laravel/installer2.1
+ORACLE 18g DB
 ```
 
 ### Caso de estudio
@@ -20,6 +23,8 @@ Global Home es una empresa que cuenta con un sitio Web destinado a la renta y/o 
 
 ### Para desarrolladores
 
+Se realizará la aplicación web y un webservice (posiblemente) utilizando un framework de php, *Laravel*.
+
 #### Licencia
 
 Este proyecto esta licenciado aún no tiene una licencia pero se encontrará  [aquí](LICENSE)
@@ -30,6 +35,7 @@ La guía para contribuir al proyecto se encuentre [aquí](CONTRIBUTING)
 
 ### Todo
 
+* [ ] Agregar cardinalidades y corregir notación Crow's foot, recomiendo cambiar a IDEF1X
 * [ ] Checar donde se podrían implementar posibles vistas.
 * [ ] Identificar triggers.
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
