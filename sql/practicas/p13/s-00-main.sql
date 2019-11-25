@@ -70,5 +70,13 @@ create global temporary table t_reporte_biblioteca (
 	total_prestamos number(10,0) not null
 ) on commit preserve rows;
 
+create table libro_imagen(
+	libro_id number(10,0) not null,
+	imagen_url varchar2(4000) not null,
+	nombre_archivo varchar2(1000) not null,
+	comando varchar2(4000) not null,
+	imagen blob
+);
+
 whenever sqlerror continue none
 Prompt Listo!
