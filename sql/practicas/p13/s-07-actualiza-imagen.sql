@@ -18,7 +18,7 @@ Prompt conectando como usuario flfr_p1302_biblio
 connect flfr_p1302_biblio/practica13
 
 Prompt creando procedimiento para actualizar imagenes.
-create or replace procedure p_actualiza_imagen
+create or replace procedure p_actualiza_imagen is
 	v_bfile bfile;
 	v_src_offset number := 1;
 	v_dest_offset number := 1;
@@ -26,10 +26,10 @@ create or replace procedure p_actualiza_imagen
 	v_src_length number;
 	v_dest_length number;
 	v_nombre_archivo varchar2(1000);
-is
+
 cursor cur_libro_imagen is
-select libro_id,imagen,nombre_archivo
-from libro_imagen;
+	select libro_id,imagen,nombre_archivo
+	from libro_imagen;
 
 begin
 
