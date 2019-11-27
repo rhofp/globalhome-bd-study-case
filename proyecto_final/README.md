@@ -33,6 +33,24 @@ Este proyecto esta licenciado aún no tiene una licencia pero se encontrará  [a
 
 La guía para contribuir al proyecto se encuentre [aquí](CONTRIBUTING)
 
+### Dudas
+
+1. ¿Se deben almacenar las fechas de conformidad?
+2. ¿La notificación es una entidad?
+
+### Elementos del modelo
+
+#### Constraints
+
+##### UNIQUE
+
+1. (num_imagen,vivienda_id)
+
+#### Triggers
+
+1. No se puede insertar en **vivienda_venta** si ya se inserto en **vivienda_vacacional** o en **vivienda_renta**.
+2. Cuando **una vivienda para vacacionar** este disponible, se enviarará un mensaje a todos los usuarios interesados.
+
 ### Todo
 
 * [ ] Agregar cardinalidades y corregir notación Crow's foot, recomiendo cambiar a IDEF1X
