@@ -1,3 +1,8 @@
+--@Autor:Flores Garcia Karina
+--@Autor:Francisco Pablo Rodrigo
+--@Fecha creación: 30/11/2019
+--@Descripción: Creacion de entidades
+
 create table usuario(
   usuario_id number(10,0) not null,
   correo_electronico varchar2(30) not null,
