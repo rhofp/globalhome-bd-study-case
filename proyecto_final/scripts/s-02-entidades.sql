@@ -3,62 +3,6 @@
 --@Fecha creación: 30/11/2019
 --@Descripción: Creacion de entidades
 
-create table usuario(
-  usuario_id number(10,0) not null,
-  correo_electronico varchar2(30) not null,
-  nombre_usuario varchar2(30) not null,
-  nombre varchar2(20) nor null,
-  apellido_paterno varchar2(15) not null,
-  apellido_materno varchar2(15) null,
-  tipo char(1) not null,
-  contrasena varchar2(20) not null
-);
-
-create table servicio(
-  servicio_id number(10,0) not null,
-  nombre varchar2(20) not null,
-  descripcion varchar2(200) not null,
-  icono blob(40) not null
-);
-
-create table servicio_vivienda(
-  servicio_vivienda_id number(10,0) not null,
-  servicio_id number(10,0) not null,
-  servicio_id number(10,0) not null,
-  vivienda_id number(10,0) not null
-);
-
-create table mensaje(
-  mensaje_id number(10,0) not null,
-  leido number(1,0) not null,
-  mensaje varchar2(2500) not null,
-  cliente_id number(10,0) not null,
-  duenio_id number(10,0) not null,
-  vivienda_interes_id number(10,0) not null,
-  respuesta_id varchar2(2500) null
-);
-
-create table status_vivienda(
-  status_vivienda_id number(10,0) not null,
-  clave varchar2(40) not null,
-  descripcion varchar2(40) not null
-);
-
-create table historico_status_vivienda(
-  historico_status_vivienda_id  number(10,0),
-  status_vivienda_id number(10,0) not null,
-  vivienda_id number(10,0) not null,
-  fecha_status date not null
-);
-
-create table tarjeta(
-  tarjeta_id number(10,0) not null,
-  clabe number(10,0) not null,
-  cliente_id number(10,0) not null,
-  expiracion_mm varchar2(10) not null,
-  expiracion_aa varchar2(10) not null
-);
-
 create table vivienda(
   vivienda_id number(10,0) not null,
   ubicacion_longitud number(10,7) not null,
@@ -67,7 +11,8 @@ create table vivienda(
   capacidad_personas_max number(2,0) not null,
   descripcion varchar2(2500) not null,
   status_vivienda_id number(2,0) not null,
-  fecha_status date not null
+  fecha_status date not null,
+  tipo char null
 );
 
 create table vivienda_renta(
@@ -83,7 +28,6 @@ create table vivienda_vacacional(
   dias_renta number(3,0) not null
 );
 
-
 create table vivienda_venta(
   vivienda_id number(10,0) not null,
   num_catastral number(4,0) not null,
@@ -95,19 +39,72 @@ create table vivienda_venta(
   clave_deposito_id number(10,0)
 );
 
+create table status_vivienda(
+  status_vivienda_id number(10,0) not null,
+  clave varchar2(40) not null,
+  descripcion varchar2(40) not null
+);
+
+create table historico_status_vivienda(
+  historico_status_vivienda_id  number(10,0),
+  status_vivienda_id number(10,0) not null,
+  vivienda_id number(10,0) not null,
+  fecha_status date not null
+);
+
+create table servicio(
+  servicio_id number(10,0) not null,
+  nombre varchar2(30) not null,
+  descripcion varchar2(2000) not null,
+  icono blob not null 
+);
+
+create table servicio_vivienda(
+  servicio_vivienda_id number(10,0) not null,
+  servicio_id number(10,0) not null,
+  vivienda_id number(10,0) not null
+);
+
+create table usuario(
+  usuario_id number(10,0) not null,
+  correo_electronico varchar2(60) not null,
+  nombre_usuario varchar2(30) not null,
+  nombre varchar2(30) nor null,
+  apellido_paterno varchar2(30) not null,
+  apellido_materno varchar2(30) null,
+  contrasena varchar2(20) not null
+  tipo char not null,
+);
+
+create table mensaje(
+  mensaje_id number(10,0) not null,
+  leido number(1,0) not null,
+  mensaje varchar2(2500) not null,
+  cliente_id number(10,0) not null,
+  duenio_id number(10,0) not null,
+  vivienda_interes_id number(10,0) not null,
+  respuesta_id varchar2(2500)
+);
+
+create table tarjeta(
+  tarjeta_id number(10,0) not null,
+  clabe number(10,0) not null,
+  cliente_id number(10,0) not null,
+  expiracion_mm varchar2(10) not null,
+  expiracion_aa varchar2(10) not null
+);
+
 create table imagen(
   imagen_id number(10,0),
   num_imagen number(2,0),
   vivienda_id number(10,0) not null,
-  imagen blob(500) not null
+  imagen blob not null
 );
-
 
 create table clave_deposito(
   clave_deposito_id number(10,0) not null,
   clabe varchar2(18) not null
 );
-
 
 create table contrato(
   contrato_id number(10,0) not null,
