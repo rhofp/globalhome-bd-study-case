@@ -44,12 +44,16 @@ La guía para contribuir al proyecto se encuentre [aquí](CONTRIBUTING)
 
 ##### UNIQUE
 
-1. (num_imagen,vivienda_id)
+1. imagen (num_imagen,vivienda_id)
+2. usuario(email)
+3. pago_vivienda(num_pago,vivienda_id)
 
 #### Triggers
 
 1. No se puede insertar en **vivienda_venta** si ya se inserto en **vivienda_vacacional** o en **vivienda_renta**.
 2. Cuando **una vivienda para vacacionar** este disponible, se enviarará un mensaje a todos los usuarios interesados.
+3. Entre **vivienda vacacionar** y **usuario** se genera una tabla **alquiler**, si el usuario insertado en alquiler no tiene tarjeta de crédito registrada, se le solicitará ingresar una.
+4. Validar en **pago_vivienda** que solo se pueden hacer 240 insert's.
 
 ### Todo
 
