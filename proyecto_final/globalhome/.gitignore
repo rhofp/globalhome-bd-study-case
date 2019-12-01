@@ -11,7 +11,6 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
-
 # Created by https://www.gitignore.io/api/phpstorm
 # Edit at https://www.gitignore.io/?templates=phpstorm
 
@@ -104,3 +103,4 @@ fabric.properties
 .idea/**/markdown-navigator/
 
 # End of https://www.gitignore.io/api/phpstorm
+.idea
