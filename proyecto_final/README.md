@@ -27,11 +27,11 @@ Se realizará la aplicación web y un webservice (posiblemente) utilizando un fr
 
 #### Licencia
 
-Este proyecto esta licenciado aún no tiene una licencia pero se encontrará  [aquí](LICENSE)
+Este proyecto esta licenciado aún no tiene una licencia pero se encontrará  [aquí](../LICENSE.md)
 
 #### Contribuciones
 
-La guía para contribuir al proyecto se encuentre [aquí](CONTRIBUTING)
+La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 
 ### Dudas
 
