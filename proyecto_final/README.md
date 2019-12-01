@@ -42,7 +42,18 @@ La guía para contribuir al proyecto se encuentre [aquí](CONTRIBUTING)
 
 #### Uso de default
 
-#### Propuesta de tabla virtual
+* Vivienda(fecha_status default sysdate)
+* Mensaje(leido default 0)
+* Contrato(fecha_contrato default sysdate)
+* Interesado_vivienda_vac(notificacion_enviada default 0)
+
+#### Propuesta de tablas y columnas virtuales
+
+#### Propuesta de tabla de temporal
+
+#### Propuesta de tabla de externa
+
+* Vivienda_sin_ubicacion: Son viviendas que no tienen calculadas las latitudes y/o longitudes.
 
 #### Constraints
 
@@ -61,8 +72,8 @@ La guía para contribuir al proyecto se encuentre [aquí](CONTRIBUTING)
 
 ### Todo
 
-* [ ] Agregar cardinalidades y corregir notación Crow's foot, recomiendo cambiar a IDEF1X
+* [x] Agregar cardinalidades y corregir notación Crow's foot, recomiendo cambiar a IDEF1X
 * [ ] Checar donde se podrían implementar posibles vistas.
-* [ ] Identificar triggers.
+* [x] Identificar triggers.
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
 * [ ] Revisar que módulo se implementará en *laravel* para hacer las vista de dicho módulo.
