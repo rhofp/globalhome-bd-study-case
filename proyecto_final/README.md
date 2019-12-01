@@ -35,10 +35,14 @@ La guía para contribuir al proyecto se encuentre [aquí](CONTRIBUTING)
 
 ### Dudas
 
-1. ¿Se deben almacenar las fechas de conformidad?
-2. ¿La notificación es una entidad?
+1. ¿Se deben almacenar las fechas de conformidad? NO
+2. ¿La notificación es una entidad? No lo es
 
 ### Elementos del modelo
+
+#### Uso de default
+
+#### Propuesta de tabla virtual
 
 #### Constraints
 
