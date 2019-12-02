@@ -51,9 +51,16 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 
 #### Propuesta de tabla de temporal
 
+* Estadísticas de costos.
+
 #### Propuesta de tabla de externa
 
 * Vivienda_sin_ubicacion: Son viviendas que no tienen calculadas las latitudes y/o longitudes.
+
+#### Propuesta de vistas
+
+* Vista para ocultar las contraseñas de los *usuarios*
+* 
 
 #### Constraints
 
@@ -63,17 +70,15 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 2. usuario(email)
 3. pago_vivienda(num_pago,vivienda_id)
 
-#### Triggers
+#### Propuesta de triggers
 
 1. No se puede insertar en **vivienda_venta** si ya se inserto en **vivienda_vacacional** o en **vivienda_renta**.
 2. Cuando **una vivienda para vacacionar** este disponible, se enviarará un mensaje a todos los usuarios interesados.
 3. Entre **vivienda vacacionar** y **usuario** se genera una tabla **alquiler**, si el usuario insertado en alquiler no tiene tarjeta de crédito registrada, se le solicitará ingresar una.
 4. Validar en **pago_vivienda** que solo se pueden hacer 240 insert's.
 
-### Todo
+### To do
 
 * [x] Agregar cardinalidades y corregir notación Crow's foot, recomiendo cambiar a IDEF1X
-* [ ] Checar donde se podrían implementar posibles vistas.
-* [x] Identificar triggers.
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
 * [ ] Revisar que módulo se implementará en *laravel* para hacer las vista de dicho módulo.
