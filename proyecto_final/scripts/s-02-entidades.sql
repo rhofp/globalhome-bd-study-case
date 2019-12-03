@@ -12,8 +12,8 @@ create table vivienda(
   capacidad_personas_max number(2,0) not null,
   descripcion varchar2(2500) not null,
   status_vivienda_id number(2,0) not null,
-  fecha_status date not null,
-  tipo char null,
+  fecha_status date default sysdate not null,
+  tipo char not null,
   constraint vivienda_pk primary key(vivienda_id)
 );
 
@@ -109,17 +109,20 @@ create table tarjeta(
   tarjeta_id number(10,0) not null,
   clabe number(10,0) not null,
   cliente_id number(10,0) not null,
-  expiracion_mm varchar2(10) not null,
-  expiracion_aa varchar2(10) not null,
+  expiracion_mm varchar2(2) not null,
+  expiracion_aa varchar2(4) not null,
   constraint tarjeta_pk primary key(tarjeta_id),
   constraint tarjeta_cliente_id_fk foreign key(cliente_id)
-  references usuario(usuario_id)
+  references usuario(usuario_id),
+  constraint tarjeta_expiracion_mm_chk check(
+    expiracion_mm in ('01','02','03','04','05','06','07','08','09','10','11','12')
+  )
 );
 
 -- Entidad 11
 create table mensaje(
   mensaje_id number(10,0) not null,
-  leido number(1,0) not null,
+  leido number(1,0) default 0 not null,
   mensaje varchar2(2500) not null,
   cliente_id number(10,0) not null,
   duenio_id number(10,0) not null,
@@ -158,7 +161,7 @@ create table vivienda_renta_clave_dep(
 -- Entidad 14
 create table vivienda_venta(
   vivienda_id number(10,0) not null,
-  num_catastral number(4,0) not null,
+  num_catastral varchar2(20) not null,
   folio_escritura varchar2(40) not null,
   avaluo_pdf blob(18) not null,
   precio_venta_inicial number(10,2) not null,
@@ -184,7 +187,8 @@ create table pago_vivienda(
   deposito_realizado_pdf blob not null,
   constraint pago_vivienda_pk primary key(pago_vivienda_id),
   constraint pago_vivienda_vivienda_id_fk foreign key(vivienda_id)
-  references vivienda(vivienda_id)
+  references vivienda(vivienda_id),
+  constraint pago_vivienda_viv_id_num_pago_uk unique(num_pago,vivienda_id)
 );
 
 -- Entidad 16
@@ -204,7 +208,7 @@ create table alquiler(
 create table contrato(
   contrato_id number(10,0) not null,
   folio varchar2(40) not null,
-  fecha_contrato varchar2(40) not null,
+  fecha_contrato varchar2(40) default sysdate not null,
   doc_pdf blob not null,
   vivienda_id number(10,0) not null,
   usuario_id number(10,0) not null,
@@ -213,7 +217,6 @@ create table contrato(
   references vivienda(vivienda_id),
   constraint contrato_usuario_id_fk foreign key(usuario_id)
   references usuario(usuario_id)
-
 );
 
 -- Entidad 18
@@ -222,7 +225,7 @@ create table interesado_vivienda_vac(
   usuario_id number(10,0) not null,
   vivienda_id number(10,0) not null,
   num_celular number(12,0) not null,
-  notificacion_enviado number(1,0) not null,
+  notificacion_enviado number(1,0) default 0 not null,
   constraint interesado_vivienda_vac_pk primary key(interesado_vivienda_vac_id),
   constraint inter_viv_vac_vivienda_id_fk foreign key(vivienda_id)
   references vivienda(vivienda_id),

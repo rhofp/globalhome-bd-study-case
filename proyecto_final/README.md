@@ -47,7 +47,7 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 * Contrato(fecha_contrato default sysdate)
 * Interesado_vivienda_vac(notificacion_enviada default 0)
 
-#### Propuesta de tablas y columnas virtuales
+#### Propuesta de columnas virtuales
 
 #### Propuesta de tabla de temporal
 
@@ -60,15 +60,15 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 #### Propuesta de vistas
 
 * Vista para ocultar las contraseñas de los *usuarios*
-* 
 
 #### Constraints
 
-##### UNIQUE
-
-1. imagen (num_imagen,vivienda_id)
-2. usuario(email)
-3. pago_vivienda(num_pago,vivienda_id)
+| Constraint | Tabla         | Atributos              | Realizado |
+| ---------- | ------------- | ---------------------- | --------- |
+| **Unique** | imagen        | num_imagen,vivienda_id | Sí        |
+| **Unique** | usuario       | email                  | Sí        |
+| **Unique** | pago_vivienda | num_pago, vivienda_id  | Sí        |
+| **Check**  | tarjeta       | expiracion_mm          | Sí        |
 
 #### Propuesta de triggers
 
