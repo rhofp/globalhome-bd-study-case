@@ -8,22 +8,22 @@
 whenever sqlerror exit rollback
 
 Prompt creando usuarios ff_proy_admin y ff_proy_invitado
-@s-01-creacion-usuario.sql
+@s-01-usuarios.sql
 
 Prompt conectando como usuario ff_proy_admin
 connect ff_proy_admin
 
 Prompt creando objetos
-@s-02-entidades-ddl.sql
-@s-03-tablas-temporales.sql
-@s-04-tablas-externas.sql
-@s-05-secuencias.sql
-@s-06-indices.sql
-@s-07-sinonimos.sql 
-@s-08-vistas.sql 
+@s-02-entidades.sql
+--@s-03-tablas-temporales.sql
+--@s-04-tablas-externas.sql
+--@s-05-secuencias.sql
+--@s-06-indices.sql
+--@s-07-sinonimos.sql 
+--@s-08-vistas.sql 
 
 Prompt realizando la carga de datos
-@s-09-carga-inicial.sql
+--@s-09-carga-inicial.sql
 
 Prompt confirmando cambios
 commit;

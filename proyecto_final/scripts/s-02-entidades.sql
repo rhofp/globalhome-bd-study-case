@@ -95,10 +95,10 @@ create table usuario(
   usuario_id number(10,0) not null,
   correo_electronico varchar2(60) not null,
   nombre_usuario varchar2(30) not null,
-  nombre varchar2(30) nor null,
+  nombre varchar2(30) not null,
   apellido_paterno varchar2(30) not null,
   apellido_materno varchar2(30) null,
-  contrasena varchar2(20) not null
+  contrasena varchar2(20) not null,
   tipo char not null,
   constraint usuario_pk primary key(usuario_id),
   constraint usuario_correo_electronico_uk unique(correo_electronico)
@@ -127,12 +127,12 @@ create table mensaje(
   cliente_id number(10,0) not null,
   duenio_id number(10,0) not null,
   vivienda_interes_id number(10,0) not null,
-  respuesta_id varchar2(2500),
+  respuesta_id number(10,0) not null,
   constraint mensaje_pk primary key(mensaje_id),
   constraint mensaje_cliente_id_fk foreign key(cliente_id)
-  references cliente(cliente_id),
-  constraint mensaje_duenio_id_fk foreign key(cliente_id)
-  references cliente(cliente_id),
+  references usuario(usuario_id),
+  constraint mensaje_duenio_id_fk foreign key(duenio_id)
+  references usuario(usuario_id),
   constraint mensaje_vivienda_interes_id_fk foreign key(vivienda_interes_id)
   references vivienda(vivienda_id),
   constraint mensaje_respuesta_id_fk foreign key(respuesta_id)
@@ -163,7 +163,7 @@ create table vivienda_venta(
   vivienda_id number(10,0) not null,
   num_catastral varchar2(20) not null,
   folio_escritura varchar2(40) not null,
-  avaluo_pdf blob(18) not null,
+  avaluo_pdf blob not null,
   precio_venta_inicial number(10,2) not null,
   comision_publicidad number(10,0) not null,
   usuario_comprador_id number(10,0) not null,
