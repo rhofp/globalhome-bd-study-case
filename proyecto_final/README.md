@@ -37,6 +37,8 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 
 1. ¿Se deben almacenar las fechas de conformidad? NO
 2. ¿La notificación es una entidad? No lo es
+3. ¿Cómo implementar tres sinónimos públicos?
+4. ¿A que se refiere con los dos caracteres de los sinónimos (punto 7 de los req.)
 
 ### Elementos del modelo
 
@@ -57,9 +59,29 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 
 * Vivienda_sin_ubicacion: Son viviendas que no tienen calculadas las latitudes y/o longitudes.
 
+#### Propuesta de sinónimos públicos
+
+#### Propuesta de sinónimos privados de invitado
+
+##### Sinónimos de tabla
+
+* Vivienda
+* Vivienda_renta
+* Vivienda_vacacional
+* Vivienda_venta
+
+##### Sinónimos de select
+
+* Un select con un join entre vivienda, vivienda_renta y vivienda_vacacional
+* Un select con un join entre vivienda y vivienda_venta
+
 #### Propuesta de vistas
 
 * Vista para ocultar las contraseñas de los *usuarios*
+* Vista en vivienda_venta, quitar columnas: 
+  * Avaluo_pdf
+  * comision_publicidad
+  * clave_deposito
 
 #### Constraints
 
