@@ -33,14 +33,9 @@ Este proyecto esta licenciado aún no tiene una licencia pero se encontrará  [a
 
 La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 
-### Dudas
-
-1. ¿Se deben almacenar las fechas de conformidad? NO
-2. ¿La notificación es una entidad? No lo es
-3. ¿Cómo implementar tres sinónimos públicos?
-4. ¿A que se refiere con los dos caracteres de los sinónimos (punto 7 de los req.)
-
 ### Construcción del modelo relacional
+
+#### Script s-01-usuarios.sql
 
 #### Script s-02-entidades.sql
 
@@ -56,71 +51,55 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 | **Unique** | pago_vivienda | num_pago, vivienda_id  |
 | **Check**  | tarjeta       | expiracion_mm          |
 
-#### Script s-03-tablas-temporales.sql
-
-#### Script s-04-tablas-externas.sql
-
-| Propuesta | Descripción                                                  |
-| --------- | ------------------------------------------------------------ |
-|           | registrar viviendas apartir de externa y luego hacer programa que verifique si la vivienda es correcta |
-|           | Vivienda_sin_ubicacion: Son viviendas que no tienen calculadas las latitudes y/o longitudes. |
-|           |                                                              |
-
 #### Script s-05-secuencias.sql
 
-#### Script s-06-índices.sql
+#### Script s-06-indices.sql
 
-#### Script s-07-sinonimos.sql
+### Requerimientos propuestos
 
-##### Sinónimos de tabla
+* **En las siguientes reglas de negocios se hacen uso de los requerimiento 03 a 19**
 
-- Vivienda
-- Vivienda_renta
-- Vivienda_vacacional
-- Vivienda_venta
+Periodicamente a la empresa *Global Home*  le llega información de nuevas viviendas que deben incorporar en su catálogo de viviendas y sus correspondientes tipos. Dicha información llega a través de un archivo de *texto plano*, por lo cual se requiere hacer uso de una **tabla externa [04,1]** que cargue la información de las viviendas. Dicha información esta separada por comas y puede incluir lo siguiente:
 
-##### Sinónimos de select
+* Descripción
+* Tipo: El tipo puede ser "VIVIENDA RENTA", "VIVIENDA VIVIENDA VACACIONAL", "VIVIENDA VENTA"
+* [COMPLETAR]
 
-- Un select con un join entre vivienda, vivienda_renta y vivienda_vacacional
-- Un select con un join entre vivienda y vivienda_venta
+Se deberá generar un **procedimiento almacenado [13,1]** que PARA CADA "REGISTRO" (**cursor [19,1]**) verifique la integridad de los datos de la tabla externa antes de que sean insertados en la jerarquía correspondiente.
 
-#### Script s-08-vistas-sql
+Tener cuidado con el tipo de vivienda, dado que la longitud del atributo es de uno
 
-- Vista para ocultar las contraseñas de los *usuarios*
-- Vista en vivienda_venta, quitar columnas: 
-  - Avaluo_pdf
-  - comision_publicidad
-  - clave_deposito
+* "VIVIENDA_RENTA" => R
+* "VIVIENDA_VACACIONAL" => V
+* "VIVIENDA_VENTA" => S (venta en inglés, *sell*)
 
-#### Script s-09-carga-inicial.sql
+Las viviendas que NO hayan cumplido con los criterios para ser insertadas en la jerarquía se insertarán en una **tabla temporal [03,1]** con la finalidad de informar al usuario final (app web) las incidencias que debe corregir.
 
-#### Script s-10-consultas.sql
+Para conservar la seguridad de los datos *críticos* se crearán las siguientes **vistas**:
 
-#### Scripts s-11-tr-\<nombre-trigger\>.sql
+1. **La vista [08,1]** será una vista casi identica a la entidad usuario excepto que no tendrá el campo de la contraseña.
 
-1. No se puede insertar en **vivienda_venta** si ya se inserto en **vivienda_vacacional** o en **vivienda_renta**.
-2. Cuando **una vivienda para vacacionar** este disponible, se enviarará un mensaje a todos los usuarios interesados.
-3. Entre **vivienda vacacionar** y **usuario** se genera una tabla **alquiler**, si el usuario insertado en alquiler no tiene tarjeta de crédito registrada, se le solicitará ingresar una.
-4. Validar en **pago_vivienda** que solo se pueden hacer 240 insert's.
+2. Para el caso de las viviendas en venta es importante no mostrar datos delicados, los cuales son
 
-#### Scripts s-12-tr-\<nombre-trigger\>-prueba.sql
+   * avaluo_pdf
 
-#### Scripts s-13-p-\<nombre-procedimiento\>.sql
+   * comision_publicidad
 
-#### Scripts s-14-p-\<nombre-procedimiento\>-prueba.sql
+   * clave_deposito
 
-#### Scripts s-15-fx-\<nombre-funcion\>.sql
+   Para lo cual será uso de la **vista [08,2]**
 
-#### Scripts s-16-fx-\<nombre-funcion\>-prueba.sql
-
-#### Scripts s-17-lob-\<nombre-programa\>.sql
-
-#### Scripts s-18-lob-\<nombre-programa\>-prueba.sql
-
-#### Scripts s-19-cur-\<nombre-programa\>.sql
+Por otra parte, global home desea conocer todas las viviendas de renta o vacacional que tengan más de 5 servicios, adicional a ello se deberán mostrar los contratos o alquileres si los hay, de esta manera el usuario administrador podrá conocer las viviendas que actualmente le estan generando ingresos, por la complejidad de la consulta se decide emplear una **vista [08,3]**.
 
 ### To do
 
 * [x] Agregar cardinalidades y corregir notación Crow's foot, recomiendo cambiar a IDEF1X
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
 * [ ] Revisar que módulo se implementará en *laravel* para hacer las vista de dicho módulo.
+
+### Dudas
+
+1. ¿Se deben almacenar las fechas de conformidad? NO
+2. ¿La notificación es una entidad? No lo es
+3. ¿Cómo implementar tres sinónimos públicos?
+4. ¿A que se refiere con los dos caracteres de los sinónimos (punto 7 de los req.)
