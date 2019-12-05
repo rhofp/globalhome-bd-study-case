@@ -1,4 +1,4 @@
-# Base de datos
+# **Base** de datos
 
 ## Proyecto final: Global Home
 
@@ -91,9 +91,16 @@ Para conservar la seguridad de los datos *críticos* se crearán las siguientes 
 
 Por otra parte, global home desea conocer todas las viviendas de renta o vacacional que tengan más de 5 servicios, adicional a ello se deberán mostrar los contratos o alquileres si los hay, de esta manera el usuario administrador podrá conocer las viviendas que actualmente le estan generando ingresos, por la complejidad de la consulta se decide emplear una **vista [08,3]**.
 
+Al registrar un contrato o el alquiler se debe autogenerar el folio por medio de una **funcion [15,1]** a partir de los siguientes datos.
+
+* "CON" o "ALQ" para contrato o alquiler, según se el caso. En caso de este registrada en ambas se emplean los caracteres "COA".
+* El identificador de la vivienda.
+* El identificador del usuario.
+* La fecha de registro
+
 ### To do
 
-* [x] Agregar cardinalidades y corregir notación Crow's foot, recomiendo cambiar a IDEF1X
+* [ ] **Agregar cardinalidades** 
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
 * [ ] Revisar que módulo se implementará en *laravel* para hacer las vista de dicho módulo.
 
