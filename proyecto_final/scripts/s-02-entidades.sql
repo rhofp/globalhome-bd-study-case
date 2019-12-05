@@ -21,7 +21,7 @@ create table vivienda(
 create table vivienda_renta(
   vivienda_id number(10,0) not null,
   renta_mensual number(10,2) not null,
-  dia_deposito char(2) not null,
+  dia_deposito number(2,0) not null,
   constraint vivienda_renta_vivienda_id_fk foreign key(vivienda_id)
   references vivienda(vivienda_id),
   constraint vivienda_renta_pk primary key(vivienda_id)
