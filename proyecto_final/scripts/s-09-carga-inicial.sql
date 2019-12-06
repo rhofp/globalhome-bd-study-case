@@ -18,6 +18,13 @@ Cargando datos iniciales
 !curl "https://api.mockaroo.com/api/7a1f8360?count=300&key=d52330b0" > "s-09-vivienda_renta_clave_dep.sql"
 !curl "https://api.mockaroo.com/api/f4c558f0?count=100&key=d52330b0" > "s-09-alquiler.sql"
 !curl "https://api.mockaroo.com/api/9936d880?count=100&key=d52330b0" > "s-09-interesado_vivienda_vac.sql"
+-- Los que deberían tener blob
+!curl "https://api.mockaroo.com/api/bb8db5b0?count=40&key=d52330b0" > "s-09-imagen.sql"
+!curl "https://api.mockaroo.com/api/1b2a0d60?count=50&key=d52330b0" > "s-09-servicio.sql"
+!curl "https://api.mockaroo.com/api/b7414ef0?count=1000&key=d52330b0" > "s-09-vivienda_venta.sql"
+!curl "https://api.mockaroo.com/api/4ab3f5d0?count=50&key=d52330b0" > "s-09-pago_vivienda.sql"
+!curl "https://api.mockaroo.com/api/87c2fe10?count=1000&key=d52330b0" > "s-09-contrato.sql"
+
 
 set define off
 -- cargador 1
@@ -33,7 +40,7 @@ set define off
 -- cargador 6
 @-s-09-imagen.sql
 -- cargador 7
---@-s-09-servicio.sql
+@-s-09-servicio.sql
 -- cargador 8
 @s-09-servicio_vivienda.sql
 -- cargador 9
@@ -47,13 +54,13 @@ set define off
 -- cargador 13
 @s-09-vivienda_renta_clave_dep.sql
 -- cargador 14
---@s-09-vivienda_venta.sql
+@s-09-vivienda_venta.sql
 -- cargador 15
---@s-09-pago_vivienda.sql
+@s-09-pago_vivienda.sql
 -- cargador 16
 @s-09-alquiler.sql
 -- cargador 17
---@s-09-contrato.sql
+@s-09-contrato.sql
 -- cargador 18
 @s-09-interesado_vivienda_vac.sql
 
