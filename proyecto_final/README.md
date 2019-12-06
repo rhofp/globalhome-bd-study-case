@@ -98,6 +98,15 @@ Al registrar un contrato o el alquiler se debe autogenerar el folio por medio de
 * El identificador del usuario.
 * La fecha de registro
 
+En caso de que los folios ya se hayan insertado, crear un **procedimiento almacenado [13,2]** que los corrija en caso de ser necesario.
+
+Para el caso de los mensajes entre el dueño y un posible cliente se requiere cuidar la integridad de los datos ya que No se permite que:
+
+* Un cliente se pueda responder así mismo, es decir, cliente_id != duenio_id
+* Tampoco es válido que la respuesta se la misma que el mensaje, es decir, mensaje_id != duenio_id
+
+Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,1]**
+
 ### To do
 
 * [ ] **Agregar cardinalidades** 
