@@ -37,6 +37,11 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 
 #### Script s-01-usuarios.sql
 
+Los usuarios creados son 
+
+* ff_proy_admin
+* ff_proy_invitado
+
 #### Script s-02-entidades.sql
 
 | Issue           | Entidad                 | Atributo                       |
@@ -53,11 +58,38 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 
 #### Script s-05-secuencias.sql
 
+De las 18 entidades se generaron 15 secuencias, vivienda, vivienda_renta, vivienda_vacacional y vivienda_venta comparten la secuencia.
+
 #### Script s-06-indices.sql
+
+#### Script s-09-carga-inicial.sql
+
+Los datos se generan de forma random por medio *mockaroo*
+
+|      | Entidad                   | Cantidad de datos generados |
+| ---- | ------------------------- | --------------------------- |
+| 1    | vivienda                  | 100                         |
+| 2    | vivienda_renta            | 30                          |
+| 3    | vivienda_vacacional       | 30                          |
+| 4    | status_vivienda           | 6                           |
+| 5    | historico_status_vivienda | 100                         |
+| 6    | imagen                    | 25                          |
+| 7    | servicio                  | 20                          |
+| 8    | servicio_vivienda         | 100                         |
+| 9    | usuario                   | 100                         |
+| 10   | tarjeta                   | 50                          |
+| 11   | mensaje                   | 50                          |
+| 12   | clave_deposito            | 50                          |
+| 13   | vivienda_renta_clave_dep  | 30                          |
+| 14   | vivienda_venta            | 50                          |
+| 15   | pago_vivienda             | 150                         |
+| 16   | alquiler                  | 15                          |
+| 17   | contrato                  | 15                          |
+| 18   | interesado_vivienda_vac   | 30                          |
 
 ### Requerimientos propuestos
 
-* **En las siguientes reglas de negocios se hacen uso de los requerimiento 03 a 19**
+* **En las siguientes reglas de negocios se hacen uso de los requerimiento 03 a 19, excepto 05, 06, 09**
 
 Periodicamente a la empresa *Global Home*  le llega información de nuevas viviendas que deben incorporar en su catálogo de viviendas y sus correspondientes tipos. Dicha información llega a través de un archivo de *texto plano*, por lo cual se requiere hacer uso de una **tabla externa [04,1]** que cargue la información de las viviendas. Dicha información esta separada por comas y puede incluir lo siguiente:
 
@@ -108,6 +140,11 @@ Para el caso de los mensajes entre el dueño y un posible cliente se requiere cu
 Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,1]**
 
 Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constraint not null de todos los datos de tipo blob ya que la aplicación no genera dicho tipo de dato. Una vez hecha la inserción de datos, se debe descargar imagenes o pdf random e insertarlos en cada uno de los campos donde corresponda. Finalmente, se debe habilitar el constraint de para no permitir nulos.
+
+1. No se puede insertar en **vivienda_venta** si ya se inserto en **vivienda_vacacional** o en **vivienda_renta**.
+2. Cuando **una vivienda para vacacionar** este disponible, se enviarará un mensaje a todos los usuarios interesados.
+3. Entre **vivienda vacacionar** y **usuario** se genera una tabla **alquiler**, si el usuario insertado en alquiler no tiene tarjeta de crédito registrada, se le solicitará ingresar una.
+4. Validar en **pago_vivienda** que solo se pueden hacer 240 insert's.
 
 ### To do
 
