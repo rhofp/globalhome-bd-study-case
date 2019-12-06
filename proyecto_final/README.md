@@ -103,9 +103,11 @@ En caso de que los folios ya se hayan insertado, crear un **procedimiento almace
 Para el caso de los mensajes entre el dueño y un posible cliente se requiere cuidar la integridad de los datos ya que No se permite que:
 
 * Un cliente se pueda responder así mismo, es decir, cliente_id != duenio_id
-* Tampoco es válido que la respuesta se la misma que el mensaje, es decir, mensaje_id != duenio_id
+* Tampoco es válido que la respuesta se la misma que el mensaje, es decir, mensaje_id != respuesta_id
 
 Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,1]**
+
+Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constraint not null de todos los datos de tipo blob ya que la aplicación no genera dicho tipo de dato. Una vez hecha la inserción de datos, se debe descargar imagenes o pdf random e insertarlos en cada uno de los campos donde corresponda. Finalmente, se debe habilitar el constraint de para no permitir nulos.
 
 ### To do
 
