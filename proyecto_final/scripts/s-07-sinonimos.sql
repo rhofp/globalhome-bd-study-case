@@ -25,3 +25,5 @@ create or replace synonym vivienda_vacacional for ff_proy_admin.vivienda_vacacio
 create or replace synonym vivienda_venta for ff_proy_admin.vivienda_venta;		
 
 select * from s_cuenta_cliente;
+
+
