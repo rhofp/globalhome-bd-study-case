@@ -55,6 +55,11 @@ Los usuarios creados son
 | **Unique** | usuario       | email                  |
 | **Unique** | pago_vivienda | num_pago, vivienda_id  |
 | **Check**  | tarjeta       | expiracion_mm          |
+    
+##### Atributos calculados
+* Para las viviendas en venta es posible realizar hasta 240 pagos, para cada pago se calcularan los días que faltan para que este se realice (fechaPago-fechaActual), cuando falten al menos 5 días para pagar se le enviará una notificación al usuario para recordarle que debe realizar su depósito.
+* Para las tarjetas que los usuarios registren de debera calcular los días que faltan para que dicha tarjeta expire (fechaExpiración-fechaActual), cuando falten al menos 15 días para que expire se le enviará un recordatorio a usuario para que actualice su forma de pago.
+    
 
 #### Script s-05-secuencias.sql
 
@@ -151,7 +156,7 @@ Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constr
 * [ ] **Agregar cardinalidades** 
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
 * [ ] Revisar que módulo se implementará en *laravel* para hacer las vista de dicho módulo.
-
+* [ ] Verificar que la tarjeta ingresada sea válida (fecha de expiración).
 ### Dudas
 
 1. ¿Se deben almacenar las fechas de conformidad? NO
