@@ -63,11 +63,12 @@ create table imagen(
   imagen_id number(10,0),
   num_imagen number(2,0),
   vivienda_id number(10,0) not null,
-  imagen blob not null,
+  imagen blob,
   constraint imagen_pk primary key(imagen_id),
   constraint imagen_vivienda_id_fk foreign key(vivienda_id)
   references vivienda(vivienda_id),
-  constraint imagen_vivienda_id_num_imagen_uk unique(vivienda_id,num_imagen)
+  constraint imagen_vivienda_id_num_imagen_uk unique(vivienda_id,num_imagen),
+  constraint imagen_imagen_chk check(imagen is not null)
 );
 
 -- Entidad 7
@@ -75,8 +76,9 @@ create table servicio(
   servicio_id number(10,0) not null,
   nombre varchar2(30) not null,
   descripcion varchar2(2000) not null,
-  icono blob not null,
-  constraint servicio_pk primary key(servicio_id)
+  icono blob,
+  constraint servicio_pk primary key(servicio_id),
+  constraint servicio_icono_chk check(icono is not null)
 );
 
 -- Entidad 8
@@ -163,10 +165,10 @@ create table vivienda_venta(
   vivienda_id number(10,0) not null,
   num_catastral varchar2(20) not null,
   folio_escritura varchar2(40) not null,
-  avaluo_pdf blob not null,
+  avaluo_pdf blob,
   precio_venta_inicial number(10,2) not null,
   comision_publicidad number(10,0) not null,
-  usuario_comprador_id number(10,0) not null,
+  usuario_comprador_id number(10,0),
   clave_deposito_id number(10,0),
   constraint vivienda_venta_vivienda_id_fk foreign key(vivienda_id)
   references vivienda(vivienda_id),
@@ -174,7 +176,8 @@ create table vivienda_venta(
   constraint vivienda_renta_usu_comprador_id_fk foreign key(usuario_comprador_id)
   references usuario(usuario_id),
   constraint vivienda_venta_clave_dep_id_fk foreign key(clave_deposito_id)
-  references clave_deposito(clave_deposito_id)
+  references clave_deposito(clave_deposito_id),
+  constraint vivienda_venta_avaluo_pdf_chk check(avaluo_pdf is not null)
 );
 
 -- Entidad 15
@@ -184,11 +187,12 @@ create table pago_vivienda(
   num_pago number(4,0) not null,
   importe_pago number(10,2) not null,
   fecha_pago date not null,
-  deposito_realizado_pdf blob not null,
+  deposito_realizado_pdf blob,
   constraint pago_vivienda_pk primary key(pago_vivienda_id),
   constraint pago_vivienda_vivienda_id_fk foreign key(vivienda_id)
   references vivienda(vivienda_id),
-  constraint pago_vivienda_viv_id_num_pago_uk unique(num_pago,vivienda_id)
+  constraint pago_vivienda_viv_id_num_pago_uk unique(num_pago,vivienda_id),
+  constraint pago_vivienda_deposito_realizado_pdf_chk check(deposito_realizado_pdf)
 );
 
 -- Entidad 16
@@ -209,14 +213,15 @@ create table contrato(
   contrato_id number(10,0) not null,
   folio varchar2(40) not null,
   fecha_contrato varchar2(40) default sysdate not null,
-  doc_pdf blob not null,
+  doc_pdf blob,
   vivienda_id number(10,0) not null,
   usuario_id number(10,0) not null,
   constraint contrato_pk primary key(contrato_id),
   constraint contrato_vivienda_id_fk foreign key(vivienda_id)
   references vivienda(vivienda_id),
   constraint contrato_usuario_id_fk foreign key(usuario_id)
-  references usuario(usuario_id)
+  references usuario(usuario_id),
+  constraint contrato_doc_pdf_chk check(doc_pdf is not null)
 );
 
 -- Entidad 18
