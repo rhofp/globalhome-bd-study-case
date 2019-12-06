@@ -109,13 +109,13 @@ create table tarjeta(
   tarjeta_id number(10,0) not null,
   clabe number(10,0) not null,
   cliente_id number(10,0) not null,
-  expiracion_mm varchar2(2) not null,
-  expiracion_aa varchar2(4) not null,
+  expiracion_mm number(2,0) not null,
+  expiracion_aa number(4,0) not null,
   constraint tarjeta_pk primary key(tarjeta_id),
   constraint tarjeta_cliente_id_fk foreign key(cliente_id)
   references usuario(usuario_id),
   constraint tarjeta_expiracion_mm_chk check(
-    expiracion_mm in ('01','02','03','04','05','06','07','08','09','10','11','12')
+    expiracion_mm in (1,2,3,4,5,6,7,8,9,10,11,12)
   )
 );
 
