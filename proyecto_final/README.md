@@ -55,6 +55,7 @@ Los usuarios creados son
 | **Unique** | usuario       | email                  |
 | **Unique** | pago_vivienda | num_pago, vivienda_id  |
 | **Check**  | tarjeta       | expiracion_mm          |
+|**Check**   | tarjetaa      | expiracion_mm          | 
     
 ##### Atributos calculados
 * Para las viviendas en venta es posible realizar hasta 240 pagos, para cada pago se calcularan los días que faltan para que este se realice (fechaPago-fechaActual), cuando falten al menos 5 días para pagar se le enviará una notificación al usuario para recordarle que debe realizar su depósito.
