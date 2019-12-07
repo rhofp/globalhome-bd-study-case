@@ -1,20 +1,26 @@
 --@Autor:Flores Garcia Karina
 --@Autor:Francisco Pablo Rodrigo
 --@Fecha creación: 30/11/2019
---@Descripción: Creación de sinónimos
-create or replace private 01_vivienda for ff_proy_admin.vivienda;
-create or replace private 02_vivienda_renta for ff_proy_admin.vivienda_renta;
-create or replace private 03_vivienda_vacacional for ff_proy_admin.vivienda_vacional;
-create or replace private 04_status_vivienda for ff_proy_admin.status_vivienda;
-create or replace private 05_historico_status_vivienda for ff_proy_admin.historico_status_vivienda;
-create or replace private 06_imagen for ff_proy_admin.imagen;
-create or replace private 07_servicio for ff_proy_admin.servicio;
-create or replace private 08_servicio_vivienda for ff_proy_admin.servicio_vivienda;
-create or replace private 09_usuario for ff_proy_admin.usuario;
-create or replace private 10_tarjeta for ff_proy_admin.tarjeta;
-create or replace private 11_mensaje for ff_proy_admin.mensaje;
-create or replace private 12_clave_deposito for ff_proy_admin.clave_deposito;
-create or replace private 13_vivienda_renta_clave_dep for ff_proy_admin.vivienda_renta_clave_dep;
-create or replace private 14_vivienda_venta for ff_proy_admin.vivienda_venta;
-create or replace private 15_vivienda for ff_proy_admin.vivienda;
-create or replace private 16_alquiler 
+--@Descripción: Creación de sinónimos privados con plsql
+
+Prompt conectando como usuario ff_proy_admin
+connect ff_proy_admin
+
+declare 
+	cursor cur_tablas_admin is
+	select table_name from user_tables;
+
+	v_nombre_tabla user_tables.table_name%type;
+	v_nombre_sinonimo varchar2;
+begin 
+	 open cur_tablas_admin;
+	 dbms_output.put_line('Creando sinonimos...')
+	 for r in cur_tablas_admin loop
+	 	fetch cur_tablas_admin into v_nombre_tabla;
+	 		v_nombre_sinonimo := 'ff_'
+	 							 ||v_nombre_tabla;
+	 	create or replace private synonym v_nombre_sinonimo from r;	 	
+	 	exit when cur_tablas_admin%notfound;
+	 end loop;
+	 close cur_tablas_admin;
+end;
