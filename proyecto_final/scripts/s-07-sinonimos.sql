@@ -20,6 +20,9 @@ grant create synonym to rfp_p0703_invitado;
 
 connect rfp_p0703_invitado/proyectof
 create or replace synonym vivienda for ff_proy_admin.vivienda;
+create or replace synonym vivienda_renta for ff_proy_admin.vivienda_renta;	
+create or replace synonym vivienda_vacacional for ff_proy_admin.vivienda_vacacional;		
+create or replace synonym vivienda_venta for ff_proy_admin.vivienda_venta;		
 
 select * from s_cuenta_cliente;
 
