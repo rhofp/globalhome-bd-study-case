@@ -69,8 +69,5 @@ on interesado_vivienda_vac(usuario_id);
 
 -- SECUENCIA DE CAMPOS QUE SE ACCEDEN CON FRECUENCIA
 
-create unique index usuario_correo_elec_iuk
-on usuario(correo_electronico)
-
-create index usuario_nom_usu_ix
+create unique index usuario_nom_usu_ix
 on usuario(lower(nombre_usuario));
