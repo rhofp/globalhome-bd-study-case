@@ -3,44 +3,54 @@
 --@Fecha creación: 30/11/2019
 --@Descripción: Cargando inciales
 
-Cargando datos iniciales
+prompt Cargando datos iniciales
 
-!curl "https://api.mockaroo.com/api/3c61fa90?count=1000&key=d52330b0" > "s-09-vivienda.sql"
-!curl "https://api.mockaroo.com/api/1bcc0800?count=1000&key=d52330b0" > "vivienda_renta.sql"
-!curl "https://api.mockaroo.com/api/721c2050?count=250&key=d52330b0" > "s-09-vivienda_vacacional.sql"
-!curl "https://api.mockaroo.com/api/edfece70?count=6&key=d52330b0" > "s-09-status_vivienda.sql"
-!curl "https://api.mockaroo.com/api/3008fe40?count=300&key=d52330b0" > "s-09-historico_status_vivienda.sql"
-!curl "https://api.mockaroo.com/api/487055a0?count=1000&key=d52330b0" > "s-09-servicio_vivienda.sql"
-!curl "https://api.mockaroo.com/api/72a75a40?count=1000&key=d52330b0" > "s-09-usuario.sql"
-!curl "https://api.mockaroo.com/api/23b94b20?count=300&key=d52330b0" > "s-09-tarjeta.sql"
-!curl "https://api.mockaroo.com/api/3f498cb0?count=50&key=d52330b0" > "s-09-mensaje.sql"
-!curl "https://api.mockaroo.com/api/330b1720?count=500&key=d52330b0" > "s-09-clave_deposito.sql"
-!curl "https://api.mockaroo.com/api/7a1f8360?count=300&key=d52330b0" > "s-09-vivienda_renta_clave_dep.sql"
-!curl "https://api.mockaroo.com/api/f4c558f0?count=100&key=d52330b0" > "s-09-alquiler.sql"
-!curl "https://api.mockaroo.com/api/9936d880?count=100&key=d52330b0" > "s-09-interesado_vivienda_vac.sql"
--- Los que deberían tener blob
-!curl "https://api.mockaroo.com/api/bb8db5b0?count=40&key=d52330b0" > "s-09-imagen.sql"
-!curl "https://api.mockaroo.com/api/1b2a0d60?count=50&key=d52330b0" > "s-09-servicio.sql"
-!curl "https://api.mockaroo.com/api/b7414ef0?count=1000&key=d52330b0" > "s-09-vivienda_venta.sql"
-!curl "https://api.mockaroo.com/api/4ab3f5d0?count=50&key=d52330b0" > "s-09-pago_vivienda.sql"
-!curl "https://api.mockaroo.com/api/87c2fe10?count=1000&key=d52330b0" > "s-09-contrato.sql"
+prompt Desactivando algunos constraints de tipo check
 
+alter table imagen disable constraint imagen_imagen_chk;
+alter table servicio disable constraint servicio_icono_chk;
+alter table vivienda_venta disable constraint vivienda_venta_avaluo_pdf_chk;
+alter table pago_vivienda disable constraint  pago_vivienda_deposito_realizado_pdf_chk;
+alter table contrato disable constraint contrato_doc_pdf_chk; 
 
 set define off
+
+!curl "https://api.mockaroo.com/api/f4c558f0?count=15&key=d52330b0" > "s-09-alquiler.sql"
+!curl "https://api.mockaroo.com/api/330b1720?count=50&key=d52330b0" > "s-09-clave_deposito.sql"
+!curl "https://api.mockaroo.com/api/87c2fe10?count=15&key=d52330b0" > "s-09-contrato.sql"
+!curl "https://api.mockaroo.com/api/3008fe40?count=100&key=d52330b0" > "s-09-historico_status_vivienda.sql"
+!curl "https://api.mockaroo.com/api/9936d880?count=30&key=d52330b0" > "s-09-interesado_vivienda_vac.sql"
+!curl "https://api.mockaroo.com/api/3f498cb0?count=50&key=d52330b0" > "s-09-mensaje.sql"
+!curl "https://api.mockaroo.com/api/487055a0?count=100&key=d52330b0" > "s-09-servicio_vivienda.sql"
+!curl "https://api.mockaroo.com/api/edfece70?count=6&key=d52330b0" > "s-09-status_vivienda.sql"
+!curl "https://api.mockaroo.com/api/23b94b20?count=50&key=d52330b0" > "s-09-tarjeta.sql"
+!curl "https://api.mockaroo.com/api/72a75a40?count=100&key=d52330b0" > "s-09-usuario.sql"
+!curl "https://api.mockaroo.com/api/3c61fa90?count=100&key=d52330b0" > "s-09-vivienda.sql"
+!curl "https://api.mockaroo.com/api/1bcc0800?count=30&key=d52330b0" > "s-09-vivienda_renta.sql"
+!curl "https://api.mockaroo.com/api/7a1f8360?count=30&key=d52330b0" > "s-09-vivienda_renta_clave_dep.sql"
+!curl "https://api.mockaroo.com/api/721c2050?count=30&key=d52330b0" > "s-09-vivienda_vacacional.sql"
+
+-- Los que deberían tener blob
+!curl "https://api.mockaroo.com/api/4ab3f5d0?count=150&key=d52330b0" > "s-09-pago_vivienda.sql"
+!curl "https://api.mockaroo.com/api/1b2a0d60?count=15&key=d52330b0" > "s-09-servicio.sql"
+!curl "https://api.mockaroo.com/api/bb8db5b0?count=40&key=d52330b0" > "s-09-imagen.sql"
+!curl "https://api.mockaroo.com/api/b7414ef0?count=100&key=d52330b0" > "s-09-vivienda_venta.sql"
+!curl "https://api.mockaroo.com/api/87c2fe10?count=15&key=d52330b0" > "s-09-contrato.sql"
+
 -- cargador 1
 @s-09-vivienda.sql
 -- cargador 2
-@s-09-vivienda_renta.sql
+--@s-09-vivienda_renta.sql
 -- cargador 3
-@s-09-vivienda_vacacional.sql
+--@s-09-vivienda_vacacional.sql
 -- cargador 4
 @s-09-status_vivienda.sql
 -- cargador 5
 @s-09-historico_status_vivienda.sql
 -- cargador 6
-@-s-09-imagen.sql
+@s-09-imagen.sql
 -- cargador 7
-@-s-09-servicio.sql
+@s-09-servicio.sql
 -- cargador 8
 @s-09-servicio_vivienda.sql
 -- cargador 9
@@ -66,5 +76,10 @@ set define off
 
 set define on
 
-Prompt confirmando cambios
-commit;
+prompt Datos aun sin confirmar
+
+-- hacer logica para descargar e insertar las imagenes
+-- habilitar constraints
+
+-- Prompt confirmando cambios
+-- commit;
