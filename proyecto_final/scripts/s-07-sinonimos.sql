@@ -22,3 +22,5 @@ connect rfp_p0703_invitado/proyectof
 create or replace synonym vivienda for ff_proy_admin.vivienda;
 
 select * from s_cuenta_cliente;
+
+

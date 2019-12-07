@@ -30,7 +30,7 @@ create index mensaje_duenio_id_ix
 on mensaje(duenio_id);
 
 create index mensaje_vivienda_interes_id_ix
-on mensaje(duenio_id);
+on mensaje(vivienda_interes_id);
 
 -- No se considero necesario indexar respuesta
 
