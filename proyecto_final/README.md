@@ -50,6 +50,8 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 | **Unique** | usuario       | email                  |
 | **Unique** | pago_vivienda | num_pago, vivienda_id  |
 | **Check**  | tarjeta       | expiracion_mm          |
+    #####Atributos calculados
+    
 
 #### Script s-05-secuencias.sql
 
