@@ -137,20 +137,21 @@ Al registrar un contrato o el alquiler se debe autogenerar el folio por medio de
 
 En caso de que los folios ya se hayan insertado, crear un **procedimiento almacenado [13,2]** que los corrija en caso de ser necesario.
 
-Para el caso de los mensajes entre el dueño y un posible cliente se requiere cuidar la integridad de los datos ya que No se permite que:
+
+Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constraint not null de todos los datos de tipo blob ya que la aplicación no genera dicho tipo de dato. Una vez hecha la inserción de datos, se debe descargar imagenes o pdf random e insertarlos en cada uno de los campos donde corresponda. Finalmente, se debe habilitar el constraint de para no permitir nulos.
+
+###### Triggers
+1. Para el caso de los mensajes entre el dueño y un posible cliente se requiere cuidar la integridad de los datos ya que No se permite que:
 
 * Un cliente se pueda responder así mismo, es decir, cliente_id != duenio_id
 * Tampoco es válido que la respuesta se la misma que el mensaje, es decir, mensaje_id != respuesta_id
 
 Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,1]**
 
-Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constraint not null de todos los datos de tipo blob ya que la aplicación no genera dicho tipo de dato. Una vez hecha la inserción de datos, se debe descargar imagenes o pdf random e insertarlos en cada uno de los campos donde corresponda. Finalmente, se debe habilitar el constraint de para no permitir nulos.
-
-###### Triggers
-1. No se puede insertar en **vivienda_venta** si ya se inserto en **vivienda_vacacional** o en **vivienda_renta**.
-2. Cuando **una vivienda para vacacionar** este disponible, se enviarará un mensaje a todos los usuarios interesados.
-3. Entre **vivienda vacacionar** y **usuario** se genera una tabla **alquiler**, si el usuario insertado en alquiler no tiene tarjeta de crédito registrada, se le solicitará ingresar una.
-4. Validar en **pago_vivienda** que solo se pueden hacer 240 insert's.
+2. No se puede insertar en **vivienda_venta** si ya se inserto en **vivienda_vacacional** o en **vivienda_renta**.
+3. Cuando **una vivienda para vacacionar** este disponible, se enviarará un mensaje a todos los usuarios interesados.
+4. Entre **vivienda vacacionar** y **usuario** se genera una tabla **alquiler**, si el usuario insertado en alquiler no tiene tarjeta de crédito registrada, se le solicitará ingresar una.
+5. Validar en **pago_vivienda** que solo se pueden hacer 240 insert's.
 
 ### To do
 
