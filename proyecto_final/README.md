@@ -52,7 +52,7 @@ La guía para contribuir al proyecto se encuentre [aquí](../CONTRIBUTING)
 | **Check**  | tarjeta       | expiracion_mm          |
     
 ##### Atributos calculados
-* Para las viviendas en venta es poosible realizar hasta 240 pagos, para cada pago se calcularan los días que faltan para que este se realice (fechaPago-fechaActual), cuando falten al menos 5 días para pagar se le enviará una notificación al usuario para recordarle que debe realizar su depósito.
+* Para las viviendas en venta es posible realizar hasta 240 pagos, para cada pago se calcularan los días que faltan para que este se realice (fechaPago-fechaActual), cuando falten al menos 5 días para pagar se le enviará una notificación al usuario para recordarle que debe realizar su depósito.
 * Para las tarjetas que los usuarios registren de debera calcular los días que faltan para que dicha tarjeta expire (fechaExpiración-fechaActual), cuando falten al menos 15 días para que expire se le enviará un recordatorio a usuario para que actualice su forma de pago.
     
 
@@ -117,7 +117,7 @@ Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,
 * [ ] **Agregar cardinalidades** 
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
 * [ ] Revisar que módulo se implementará en *laravel* para hacer las vista de dicho módulo.
-
+* [ ] Verificar que la tarjeta ingresada sea válida (fecha de expiración).
 ### Dudas
 
 1. ¿Se deben almacenar las fechas de conformidad? NO
