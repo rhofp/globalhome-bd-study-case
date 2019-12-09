@@ -58,10 +58,8 @@ Los usuarios creados son
 |**Check**   | tarjetaa      | expiracion_mm y expiracion_aa      | 
     
 ##### Atributos calculados
-* Para las viviendas en venta es posible realizar hasta 240 pagos, para cada pago se calcularan los días que faltan para que este se realice (fechaPago-fechaActual), cuando falten al menos 5 días para pagar se le enviará una notificación al usuario para recordarle que debe realizar su depósito.
-* Para las tarjetas que los usuarios registren de debera calcular los días que faltan para que dicha tarjeta expire (fechaExpiración-fechaActual), cuando falten al menos 15 días para que expire se le enviará un recordatorio a usuario para que actualice su forma de pago.
 * En vivienda_vacion agregar atributo fecha_fin (fecha_inicio+dias_renta).
-* Para el pago de una vivienda agregar un atributo fin_pago (fecha_inicio+240mensualidades).
+* Para el pago de una vivienda agregar un atributo fin_pago (fecha_inicio+240mensualidades). **Este no lo haremos porque usa un sysdate**
 * Agregar un impuesto del 3% (precio_final a una vivienta en venta).
 
 #### Script s-05-secuencias.sql
