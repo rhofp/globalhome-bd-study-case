@@ -62,7 +62,7 @@ Los usuarios creados son
 * Para las tarjetas que los usuarios registren de debera calcular los días que faltan para que dicha tarjeta expire (fechaExpiración-fechaActual), cuando falten al menos 15 días para que expire se le enviará un recordatorio a usuario para que actualice su forma de pago.
 * En vivienda_vacion agregar atributo fecha_fin (fecha_inicio+dias_renta).
 * Para el pago de una vivienda agregar un atributo fin_pago (fecha_inicio+240mensualidades).
-* Agregar un impuesto (precio_final a una vivienta en venta).
+* Agregar un impuesto del 3% (precio_final a una vivienta en venta).
 
 #### Script s-05-secuencias.sql
 
