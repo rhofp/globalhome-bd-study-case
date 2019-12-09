@@ -62,7 +62,9 @@ begin
 					direccion,
 					capacidad_personas_max,
 					descripcion,
-					tipo
+					es_renta,
+					es_vacacional,
+					es_venta
 				)values(
 					vivienda_seq.nextval,
 					p.ubicacion_longitud,
@@ -70,7 +72,7 @@ begin
 					p.direccion,
 					p.capacidad_personas_max,
 					p.descripcion,
-					'R'
+					1,0,0
 				);
 
 				insert into vivienda_renta(
@@ -94,7 +96,9 @@ begin
 					direccion,
 					capacidad_personas_max,
 					descripcion,
-					tipo
+					es_renta,
+					es_vacacional,
+					es_venta
 				)values(
 					vivienda_seq.nextval,
 					p.ubicacion_longitud,
@@ -102,7 +106,7 @@ begin
 					p.direccion,
 					p.capacidad_personas_max,
 					p.descripcion,
-					'V'
+					0,1,0
 				);
 
 				insert into vivienda_vacacional (
