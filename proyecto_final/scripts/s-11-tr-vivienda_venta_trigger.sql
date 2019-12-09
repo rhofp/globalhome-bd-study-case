@@ -7,7 +7,7 @@ before insert on vivienda_venta
 for each row
 declare
     v_vivienda_vacacional vivienda_vacacional.vivienda_id%type;
-	v_vivienda_venta vivienda_renta.vivienda_id%type;
+	v_vivienda_renta vivienda_renta.vivienda_id%type;
 begin
 	SELECT vivienda_id into v_vivienda_vacacional FROM vivienda_vacacional WHERE vivienda_id = :new.vivienda_id; 
 	SELECT vivienda_id into v_vivienda_renta FROM vivienda_renta WHERE vivienda_id = :new.vivienda_id; 
