@@ -29,7 +29,7 @@ create table vivienda_renta(
 
 -- Entidad 3
 create table vivienda_vacacional(
-  vivienda_id number(10,0),
+  vivienda_id number(10,0) not null,
   fecha_inicio date not null,
   dias_renta number(3,0) not null,
   constraint vivienda_vacacional_vivienda_id_fk foreign key (vivienda_id)
