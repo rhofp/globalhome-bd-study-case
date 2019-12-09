@@ -15,7 +15,7 @@ create or replace directory tmp_dir as '/tmp/bases';
 grant read, write on directory tmp_dir to ff_proy_admin;
 
 prompt Contectando con usuario ff_proy_admin para crear la tabla externa
-connect ff_proy_admin
+connect ff_proy_admin/proyectof
 show user
 prompt creando tabla externa
 create table vivienda_ext (
@@ -24,7 +24,6 @@ create table vivienda_ext (
   direccion varchar2(250),
   capacidad_personas_max number(2,0),
   descripcion varchar2(2500),
-  tipo varchar2(50),
   renta_mensual number(10,2),
   dia_deposito number(2,0),
   fecha_inicio date,
@@ -37,8 +36,8 @@ organization external (
     default directory tmp_dir
     access parameters (
         records delimited by newline
-        badfile tmp_dir:'vivienda_ext_bad.log'
-        logfile tmp_dir:'vivienda_ext.log'
+        badfile tmp_dir:'s-04-vivienda_ext_bad.log'
+        logfile tmp_dir:'s-04-vivienda_ext.log'
         fields terminated by ','
         lrtrim
         missing field values are null 
@@ -48,14 +47,13 @@ organization external (
 			direccion,
 			capacidad_personas_max,
 			descripcion,
-			tipo,
 			renta_mensual,
 			dia_deposito,
 			fecha_inicio date mask "dd/mm/yyyy",
 			dias_renta
         )
     )
-    location ('vivienda_ext.csv')
+    location ('s-04-vivienda_ext.csv')
 )
 reject limit unlimited;
 
@@ -69,7 +67,7 @@ prompt creando el directorio /tmp/bases en caso de no existir
 -- directorio donde se está ejecutando este script.
 -- De lo contrario,  el comando cp fallará.
 prompt copiando el archivo csv a /tmp/bases
-!cp vivienda_ext.csv /tmp/bases
+!cp s-04-vivienda_ext.csv /tmp/bases
 prompt cambiando permisos
 !chmod 777 /tmp/bases
 
