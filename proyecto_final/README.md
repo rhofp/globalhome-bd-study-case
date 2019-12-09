@@ -54,7 +54,7 @@ Los usuarios creados son
 | **Unique** | imagen        | num_imagen,vivienda_id |
 | **Unique** | usuario       | email                  |
 | **Unique** | pago_vivienda | num_pago, vivienda_id  |
-|**Check**   | tarjeta    | expiracion_mm y expiracion_aa   | 
+|**Check**   | tarjeta    | expiracion_mm y expiracion_aa   |
 
 
 ##### Atributos calculados
