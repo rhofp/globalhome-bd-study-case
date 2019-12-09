@@ -19,14 +19,16 @@ connect ff_proy_admin
 show user
 prompt creando tabla externa
 create table vivienda_ext (
-    num_empleado     number(10,0),
-    nombre			 varchar2(40),
-    ap_paterno       varchar2(40),
-    ap_materno       varchar2(40),
-    fecha_nacimiento date,
-    email            varchar2(100),
-    sueldo_mensual   number(8,2),
-    comision         number(5,2)
+  ubicacion_longitud number(10,7),
+  ubicacion_latitud number(10,7),
+  direccion varchar2(250),
+  capacidad_personas_max number(2,0),
+  descripcion varchar2(2500),
+  tipo varchar2(50),
+  renta_mensual number(10,2),
+  dia_deposito number(2,0),
+  fecha_inicio date,
+  dias_renta number(3,0)
 )
 organization external (
     --En oracle existen 2 tipos de drivers para parsear el archivo:
@@ -41,8 +43,16 @@ organization external (
         lrtrim
         missing field values are null 
         (
-        	num_empleado, nombre, ap_paterno, ap_materno,
-        	fecha_nacimiento date mask "dd/mm/yyyy",email,sueldo_mensual,comision
+			ubicacion_longitud,
+			ubicacion_latitud,
+			direccion,
+			capacidad_personas_max,
+			descripcion,
+			tipo,
+			renta_mensual,
+			dia_deposito,
+			fecha_inicio date mask "dd/mm/yyyy",
+			dias_renta
         )
     )
     location ('vivienda_ext.csv')
@@ -65,10 +75,8 @@ prompt cambiando permisos
 
 prompt mostrando los datos 
 
-col nombre format a15
-col ap_paterno format a15
-col ap_materno format a15
-col email format a15
-
+col	direccion format a5
+col	descripcion format a5
+col	tipo format a5
 select * from vivienda_ext;
 
