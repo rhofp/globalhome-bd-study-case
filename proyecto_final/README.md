@@ -130,7 +130,6 @@ Para conservar la seguridad de los datos *críticos* se crearán las siguientes 
 
 Por otra parte, global home desea conocer todas las viviendas de renta o vacacional que tengan más de 5 servicios, adicional a ello se deberán mostrar los contratos o alquileres si los hay, de esta manera el usuario administrador podrá conocer las viviendas que actualmente le estan generando ingresos, por la complejidad de la consulta se decide emplear una **vista [08,3]**.
 
-Cuando un usuario que desee comprar una casa visite el sitio las viviendas en venta no deberán mostrar la comisión que se cobra ni el precio final aplicado a quien la anuncia. **vista[08,4]**.
 
 Al registrar un contrato o el alquiler se debe autogenerar el folio por medio de una **funcion [15,1]** a partir de los siguientes datos.
 
