@@ -160,11 +160,7 @@ Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
 * [ ] Revisar que módulo se implementará en *laravel* para hacer las vista de dicho módulo.
 * [ ] Verificar que la tarjeta ingresada sea válida (fecha de expiración).
-<<<<<<< HEAD
-* [ ] En contrato cambiar doc_pdf de varchar a blob porque se trata de un documento (modelo lógico)
-=======
-* [ ] Cambiar doc_pdf de varchar a blob porque se trata de un documento
->>>>>>> a186f7ad2fe7b713957168c536cbb9c18a24599a
+
 ### Dudas
 
 1. ¿Se deben almacenar las fechas de conformidad? NO
