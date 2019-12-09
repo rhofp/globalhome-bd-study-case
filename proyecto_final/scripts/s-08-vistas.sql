@@ -10,7 +10,7 @@ connect FF_PROY_ADMIN
 create or replace view v_usuario(
  usuario_id,correo_electronico,nombre_usuario,nombre,
  apellido_paterno,apellido_materno,tipo
-) as select usuario_id,orreo_electronico,nombre_usuario,
+) as select usuario_id,correo_electronico,nombre_usuario,
 nombre,apellido_paterno,
 apellido_materno,tipo from usuario;
 
@@ -19,9 +19,9 @@ create or replace view v_viviendas_venta(
  vivienda_id,ubicacion_latitud,ubicacion_longitud,direccion,
  capacidad_personas_max,descripcion,status_vivienda_id,
  fecha_status,tipo,num_catastral,precio_venta_inicial)
-as select vivienda_id,ubicacion_latitud,ubicacion_longitud,direccion,
- capacidad_personas_max,descripcion,status_vivienda_id,
- fecha_status,tipo,num_catastral,precio_venta_inicial
+as select v.vivienda_id,v.ubicacion_latitud,v.ubicacion_longitud,v.direccion,
+ v.capacidad_personas_max,v.descripcion,v.status_vivienda_id,
+ v.fecha_status,v.tipo,vv.num_catastral,vv.precio_venta_inicial
 from vivienda v, vivienda_venta vv
 where v.vivienda_id=vv.vivienda_id;
 
