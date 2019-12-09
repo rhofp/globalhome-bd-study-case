@@ -109,7 +109,7 @@ create table usuario(
 -- Entidad 10
 create table tarjeta(
   tarjeta_id number(10,0) not null,
-  clabe number(10,0) not null,
+  clabe number(20,0) not null,
   cliente_id number(10,0) not null,
   expiracion_mm number(2,0) not null,
   expiracion_aa number(4,0) not null,
@@ -129,7 +129,7 @@ create table mensaje(
   cliente_id number(10,0) not null,
   duenio_id number(10,0) not null,
   vivienda_interes_id number(10,0) not null,
-  respuesta_id number(10,0) not null,
+  respuesta_id number(10,0),
   constraint mensaje_pk primary key(mensaje_id),
   constraint mensaje_cliente_id_fk foreign key(cliente_id)
   references usuario(usuario_id),
@@ -144,7 +144,7 @@ create table mensaje(
 -- Entidad 12
 create table clave_deposito(
   clave_deposito_id number(10,0) not null,
-  clabe varchar2(18) not null,
+  clabe varchar2(30) not null,
   constraint clave_deposito_pk primary key(clave_deposito_id)
 );
 
@@ -163,7 +163,7 @@ create table vivienda_renta_clave_dep(
 -- Entidad 14
 create table vivienda_venta(
   vivienda_id number(10,0) not null,
-  num_catastral varchar2(20) not null,
+  num_catastral varchar2(40) not null,
   folio_escritura varchar2(40) not null,
   avaluo_pdf blob,
   precio_venta_inicial number(10,2) not null,
@@ -212,7 +212,7 @@ create table alquiler(
 create table contrato(
   contrato_id number(10,0) not null,
   folio varchar2(40) not null,
-  fecha_contrato varchar2(40) default sysdate not null,
+  fecha_contrato date default sysdate not null,
   doc_pdf blob,
   vivienda_id number(10,0) not null,
   usuario_id number(10,0) not null,
