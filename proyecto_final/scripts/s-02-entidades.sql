@@ -13,7 +13,9 @@ create table vivienda(
   descripcion varchar2(2500) not null,
   status_vivienda_id number(2,0) not null,
   fecha_status date default sysdate not null,
-  tipo char not null,
+  es_renta number(1,0) not null,
+  es_vacacional number(1,0) not null,
+  es_venta number(1,0) not null,
   constraint vivienda_pk primary key(vivienda_id)
 );
 

@@ -96,5 +96,5 @@ prompt Datos aun sin confirmar
 -- hacer logica para descargar e insertar las imagenes
 -- habilitar constraints
 
-Prompt confirmando cambios
-commit;
+--Prompt confirmando cambios
+--commit;
