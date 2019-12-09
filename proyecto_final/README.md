@@ -153,6 +153,7 @@ Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,
 3. Cuando **una vivienda para vacacionar** este disponible, se enviarará un mensaje a todos los usuarios interesados.
 4. Entre **vivienda vacacionar** y **usuario** se genera una tabla **alquiler**, si el usuario insertado en alquiler no tiene tarjeta de crédito registrada, se le solicitará ingresar una.
 5. Validar en **pago_vivienda** que solo se pueden hacer 240 insert's.
+6. Agregar el **histórico del status** de la vivienda
 
 ### To do
 
