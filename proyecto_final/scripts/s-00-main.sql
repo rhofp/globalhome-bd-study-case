@@ -24,7 +24,7 @@ Prompt creando objetos
 --@s-08-vistas.sql 
 
 Prompt realizando la carga de datos
---@s-09-carga-inicial.sql
+@s-09-carga-inicial.sql
 
 --Si se encuentra un error, no se sale de SQL *Plus
 --no se hace commit ni rollback, es decir, se
