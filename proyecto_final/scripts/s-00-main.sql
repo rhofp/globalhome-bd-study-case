@@ -11,7 +11,8 @@ Prompt creando usuarios ff_proy_admin y ff_proy_invitado
 @s-01-usuarios.sql
 
 Prompt conectando como usuario ff_proy_admin
-connect ff_proy_admin
+connect ff_proy_admin/proyectof 
+-- QUITAR CONTRASEÑA AL FINALIZAR TODAS LAS PRUEBAS
 
 Prompt creando objetos
 @s-02-entidades.sql
@@ -23,10 +24,8 @@ Prompt creando objetos
 --@s-08-vistas.sql 
 
 Prompt realizando la carga de datos
---@s-09-carga-inicial.sql
+@s-09-carga-inicial.sql
 
-Prompt confirmando cambios
-commit;
 --Si se encuentra un error, no se sale de SQL *Plus
 --no se hace commit ni rollback, es decir, se
 --regresa al estado original.

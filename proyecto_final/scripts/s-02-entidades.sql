@@ -41,7 +41,7 @@ create table vivienda_vacacional(
 create table status_vivienda(
   status_vivienda_id number(10,0) not null,
   clave varchar2(40) not null,
-  descripcion varchar2(40) not null,
+  descripcion varchar2(200) not null,
   constraint status_vivienda_pk primary key(status_vivienda_id)
 );
 
@@ -192,7 +192,7 @@ create table pago_vivienda(
   constraint pago_vivienda_vivienda_id_fk foreign key(vivienda_id)
   references vivienda(vivienda_id),
   constraint pago_vivienda_viv_id_num_pago_uk unique(num_pago,vivienda_id),
-  constraint pago_vivienda_deposito_realizado_pdf_chk check(deposito_realizado_pdf)
+  constraint pago_vivienda_deposito_realizado_pdf_chk check(deposito_realizado_pdf is not null)
 );
 
 -- Entidad 16
