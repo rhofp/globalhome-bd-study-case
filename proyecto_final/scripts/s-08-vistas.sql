@@ -17,10 +17,10 @@ apellido_materno,tipo from usuario;
 --Vista para viviendas en venta [08,2]
 create or replace view v_viviendas_venta(
  vivienda_id,ubicacion_latitud,ubicacion_longitud,direccion,
- capacidad_personas_max,descripción,status_vivienda_id,
+ capacidad_personas_max,descripcion,status_vivienda_id,
  fecha_status,tipo,num_catastral,precio_venta_inicial)
 as select vivienda_id,ubicacion_latitud,ubicacion_longitud,direccion,
- capacidad_personas_max,descripción,status_vivienda_id,
+ capacidad_personas_max,descripcióo,status_vivienda_id,
  fecha_status,tipo,num_catastral,precio_venta_inicial
 from vivienda v, vivienda_venta vv
 where v.vivienda_id=vv.vivienda_id;
@@ -29,7 +29,7 @@ where v.vivienda_id=vv.vivienda_id;
 
 create or replace view v_vivienda_servicios(
  vivienda_id,ubicacion_latitud,ubicacion_longitud,direccion,
- capacidad_personas_max,descripción,status_vivienda_id,
+ capacidad_personas_max,descripcion,status_vivienda_id,
  fecha_status,tipo,num_servicios,
  contrato_id,folio,fecha_contrato,alquiler_id,folio_alquiler
 )as select v.vivienda_id,v.ubicacion_latitud,v.ubicacion_longitud,
