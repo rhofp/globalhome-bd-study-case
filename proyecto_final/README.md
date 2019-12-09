@@ -157,6 +157,7 @@ Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constr
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
 * [ ] Revisar que módulo se implementará en *laravel* para hacer las vista de dicho módulo.
 * [ ] Verificar que la tarjeta ingresada sea válida (fecha de expiración).
+* [ ] Cambiar doc_pdf de varchar a blob porque se trata de un documento
 ### Dudas
 
 1. ¿Se deben almacenar las fechas de conformidad? NO
