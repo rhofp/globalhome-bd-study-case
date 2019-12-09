@@ -32,6 +32,7 @@ create table vivienda_vacacional(
   vivienda_id number(10,0),
   fecha_inicio date not null,
   dias_renta number(3,0) not null,
+  fecha_fin as (fecha_inicio+dias_renta) virtual,
   constraint vivienda_vacacional_vivienda_id_fk foreign key (vivienda_id)
   references vivienda(vivienda_id),
   constraint vivienda_vacacional_pk primary key(vivienda_id)
@@ -170,6 +171,7 @@ create table vivienda_venta(
   comision_publicidad number(10,0) not null,
   usuario_comprador_id number(10,0),
   clave_deposito_id number(10,0),
+  precio_venta_final as (precio_venta_inicial-comision_publicidad) virtual,
   constraint vivienda_venta_vivienda_id_fk foreign key(vivienda_id)
   references vivienda(vivienda_id),
   constraint vivienda_venta_pk primary key(vivienda_id),

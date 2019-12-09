@@ -1,3 +1,8 @@
+--@Autor:Flores Garcia Karina
+--@Autor:Francisco Pablo Rodrigo
+--@Fecha creación: 01/12/2019
+--@Descripción: Creacion de trigger para histórico
+
 create or replace trigger hist_status_trigger
 	after insert or update of status_vivienda_id on vivienda
 	for each row
