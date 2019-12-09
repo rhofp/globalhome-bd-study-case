@@ -55,11 +55,11 @@ Los usuarios creados son
 | **Unique** | usuario       | email                  |
 | **Unique** | pago_vivienda | num_pago, vivienda_id  |
 | **Check**  | tarjeta       | expiracion_mm          |
-    
+
 ##### Atributos calculados
 * Para las viviendas en venta es posible realizar hasta 240 pagos, para cada pago se calcularan los días que faltan para que este se realice (fechaPago-fechaActual), cuando falten al menos 5 días para pagar se le enviará una notificación al usuario para recordarle que debe realizar su depósito.
 * Para las tarjetas que los usuarios registren de debera calcular los días que faltan para que dicha tarjeta expire (fechaExpiración-fechaActual), cuando falten al menos 15 días para que expire se le enviará un recordatorio a usuario para que actualice su forma de pago.
-    
+  
 
 #### Script s-05-secuencias.sql
 
@@ -96,11 +96,17 @@ Los datos se generan de forma random por medio *mockaroo*
 
 * **En las siguientes reglas de negocios se hacen uso de los requerimiento 03 a 19, excepto 05, 06, 09**
 
-Periodicamente a la empresa *Global Home*  le llega información de nuevas viviendas que deben incorporar en su catálogo de viviendas y sus correspondientes tipos. Dicha información llega a través de un archivo de *texto plano*, por lo cual se requiere hacer uso de una **tabla externa [04,1]** que cargue la información de las viviendas. Dicha información esta separada por comas y puede incluir lo siguiente:
+Periodicamente a la empresa *Global Home*  le llega información de nuevas viviendas que deben incorporar en su catálogo de viviendas y sus correspondientes tipos. Dicha información llega a través de un archivo de *texto separado por compas (CSV)*, por lo cual se requiere hacer uso de una **tabla externa [04,1]** que cargue la información de las viviendas. Dicha información incluir lo siguiente:
 
-* Descripción
-* Tipo: El tipo puede ser "VIVIENDA RENTA", "VIVIENDA VIVIENDA VACACIONAL", "VIVIENDA VENTA"
-* [COMPLETAR]
+* ubicacion_longitud
+* ubicacion_latitud
+* direccion
+* capacidad_personas_max
+* descripcion
+* renta_mensual
+* dia_deposito
+* fecha_inicio
+* dias_renta
 
 Se deberá generar un **procedimiento almacenado [13,1]** que PARA CADA "REGISTRO" (**cursor [19,1]**) verifique la integridad de los datos de la tabla externa antes de que sean insertados en la jerarquía correspondiente.
 
@@ -144,11 +150,11 @@ Para el caso de los mensajes entre el dueño y un posible cliente se requiere cu
 
 Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,1]**
 
-Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constraint not null de todos los datos de tipo blob ya que la aplicación no genera dicho tipo de dato. Una vez hecha la inserción de datos, se debe descargar imagenes o pdf random e insertarlos en cada uno de los campos donde corresponda. Finalmente, se debe habilitar el constraint de para no permitir nulos.
+Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constraint not null de todos los datos de tipo blob ya que la aplicación no genera dicho tipo de dato. Una vez hecha la inserción de datos, se debe descargar imagenes o pdf random e insertarlos en cada uno de los campos donde corresponda. Finalmente, se debe habilitar el constraint para no permitir nulos.
 
 1. No se puede insertar en **vivienda_venta** si ya se inserto en **vivienda_vacacional** o en **vivienda_renta**.
 2. Cuando **una vivienda para vacacionar** este disponible, se enviarará un mensaje a todos los usuarios interesados.
-3. Entre **vivienda vacacionar** y **usuario** se genera una tabla **alquiler**, si el usuario insertado en alquiler no tiene tarjeta de crédito registrada, se le solicitará ingresar una.
+3. Entre **vivienda vacacional** y **usuario** se genera una tabla **alquiler**, si el usuario insertado en alquiler no tiene tarjeta de crédito registrada, se le solicitará ingresar una.
 4. Validar en **pago_vivienda** que solo se pueden hacer 240 insert's.
 
 ### To do
