@@ -20,7 +20,7 @@ create or replace view v_viviendas_venta(
  capacidad_personas_max,descripcion,status_vivienda_id,
  fecha_status,tipo,num_catastral,precio_venta_inicial)
 as select vivienda_id,ubicacion_latitud,ubicacion_longitud,direccion,
- capacidad_personas_max,descripcióo,status_vivienda_id,
+ capacidad_personas_max,descripcion,status_vivienda_id,
  fecha_status,tipo,num_catastral,precio_venta_inicial
 from vivienda v, vivienda_venta vv
 where v.vivienda_id=vv.vivienda_id;
