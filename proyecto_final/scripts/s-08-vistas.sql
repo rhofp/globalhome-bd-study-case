@@ -27,11 +27,11 @@ where v.vivienda_id=vv.vivienda_id;
 create or replace view v_vivienda_servicios(
  vivienda_id,ubicacion_latitud,ubicacion_longitud,direccion,
  capacidad_personas_max,descripcion,status_vivienda_id,
- fecha_status,num_servicios,
+ fecha_status,es_renta,es_vacacional,num_servicios,
  contrato_id,folio,fecha_contrato,alquiler_id,folio_alquiler
 )as select v.vivienda_id,v.ubicacion_latitud,v.ubicacion_longitud,
 v.direccion,v.capacidad_personas_max,v.descripcion,v.status_vivienda_id,
-v.fecha_status, count(servicio_vivienda_id) as num_servicios,
+v.fecha_status,v.es_renta,v.es_vacacional, count(sv.servicio_vivienda_id) as num_servicios,
 c.contrato_id,c.folio,c.fecha_contrato,a.alquiler_id,a.folio_alquiler
 from vivienda v
 join servicio_vivienda sv
@@ -40,9 +40,9 @@ left join  contrato c
 on  v.vivienda_id=c.vivienda_id
 left join alquiler a
 on v.vivienda_id=a.vivienda_id
+where es_renta=1 or es_vacacional=1 or (es_renta=1 and es_vacacional=1)
 group by v.vivienda_id, v.ubicacion_latitud,v.ubicacion_longitud,
 v.direccion,v.capacidad_personas_max,v.descripcion,v.status_vivienda_id,
-v.fecha_status,c.contrato_id,c.folio,c.fecha_contrato,
-a.alquiler_id,a.folio_alquiler;
---having count(servicio_vivienda_id) >= 5 and (tipo='v' or tipo='r');
-
+v.fecha_status,v.es_renta,v.es_vacacional,c.contrato_id,c.folio,c.fecha_contrato,
+a.alquiler_id,a.folio_alquilers
+having count(sv.servicio_vivienda_id) >= 5;
