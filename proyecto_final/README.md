@@ -157,6 +157,9 @@ Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,
 5. Validar en **pago_vivienda** que solo se pueden hacer 240 insert's.
 6. Agregar el **histórico del status** de la vivienda
 
+#### Consultas
+1. Mostrar los datos del servicio más común en las viviendas anunciadas. (Uso de join, funciones de agregación).
+2. Global Home decide darle un reconocimiento al usuario que más contratos de renta haya tenido en los últimos 5 años. Mostrar todos los datos del usuario para dicho caso, excepto los datos sensisbles. (joins,funciones de agregación y vista de usuario)
 ### To do
 
 * [ ] **Agregar cardinalidades** 
