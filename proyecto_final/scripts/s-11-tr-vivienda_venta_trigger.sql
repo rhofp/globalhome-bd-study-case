@@ -17,3 +17,6 @@ begin
 		DBMS_OUTPUT.PUT_LINE('No se puede poner a la venta su vivienda porque esta en renta');
 	END IF;
 END;
+/
+
+show errors;
