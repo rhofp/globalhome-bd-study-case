@@ -1,0 +1,15 @@
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '60429-052', 82, 55);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '0409-3299', 26, 99);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '65044-3020', 19, 64);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '59779-095', 34, 11);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '68152-102', 37, 18);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '65841-651', 53, 92);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '54838-522', 86, 16);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '0054-8496', 54, 85);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '41163-289', 75, 48);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '36800-396', 26, 78);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '76420-470', 31, 89);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '59623-003', 47, 56);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '62620-1001', 40, 59);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '66975-356', 20, 85);
+insert into alquiler (alquiler_id, folio_alquiler, vivienda_id , usuario_id ) values (alquiler_seq.nextval, '52125-634', 18, 55);

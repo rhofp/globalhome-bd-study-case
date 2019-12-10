@@ -1,0 +1,15 @@
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'AGUA POTABLE', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'COMBUSTIBLE PARA COCIONAR', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'TELEFONIA', 'Donec ut mauris eget massa tempor convallis.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'INTERNET', 'Nullam varius.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'GAS ESTACIONARIO', 'Phasellus sit amet erat.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'DRENAJE', 'Aenean sit amet justo.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'LUZ ELÉCTRICA', 'Cras in purus eu magna vulputate luctus.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'LIMPIEZA', 'Mauris ullamcorper purus sit amet nulla.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'LAVADORA', 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'CALEFACCION', 'Donec ut mauris eget massa tempor convallis.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'CABLE TV', 'In blandit ultrices enim.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'RECOLECCION DE BASURA', 'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'ELEVADOR', 'Cras in purus eu magna vulputate luctus.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'MANTENIMIENTO', 'Nulla ac enim.', empty_blob());
+insert into servicio (servicio_id, nombre, descripcion, icono) values (servicio_seq.nextval, 'RED CONTRA INCENDIOS', 'Vivamus tortor.', empty_blob());
