@@ -7,7 +7,7 @@
 --se sale de SQL *Plus
 whenever sqlerror exit rollback
 
-Prompt creando usuarios ff_proy_admin y ff_proy_invitado
+prompt creando usuarios ff_proy_admin y ff_proy_invitado
 @s-01-usuarios.sql
 
 Prompt conectando como usuario ff_proy_admin

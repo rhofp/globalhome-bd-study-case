@@ -165,7 +165,7 @@ Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constr
 
 ### To do
 
-* [ ] **Agregar cardinalidades** 
+* [x] **Agregar cardinalidades** 
 * [ ] Revisar cómo hacer la conexión de la DB con laravel.
 * [ ] Revisar que módulo se implementará en *laravel* para hacer las vista de dicho módulo.
 * [ ] Verificar que la tarjeta ingresada sea válida (fecha de expiración).
