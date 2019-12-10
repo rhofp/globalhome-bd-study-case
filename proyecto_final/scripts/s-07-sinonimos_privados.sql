@@ -2,25 +2,22 @@
 --@Autor:Francisco Pablo Rodrigo
 --@Fecha creación: 30/11/2019
 --@Descripción: Creación de sinónimos privados con plsql
-
-Prompt conectando como usuario ff_proy_admin
-connect ff_proy_admin
-
+set serveroutput on
 declare 
 	cursor cur_tablas_admin is
 	select table_name from user_tables;
 
 	v_nombre_tabla user_tables.table_name%type;
-	v_nombre_sinonimo varchar2;
+	v_nombre_sinonimo varchar2(1000);
+	v_command varchar2(1000);
 begin 
-	 open cur_tablas_admin;
-	 dbms_output.put_line('Creando sinonimos...')
+	 dbms_output.put_line('Creando sinonimos ...');
+
 	 for r in cur_tablas_admin loop
-	 	fetch cur_tablas_admin into v_nombre_tabla;
-	 		v_nombre_sinonimo := 'ff_'
-	 							 ||v_nombre_tabla;
-	 	create or replace private synonym v_nombre_sinonimo from r;	 	
-	 	exit when cur_tablas_admin%notfound;
+	 	v_nombre_sinonimo := 'FF_' ||r.table_name;
+	 	v_command := 'create or replace synonym '||v_nombre_sinonimo||' for '||r.table_name;	 	
+	 	execute immediate v_command;
 	 end loop;
-	 close cur_tablas_admin;
 end;
+/
+show errors

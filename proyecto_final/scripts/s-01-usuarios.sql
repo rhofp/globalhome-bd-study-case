@@ -3,7 +3,7 @@
 --@Fecha creación: 30/11/2019
 --@Descripción: Creacion de usuarios
 
-Creación de usuario FF_PROY_INVITADO y FF_PROY_ADMIN
+prompt Creación de usuario FF_PROY_INVITADO y FF_PROY_ADMIN
 Prompt proporcione el password del usuario sys
 connect sys as sysdba
 
@@ -38,9 +38,10 @@ end;
 
 create user FF_PROY_ADMIN identified by proyectof quota unlimited on users;
 grant create session, create table, create procedure, create sequence, create view,
-create trigger to FF_PROY_ADMIN;
+create public synonym,create synonym, create trigger to FF_PROY_ADMIN;
 
 create user FF_PROY_INVITADO identified by proyectof;
+grant create session,create synonym to FF_PROY_INVITADO;
 
 --Se requiere hacer uso del usuario SYS para crear un objeto tipo
 --directory y otorgar privilegios. 
@@ -50,7 +51,7 @@ create user FF_PROY_INVITADO identified by proyectof;
 -- reales en el sistema de archivos. En este caso tmp_dir es un
 -- objeto que apunta al directorio /tmp/bases del servidor 
 prompt creando directorio tmp_dir
-create or replace directory tmp_dir as '/tmp/bd/load';
+create or replace directory tmp_dir as '/tmp/bases';
 
 --se otorgan permisos para que el usuario jorge_0307 de la BD pueda leer
 --el contenido del directorio
@@ -60,6 +61,6 @@ grant read, write on directory tmp_dir to ff_proy_admin;
 -- APUNTANDO A DIRECTORIO PARA ICONOS
 
 Prompt creando objeto DATA_DIR
-create or replace directory data_dir as '/tmp/bd/iconos';
+create or replace directory data_dir as '/tmp/bd';
 
 grant read,write on directory data_dir to ff_proy_admin;
