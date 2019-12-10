@@ -159,7 +159,7 @@ Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,
 
 #### Consultas
 1. Mostrar los datos del servicio más común en las viviendas anunciadas. (Uso de join, funciones de agregación).
-2. Global Home decide darle un reconocimiento al usuario que más contratos de renta haya tenido en los últimos 5 años. Mostrar todos los datos del usuario para dicho caso, excepto los datos sensisbles. (joins,funciones de agregación y vista de usuario)
+2. Global Home decide darle publicidad al sitio dandole un premio al usuario que más contratos de renta haya tenido en los últimos 5 años. Mostrar todos los datos del usuario para dicho caso, excepto los datos sensisbles. (joins,funciones de agregación,sinónimos y vistas de usuario) **Esta consulta la hace un usuario invitado**
 ### To do
 
 * [ ] **Agregar cardinalidades** 
