@@ -14,6 +14,7 @@ begin
 	FROM vivienda_vacacional WHERE vivienda_id = :new.vivienda_id; 
 	SELECT vivienda_id into v_vivienda_renta 
 	FROM vivienda_renta WHERE vivienda_id = :new.vivienda_id; 
+
 	IF v_vivienda_vacacional is not null then
 		DBMS_OUTPUT.PUT_LINE('No se puede poner a la venta su vivienda porque esta en renta vacacional');
 	ELSIF v_vivienda_renta is not null then
@@ -22,3 +23,4 @@ begin
 END;
 /
 show errors
+

@@ -37,7 +37,7 @@ end;
 /
 
 create user FF_PROY_ADMIN identified by proyectof quota unlimited on users;
-grant create session, create table, create procedure, create sequence,
+grant create session, create table, create procedure, create sequence, create view,
 create trigger to FF_PROY_ADMIN;
 
 create user FF_PROY_INVITADO identified by proyectof;
