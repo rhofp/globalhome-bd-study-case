@@ -163,6 +163,12 @@ Los requerimientos anteriores deberán ser válidados mediante un **trigger [11,
 
 Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constraint not null de todos los datos de tipo blob ya que la aplicación no genera dicho tipo de dato. Una vez hecha la inserción de datos, se debe descargar imagenes o pdf random e insertarlos en cada uno de los campos donde corresponda. Finalmente, se debe habilitar el constraint para no permitir nulos.
 
+
+#### Consultas
+1. Mostrar los datos del servicio más común en las viviendas anunciadas. (Uso de join, funciones de agregación).
+2. Global Home decide darle publicidad al sitio dandole un premio al usuario que más contratos de renta haya tenido en los últimos 5 años. Mostrar todos los datos del usuario para dicho caso, excepto los datos sensisbles. (joins,funciones de agregación,sinónimos y vistas de usuario) **Esta consulta la hace un usuario invitado**
+3. Globaal Home contrato a una empresa de estadistica para saber cuales han sido sus ganancias en viviendas vendidas en los últimos 3 años, tomando como ingreso la comisión por publicidad que se le paga al sitio. Tomar en cuenta todas las viviendas excepto las que se vendieron en diciembre del año pasado(join, funciones,álgebra relacional).
+
 ### To do
 
 * [ ] **Agregar cardinalidades** 
