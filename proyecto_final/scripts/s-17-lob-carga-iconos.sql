@@ -6,13 +6,6 @@
 --whenever sqlerror exit rollback
 set serveroutput on
 Prompt Actualizando iconos de servicios
-Prompt conectando como sys
-connect sys as sysdba
-
-Prompt creando objeto DATA_DIR
-create or replace directory data_dir as '/tmp/bd';
-
-grant read,write on directory data_dir to ff_proy_admin;
 
 Prompt conectando como usuario ff_proy_admin
 connect ff_proy_admin/proyectof

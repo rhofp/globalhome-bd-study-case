@@ -2,6 +2,7 @@
 --@Autor:Francisco Pablo Rodrigo
 --@Fecha creación: 01/12/2019
 --@Descripción: Creacion de trigger para jerarquias
+
 create or replace trigger vivienda_venta_trigger
 before insert on vivienda_venta
 for each row

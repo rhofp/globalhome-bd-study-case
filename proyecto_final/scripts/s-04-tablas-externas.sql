@@ -1,22 +1,11 @@
---Se requiere hacer uso del usuario SYS para crear un objeto tipo
---directory y otorgar privilegios. 
-prompt Conectando como sys
-connect sys as sysdba
+--@Autor:Flores Garcia Karina
+--@Autor:Francisco Pablo Rodrigo
+--@Fecha creación: 30/11/2019
+--@Descripción: Creacion de tabla externa
 
---Un objeto tipo directory es un objeto que se crea y almacena en el
--- diccionario de datos y se emplea para mapear directorios
--- reales en el sistema de archivos. En este caso tmp_dir es un
--- objeto que apunta al directorio /tmp/bases del servidor 
-prompt creando directorio tmp_dir
-create or replace directory tmp_dir as '/tmp/bases';
-
---se otorgan permisos para que el usuario jorge_0307 de la BD pueda leer
---el contenido del directorio
-grant read, write on directory tmp_dir to ff_proy_admin;
-
-prompt Contectando con usuario ff_proy_admin para crear la tabla externa
-connect ff_proy_admin/proyectof
-show user
+--prompt Contectando con usuario ff_proy_admin para crear la tabla externa
+--connect ff_proy_admin/proyectof
+--show user
 prompt creando tabla externa
 create table vivienda_ext (
   ubicacion_longitud number(10,7),

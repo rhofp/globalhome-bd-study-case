@@ -3,7 +3,7 @@
 --@Fecha creación:04/12/2019
 --@Descripción: Programa que corrije los folios de contrato y alquiler
 
-connect ff_proy_admin/proyectof
+--connect ff_proy_admin/proyectof
 
 Prompt creando bloque pl/sql para ejecutar Procedimiento p_corrige_folios
 

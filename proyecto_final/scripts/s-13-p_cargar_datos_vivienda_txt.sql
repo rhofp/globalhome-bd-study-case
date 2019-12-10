@@ -4,7 +4,7 @@
 --@Descripción: Programa que carga datos de una tabla 
 --externa a la jerarquia de vivienda
 
-connect ff_proy_admin/proyectof
+--connect ff_proy_admin/proyectof
 
 Prompt creando bloque pl/sql para ejecutar Procedimiento p_cargar_datos_vivienda_txt
 

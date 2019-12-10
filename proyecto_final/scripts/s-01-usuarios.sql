@@ -42,3 +42,24 @@ create trigger to FF_PROY_ADMIN;
 
 create user FF_PROY_INVITADO identified by proyectof;
 
+--Se requiere hacer uso del usuario SYS para crear un objeto tipo
+--directory y otorgar privilegios. 
+
+--Un objeto tipo directory es un objeto que se crea y almacena en el
+-- diccionario de datos y se emplea para mapear directorios
+-- reales en el sistema de archivos. En este caso tmp_dir es un
+-- objeto que apunta al directorio /tmp/bases del servidor 
+prompt creando directorio tmp_dir
+create or replace directory tmp_dir as '/tmp/bd/load';
+
+--se otorgan permisos para que el usuario jorge_0307 de la BD pueda leer
+--el contenido del directorio
+grant read, write on directory tmp_dir to ff_proy_admin;
+
+
+-- APUNTANDO A DIRECTORIO PARA ICONOS
+
+Prompt creando objeto DATA_DIR
+create or replace directory data_dir as '/tmp/bd/iconos';
+
+grant read,write on directory data_dir to ff_proy_admin;
