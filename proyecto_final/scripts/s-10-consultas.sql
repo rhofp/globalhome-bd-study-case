@@ -63,6 +63,32 @@ having u.tipo='C'))));
 
 
 
+--Mostrar los datos de la persona que ha comprado una vivienda lo más recientemente
+--FUNCIONA
+select *
+from v_usuario
+where usuario_id=(
+select usuario_comprador_id
+from vivienda_venta vv
+where vivienda_id =(
+select vivienda_id
+from vivienda 
+where fecha_status=(
+select max(fecha_status)
+from vivienda
+group by es_venta,status_vivienda_id
+having es_venta=1 and status_vivienda_id=5) and es_venta=1
+));
+
+
+--select vivienda_id
+--from vivienda 
+--where fecha_status=(
+--select max(fecha_status)
+--from vivienda
+--group by es_venta,status_vivienda_id
+--having es_venta=1 and status_vivienda_id=5) and es_venta=1;
+
 
 --Ganancias vendidas en los ultimos 3 años sin contar las ventas en los meses de diciembre
 --FUNCIONA 
@@ -82,4 +108,20 @@ on q1.vivienda_id = vv.vivienda_id;
 
 
 
+--MOstrar la lista de clabes en las que se puede hacer el deposito de la vivienda_renta con status_disponible 
+--y que su fecha de status sea la más antigua, esto con el fin de aplicarle un descuento para que se rente
 
+select * 
+from clave_deposito
+where clave_deposito_id=(
+select clave_deposito_id from
+vivienda_renta_clave_dep
+where vivienda_id=(
+select vivienda_id
+from vivienda 
+where fecha_status=(
+select min(fecha_status)
+from vivienda
+group by es_renta,status_vivienda_id
+having es_renta=1 and status_vivienda_id=1) and es_renta=1
+));
