@@ -5,11 +5,11 @@
 
 Prompt copiando iconos
 
-!rm -rf /tmp/bd
-!mkdir -p /tmp/bd
-!chmod 777 /tmp/bd
-!cp imagenes/img-* /tmp/bd
-!chmod 755 /tmp/bd/img-*
+!rm -rf /tmp/bd/iconos
+!mkdir -p /tmp/bd/iconos
+!chmod 777 /tmp/bd/iconos
+!cp iconos/icono-* /tmp/bd/iconos
+!chmod 755 /tmp/bd/iconos/icono-*
 
 Prompt invocando procedimiento
 exec p_actualiza_icono

@@ -1,17 +1,17 @@
 --@Autor: Francisco Pablo Rodrigo
 --@Autor: Flores Garcia Karina
 --@Fecha creación:04/12/2019
---@Descripción: Script encargado de actualizar iconoes en la BD.
+--@Descripción: Script encargado de actualizar contratos
 
 --whenever sqlerror exit rollback
 set serveroutput on
-Prompt Actualizando iconos de servicios
+Prompt Actualizando pdf de contratos
 
 Prompt conectando como usuario ff_proy_admin
 connect ff_proy_admin/proyectof
 
-Prompt creando procedimiento para actualizar iconos.
-create or replace procedure p_actualiza_icono is
+Prompt creando procedimiento para actualizar pdfs.
+create or replace procedure p_actualiza_contrato is
 	v_bfile bfile;
 	v_src_offset number := 1;
 	v_dest_offset number := 1;
@@ -21,20 +21,20 @@ create or replace procedure p_actualiza_icono is
 	v_contador number := 1;
 	v_nombre_archivo varchar2(1000);
 
-cursor cur_servicio_icono is
-	select servicio_id,icono
-	from servicio;
+cursor cur_contrato is
+	select contrato_id,doc_pdf
+	from contrato;
 
 begin
 
-	for r in cur_servicio_icono loop
+	for r in cur_contrato loop
 		v_src_offset := 1;
 		v_dest_offset := 1;
 
-		v_nombre_archivo := 'icono-'||v_contador||'.jpg';
+		v_nombre_archivo := 'contrato'||v_contador||'.pdf';
 
-		dbms_output.put_line('cargando icono para '|| v_nombre_archivo);
-		v_bfile := bfilename('ICON_DIR', v_nombre_archivo);
+		dbms_output.put_line('cargando pdf para '|| v_nombre_archivo);
+		v_bfile := bfilename('PDF_DIR', v_nombre_archivo);
 
 		if dbms_lob.fileexists(v_bfile) = 1 and not dbms_lob.isopen(v_bfile) = 1 then 
 			dbms_lob.open(v_bfile, dbms_lob.lob_readonly);
@@ -45,9 +45,9 @@ begin
 			|| ' o el archivo esta abierto');
 		end if;
 
-		select icono into v_dest_blob
-		from servicio
-		where servicio_id = r.servicio_id
+		select doc_pdf into v_dest_blob
+		from contrato
+		where contrato_id = r.contrato_id
 		for update;
 
 		dbms_lob.loadblobfromfile(
