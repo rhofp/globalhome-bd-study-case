@@ -11,9 +11,6 @@ prompt descargando archivos de carga inicial
 -- INVOCAR EL SIGUIENTE SCRIPT SOLO SI NO SE CUENTA CON LOS SCRIPTS DE CARGA INICIAL
 --@s-09-descarga-archivos-carga-inicial.sql
 
-prompt Deshabilitando constraints de entidades blob
-@s-09-deshabilitar-constraints.sql
-
 -- cargador 1
 prompt Cargando datos de vivienda
 @carga-inicial/s-09-vivienda.sql
