@@ -50,7 +50,6 @@ Los usuarios creados son
 | **Default**    | Mensaje                 | leido default 0                |
 | **Default**    | Contrato                | fecha_contrato default sysdate |
 | **Default**    | Interesado_vivienda_vac | notificacion_enviada default   |
-| **Columna virtual** |                         |                                |
 | **Unique** | imagen        | num_imagen,vivienda_id |
 | **Unique** | usuario       | email                  |
 | **Unique** | pago_vivienda | num_pago, vivienda_id  |
