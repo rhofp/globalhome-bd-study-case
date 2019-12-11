@@ -14,7 +14,7 @@ create or replace function f_genera_folio(
 ) return varchar2 is
 
 -- variables 
-v_folio_gen varchar2(100);
+v_folio_gen varchar2(100) default 'CON-v00-u00-dd-mm-yyyy';
 v_fecha_status date;
 v_vivienda_es_renta number(1,0);
 v_vivienda_es_vacacional number(1,0);
@@ -37,6 +37,8 @@ begin
 	elsif v_vivienda_es_renta = 1 then 
 		v_folio_gen := 'CON-v'||p_vivienda_id||'-u'||p_usuario_id||'-'|| 
 		to_char(v_fecha_status,'dd-mm-yyyy') ;
+	else
+		v_folio_gen := 'CON-v00-u00-dd-mm-yyyy' ;
 	end if;
 
 	return v_folio_gen;

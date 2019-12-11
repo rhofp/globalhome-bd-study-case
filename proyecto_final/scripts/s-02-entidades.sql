@@ -4,6 +4,7 @@
 --@Descripción: Creacion de entidades
 
 -- Entidad 1
+prompt CREANDO TABLA vivienda
 create table vivienda(
   vivienda_id number(10,0) not null,
   ubicacion_longitud number(10,7) not null,
@@ -20,6 +21,7 @@ create table vivienda(
 );
 
 -- Entidad 2
+prompt CREANDO TABLA vivienda_renta
 create table vivienda_renta(
   vivienda_id number(10,0) not null,
   renta_mensual number(10,2) not null,
@@ -30,6 +32,7 @@ create table vivienda_renta(
 );
 
 -- Entidad 3
+prompt CREANDO TABLA vivienda_vacacional
 create table vivienda_vacacional(
   vivienda_id number(10,0) not null,
   fecha_inicio date not null,
@@ -41,6 +44,7 @@ create table vivienda_vacacional(
 );
 
 -- Entidad 4
+prompt CREANDO TABLA status_vivienda
 create table status_vivienda(
   status_vivienda_id number(10,0) not null,
   clave varchar2(40) not null,
@@ -49,6 +53,7 @@ create table status_vivienda(
 );
 
 -- Entidad 5
+prompt CREANDO TABLA historico_status_vivienda
 create table historico_status_vivienda(
   historico_status_vivienda_id  number(10,0),
   status_vivienda_id number(10,0) not null,
@@ -62,6 +67,7 @@ create table historico_status_vivienda(
 );
 
 -- Entidad 6
+prompt CREANDO TABLA imagen
 create table imagen(
   imagen_id number(10,0),
   num_imagen number(2,0),
@@ -75,6 +81,7 @@ create table imagen(
 );
 
 -- Entidad 7
+prompt CREANDO TABLA servicio
 create table servicio(
   servicio_id number(10,0) not null,
   nombre varchar2(30) not null,
@@ -85,6 +92,7 @@ create table servicio(
 );
 
 -- Entidad 8
+prompt CREANDO TABLA servicio_vivienda
 create table servicio_vivienda(
   servicio_vivienda_id number(10,0) not null,
   servicio_id number(10,0) not null,
@@ -96,6 +104,7 @@ create table servicio_vivienda(
 );
 
 -- Entidad 9
+prompt CREANDO TABLA usuario
 create table usuario(
   usuario_id number(10,0) not null,
   correo_electronico varchar2(60) not null,
@@ -110,6 +119,7 @@ create table usuario(
 );
 
 -- Entidad 10
+prompt CREANDO TABLA tarjeta
 create table tarjeta(
   tarjeta_id number(10,0) not null,
   clabe number(20,0) not null,
@@ -125,6 +135,7 @@ create table tarjeta(
 );
 
 -- Entidad 11
+prompt CREANDO TABLA mensaje
 create table mensaje(
   mensaje_id number(10,0) not null,
   leido number(1,0) default 0 not null,
@@ -145,6 +156,7 @@ create table mensaje(
 );
 
 -- Entidad 12
+prompt CREANDO TABLA clave_deposito
 create table clave_deposito(
   clave_deposito_id number(10,0) not null,
   clabe varchar2(30) not null,
@@ -152,6 +164,7 @@ create table clave_deposito(
 );
 
 -- Entidad 13
+prompt CREANDO TABLA vivienda_renta_clave_dep
 create table vivienda_renta_clave_dep(
   vivienda_renta_clave_dep_id number(10,0) not null,
   clave_deposito_id number(10,0) not null,
@@ -164,6 +177,7 @@ create table vivienda_renta_clave_dep(
 );
 
 -- Entidad 14
+prompt CREANDO TABLA vivienda_venta
 create table vivienda_venta(
   vivienda_id number(10,0) not null,
   num_catastral varchar2(40) not null,
@@ -185,6 +199,7 @@ create table vivienda_venta(
 );
 
 -- Entidad 15
+prompt CREANDO TABLA pago_vivienda
 create table pago_vivienda(
   pago_vivienda_id number(10,0) not null,
   vivienda_id number(10,0) not null,
@@ -200,9 +215,10 @@ create table pago_vivienda(
 );
 
 -- Entidad 16
+prompt CREANDO TABLA alquiler
 create table alquiler(
   alquiler_id number(10,0) not null,
-  folio_alquiler varchar2(20) not null,
+  folio_alquiler varchar2(50) not null,
   vivienda_id number(10,0) not null,
   usuario_id number(10,0) not null,
   constraint alquiler_pk primary key(alquiler_id),
@@ -213,9 +229,10 @@ create table alquiler(
 );
 
 -- Entidad 17
+prompt CREANDO TABLA contrato
 create table contrato(
   contrato_id number(10,0) not null,
-  folio varchar2(40) not null,
+  folio varchar2(50) not null,
   fecha_contrato date default sysdate not null,
   doc_pdf blob,
   vivienda_id number(10,0) not null,
@@ -229,6 +246,7 @@ create table contrato(
 );
 
 -- Entidad 18
+prompt CREANDO TABLA interesado_vivienda_vac
 create table interesado_vivienda_vac(
   interesado_vivienda_vac_id number(10,0) not null,
   usuario_id number(10,0) not null,

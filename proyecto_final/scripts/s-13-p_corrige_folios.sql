@@ -27,21 +27,15 @@ begin
 		v_folio_gen := f_genera_folio(p.vivienda_id,p.usuario_id);
 		-- comparar v_folio_gen con el folio que de p,
 		-- en caso de ser distinot hacer update
-		if v_folio_gen = p.folio_alquiler then 
-			update alquiler set folio_alquiler = v_folio_gen 
-			where usuario_id = p.usuario_id and
-			vivienda_id = p.vivienda_id;
-		end if;
+		update alquiler set folio_alquiler = v_folio_gen 
+		where alquiler_id = p.alquiler_id;
 	end loop;
 
 	for p in cur_contrato loop
 		v_folio_gen := f_genera_folio(p.vivienda_id,p.usuario_id);
 
-		if v_folio_gen = p.folio then 
-			update contrato set folio = v_folio_gen 
-			where usuario_id = p.usuario_id and
-			vivienda_id = p.vivienda_id;
-		end if;
+		update contrato set folio = v_folio_gen 
+		where contrato_id = p.contrato_id;
 	end loop;
 
 end;

@@ -3,6 +3,12 @@
 --@Fecha creación:04/12/2019
 --@Descripción: Script encargado de actualizar pdfs en la BD.
 set serveroutput on
+
+Prompt Se muestran datos antes de inserción de BLOB
+
+select vivienda_id,dbms_lob.getlength(avaluo_pdf) as longitud_avaluo_pdf
+from vivienda_venta;
+
 Prompt copiando pdf
 
 !mkdir -p /tmp/bd/pdf

@@ -3,6 +3,12 @@
 --@Fecha creación:04/12/2019
 --@Descripción: Script encargado de actualizar pdfs en la BD.
 set serveroutput on
+
+Prompt se muestran los datos de contrato antes de la inserción de archivo BLOB
+
+select contrato_id,dbms_lob.getlength(doc_pdf) as longitud_doc_pdf
+from contrato;
+
 Prompt copiando pdf
 
 !rm -rf /tmp/bd/pdf

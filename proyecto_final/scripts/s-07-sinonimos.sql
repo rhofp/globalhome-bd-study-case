@@ -2,7 +2,7 @@
 --@Autor:Francisco Pablo Rodrigo
 --@Fecha creación: 30/11/2019
 --@Descripción: Creacion de sinonimos
-
+prompt CREANDO SINONIMOS
 -- Sinonimos publicos
 create or replace public synonym publ_vivienda for ff_proy_admin.vivienda;
 create or replace public synonym publ_vivienda_renta 

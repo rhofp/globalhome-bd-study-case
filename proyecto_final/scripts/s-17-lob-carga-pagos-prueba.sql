@@ -3,6 +3,11 @@
 --@Fecha creación:04/12/2019
 --@Descripción: Script encargado de actualizar pdfs en la BD.
 set serveroutput on
+
+Prompt Se muestra datos de pago_vivienda antes insercion de archivo BLOB
+select pago_vivienda_id,dbms_lob.getlength(deposito_realizado_pdf) as longitud_deposito_pdf
+from pago_vivienda;
+
 Prompt copiando pdf
 
 !mkdir -p /tmp/bd/pdf

@@ -3,7 +3,7 @@
 --@Fecha creación: 30/11/2019
 --@Descripción: Cargando inciales
 
-prompt Cargando datos iniciales
+prompt CARGANDO DATOS INICIALES
 
 set define off
 

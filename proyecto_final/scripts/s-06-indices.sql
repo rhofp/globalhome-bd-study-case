@@ -4,6 +4,7 @@
 --@Descripción: Creacion de indices
 
 -- SECUENCIAS DE LLAVES FORANEAS
+prompt CREANDO INDICES
 
 create index vivienda_status_viv_id_ix
 on vivienda(status_vivienda_id);

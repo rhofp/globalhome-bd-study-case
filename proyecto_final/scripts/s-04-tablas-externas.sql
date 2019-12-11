@@ -6,7 +6,7 @@
 --prompt Contectando con usuario ff_proy_admin para crear la tabla externa
 --connect ff_proy_admin/proyectof
 --show user
-prompt creando tabla externa
+prompt CREANDO TABLA EXTERNA vivienda_ext
 create table vivienda_ext (
   ubicacion_longitud number(10,7),
   ubicacion_latitud number(10,7),
@@ -45,3 +45,17 @@ organization external (
     location ('s-04-vivienda_ext.csv')
 )
 reject limit unlimited;
+
+--Dentro de sqlplus se pueden ejecutar comandos del s.o. empleando '!'
+--En esta instrucción se crea el directorio /tmp/bases para
+--copiar el archivo csv
+prompt creando el directorio /tmp/bases en caso de no existir
+!mkdir -p /tmp/bd/load
+
+-- Asegurarse que el archivo csv se encuentra en elmismo
+-- directorio donde se está ejecutando este script.
+-- De lo contrario,  el comando cp fallará.
+prompt copiando el archivo csv a /tmp/bd/load
+!cp s-04-vivienda_ext.csv /tmp/bd/load
+prompt cambiando permisos
+!chmod 777 /tmp/bd/load

@@ -3,12 +3,12 @@
 --@Fecha creación: 30/11/2019
 --@Descripción: Creacion de usuarios
 
+--permite la salida de mensajes a consula empleabo dbms_output.put_line
+set serveroutput on
+
 prompt Creación de usuario FF_PROY_INVITADO y FF_PROY_ADMIN
 Prompt proporcione el password del usuario sys
 connect sys as sysdba
-
---permite la salida de mensajes a consula empleabo dbms_output.put_line
-set serveroutput on
 
 --este bloque anómimo valida la existencia del usuario, si existe lo elimina.
 declare

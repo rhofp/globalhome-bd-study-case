@@ -47,11 +47,72 @@ begin
 			);
 
 			v_vivienda_no_valida := 1;
-
+		else
+			insert into vivienda_invalida_temp(
+				ubicacion_longitud,
+				ubicacion_latitud,
+				direccion,
+				capacidad_personas_max,
+				descripcion
+			) values(
+				p.ubicacion_longitud,
+				p.ubicacion_latitud,
+				p.direccion,
+				p.capacidad_personas_max,
+				p.descripcion
+			);
 		end if;
 
 		if v_vivienda_no_valida = 0 then
 			if 	p.renta_mensual is not null and 
+				p.dia_deposito is not null and 
+				p.fecha_inicio is not null and
+				p.dias_renta is not null then
+
+				-- Significa que es tanto vivienda renta como vivienda vacacional
+				insert into vivienda(
+					vivienda_id,
+					ubicacion_longitud,
+					ubicacion_latitud,
+					direccion,
+					capacidad_personas_max,
+					descripcion,
+					status_vivienda_id,
+					es_renta,
+					es_vacacional,
+					es_venta
+				)values(
+					vivienda_seq.nextval,
+					p.ubicacion_longitud,
+					p.ubicacion_latitud,
+					p.direccion,
+					p.capacidad_personas_max,
+					p.descripcion,
+					1,
+					1,0,0
+				);
+
+				insert into vivienda_renta(
+					vivienda_id,
+					renta_mensual,
+					dia_deposito
+				)values(
+					vivienda_seq.currval,
+					p.renta_mensual,
+					p.dia_deposito
+				);
+
+				insert into vivienda_vacacional (
+					vivienda_id,
+					fecha_inicio,
+					dias_renta
+				)values(
+					vivienda_seq.currval,
+					p.fecha_inicio,
+					p.dias_renta
+				);
+
+			elsif p.renta_mensual is not null and 
 				p.dia_deposito is not null then
 				-- Significa que se trata de una vivienda_renta, por lo tanto se hace insert
 

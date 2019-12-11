@@ -3,6 +3,8 @@
 --@Fecha creación: 30/11/2019
 --@Descripción: Creacion de vistas
 
+prompt CREANDO VISTAS
+
 --Vista para los usuarios [08,1]
 create or replace view v_usuario(
  usuario_id,correo_electronico,nombre_usuario,nombre,
@@ -44,5 +46,5 @@ where es_renta=1 or es_vacacional=1 or (es_renta=1 and es_vacacional=1)
 group by v.vivienda_id, v.ubicacion_latitud,v.ubicacion_longitud,
 v.direccion,v.capacidad_personas_max,v.descripcion,v.status_vivienda_id,
 v.fecha_status,v.es_renta,v.es_vacacional,c.contrato_id,c.folio,c.fecha_contrato,
-a.alquiler_id,a.folio_alquilers
+a.alquiler_id,a.folio_alquiler
 having count(sv.servicio_vivienda_id) >= 5;

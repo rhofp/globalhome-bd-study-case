@@ -168,6 +168,44 @@ Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constr
 2. Global Home decide darle publicidad al sitio dandole un premio al usuario que más contratos de renta haya tenido en los últimos 5 años. Mostrar todos los datos del usuario para dicho caso, excepto los datos sensisbles. (joins,funciones de agregación,sinónimos y vistas de usuario) **Esta consulta la hace un usuario invitado**
 3. Globaal Home contrato a una empresa de estadistica para saber cuales han sido sus ganancias en viviendas vendidas en los últimos 3 años, tomando como ingreso la comisión por publicidad que se le paga al sitio. Tomar en cuenta todas las viviendas excepto las que se vendieron en diciembre del año pasado(join, funciones,álgebra relacional).
 
+## Pruebas
+
+* Se muestra el usuario de **tablas externas** y **temporales**
+
+  ```sql
+  @s-04-tablas-externas-prueba.sql
+  select * from tabla temporal;
+  ```
+
+* Se realiza la inserción de datos a partir de una tabla externa en la jerarquía de vivienda y sus subtipos, por medio de **procedimiento almacenado**. Los datos que tengan fallas se mandan a una tabla temporal. Se hizo uso de un **cursor** para iterar sobre la tabla externa
+
+  ```sql
+  @s13-p_cargar_datos_vivienda_txt-prueba.sql
+  select * from tabla temporal;
+  ```
+
+* Se plantea un corrección periodica de las banderas de vivienda con base el los registros que se tengan en la jerarquía de la misma, para ello, mediante un procedimiento almacenado se corrigen las banderas.
+
+  ```sql
+  @s-13p_corrige_banderas-prueba.sql
+  ```
+
+* Los folios de contratos y alquileres fueron capturados de forma erronea, deben de llegar cierto formato, se genero una **función** que les da formato a todos aquellos folios que sean válidos. Posteriormente se genera un **procedimiento almacenado** que utliza la función para corregir todos los folios. 
+
+  ```sql
+  @s-13-p_corrige_folios-prueba.sql
+  ```
+
+* Inserción de archivos BLOB
+
+  ```sql
+  @s-17-lob-carga-contratos-prueba.sql
+  @s-17-lob-carga-iconos-prueba.sql
+  @s-17-lob-carga-imagenes-prueba.sql
+  @s-17-lob-carga-pagos-prueba.sql
+  @s-17-lob-carga-ventas-prueba.sql
+  ```
+
 ### To do
 
 * [x] **Agregar cardinalidades** 
