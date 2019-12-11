@@ -21,6 +21,7 @@ connect ff_proy_admin/proyectof
 @s-07-sinonimos.sql 
 @s-07-sinonimos_privados.sql 
 @s-08-vistas.sql 
+
 @s-09-carga-inicial.sql
 
 --@s-11-tr-pago_vivienda_trigger.sql
@@ -31,7 +32,11 @@ connect ff_proy_admin/proyectof
 @s-15-f_genera_folio.sql
 @s-13-p_corrige_folios.sql
 
+@s-17-lob-carga-contratos.sql
 @s-17-lob-carga-iconos.sql
+@s-17-lob-carga-imagenes.sql
+@s-17-lob-carga-pagos.sql
+@s-17-lob-carga-ventas.sql
 
 --Si se encuentra un error, no se sale de SQL *Plus
 --no se hace commit ni rollback, es decir, se
