@@ -24,7 +24,7 @@ connect ff_proy_admin/proyectof
 
 @s-09-carga-inicial.sql
 
---@s-11-tr-pago_vivienda_trigger.sql
+@s-11-tr-pago_vivienda_trigger.sql
 @s-11-tr-vacaciones_alquiler_trigger.sql
 @s-11-tr-vivienda_venta_trigger.sql
 
