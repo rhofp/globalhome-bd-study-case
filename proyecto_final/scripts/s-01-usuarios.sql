@@ -51,7 +51,7 @@ grant create session,create synonym to FF_PROY_INVITADO;
 -- reales en el sistema de archivos. En este caso tmp_dir es un
 -- objeto que apunta al directorio /tmp/bases del servidor 
 prompt creando directorio tmp_dir
-create or replace directory tmp_dir as '/tmp/bases';
+create or replace directory tmp_dir as '/tmp/bd/load';
 
 --se otorgan permisos para que el usuario jorge_0307 de la BD pueda leer
 --el contenido del directorio
@@ -60,7 +60,17 @@ grant read, write on directory tmp_dir to ff_proy_admin;
 
 -- APUNTANDO A DIRECTORIO PARA ICONOS
 
-Prompt creando objeto DATA_DIR
-create or replace directory data_dir as '/tmp/bd';
+Prompt creando objeto ICON_DIR
+create or replace directory icon_dir as '/tmp/bd/iconos';
 
-grant read,write on directory data_dir to ff_proy_admin;
+grant read,write on directory icon_dir to ff_proy_admin;
+
+Prompt creando objeto IMG_DIR
+create or replace directory img_dir as '/tmp/bd/imagenes';
+
+grant read,write on directory img_dir to ff_proy_admin;	
+
+Prompt creando objeto PDF_DIR
+create or replace directory pdf_dir as '/tmp/bd/pdf';
+
+grant read,write on directory pdf_dir to ff_proy_admin;		
