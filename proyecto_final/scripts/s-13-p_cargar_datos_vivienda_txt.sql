@@ -62,6 +62,7 @@ begin
 					direccion,
 					capacidad_personas_max,
 					descripcion,
+					status_vivienda_id,
 					es_renta,
 					es_vacacional,
 					es_venta
@@ -72,6 +73,7 @@ begin
 					p.direccion,
 					p.capacidad_personas_max,
 					p.descripcion,
+					1,
 					1,0,0
 				);
 
@@ -96,6 +98,7 @@ begin
 					direccion,
 					capacidad_personas_max,
 					descripcion,
+					status_vivienda_id,
 					es_renta,
 					es_vacacional,
 					es_venta
@@ -106,6 +109,7 @@ begin
 					p.direccion,
 					p.capacidad_personas_max,
 					p.descripcion,
+					1,
 					0,1,0
 				);
 
