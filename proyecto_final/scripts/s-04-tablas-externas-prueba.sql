@@ -2,15 +2,15 @@
 --En esta instrucción se crea el directorio /tmp/bases para
 --copiar el archivo csv
 prompt creando el directorio /tmp/bases en caso de no existir
-!mkdir -p /tmp/bd/iconos
+!mkdir -p /tmp/bd/load
 
 -- Asegurarse que el archivo csv se encuentra en elmismo
 -- directorio donde se está ejecutando este script.
 -- De lo contrario,  el comando cp fallará.
-prompt copiando el archivo csv a /tmp/bd/iconos
-!cp s-04-vivienda_ext.csv /tmp/bd/iconos
+prompt copiando el archivo csv a /tmp/bd/load
+!cp s-04-vivienda_ext.csv /tmp/bd/load
 prompt cambiando permisos
-!chmod 777 /tmp/bd/iconos
+!chmod 777 /tmp/bd/load
 
 prompt mostrando los datos 
 
