@@ -11,3 +11,7 @@ create or replace trigger notificacion_vivienda_vacacional_trigger
     select status_vivienda_id on v_status_id from vivienda where vivienda_id=:new.vivienda_id
 
   end;
+
+
+
+  --AUN NO ESTA COMPLETO

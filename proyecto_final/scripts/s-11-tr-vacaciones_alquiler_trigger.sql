@@ -2,6 +2,8 @@
 --@Autor:Francisco Pablo Rodrigo
 --@Fecha creación: 01/12/2019
 --@Descripción: Creacion de trigger para generar solicitar tarjeta
+
+--Ya debería funcionar
 create or replace trigger vacaciones_alquiler_trigger
 after insert on ALQUILER
 FOR EACH ROW
