@@ -29,6 +29,7 @@ connect ff_proy_admin/proyectof
 @s-11-tr-vivienda_venta_trigger.sql
 
 @s-13-p_cargar_datos_vivienda_txt.sql
+@s-13-p_corrige_banderas.sql	
 @s-15-f_genera_folio.sql
 @s-13-p_corrige_folios.sql
 

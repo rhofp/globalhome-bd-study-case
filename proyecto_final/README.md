@@ -174,20 +174,20 @@ Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constr
 
   ```sql
   @s-04-tablas-externas-prueba.sql
-  select * from tabla temporal;
+  select * from vivienda_invalida_temp;
   ```
 
 * Se realiza la inserción de datos a partir de una tabla externa en la jerarquía de vivienda y sus subtipos, por medio de **procedimiento almacenado**. Los datos que tengan fallas se mandan a una tabla temporal. Se hizo uso de un **cursor** para iterar sobre la tabla externa
 
   ```sql
-  @s13-p_cargar_datos_vivienda_txt-prueba.sql
-  select * from tabla temporal;
+  @s-13-p_cargar_datos_vivienda_txt-prueba.sql
+  select * from vivienda_invalida_temp;
   ```
 
 * Se plantea un corrección periodica de las banderas de vivienda con base el los registros que se tengan en la jerarquía de la misma, para ello, mediante un procedimiento almacenado se corrigen las banderas.
 
   ```sql
-  @s-13p_corrige_banderas-prueba.sql
+  @s-13-p_corrige_banderas-prueba.sql	
   ```
 
 * Los folios de contratos y alquileres fueron capturados de forma erronea, deben de llegar cierto formato, se genero una **función** que les da formato a todos aquellos folios que sean válidos. Posteriormente se genera un **procedimiento almacenado** que utliza la función para corregir todos los folios. 
@@ -199,11 +199,11 @@ Para poder realizar la *carga de datos de prueba* se debe deshabilitar el constr
 * Inserción de archivos BLOB
 
   ```sql
-  @s-17-lob-carga-contratos-prueba.sql
-  @s-17-lob-carga-iconos-prueba.sql
-  @s-17-lob-carga-imagenes-prueba.sql
-  @s-17-lob-carga-pagos-prueba.sql
-  @s-17-lob-carga-ventas-prueba.sql
+  @s-18-lob-carga-contratos-prueba.sql
+  @s-18-lob-carga-iconos-prueba.sql
+  @s-18-lob-carga-imagenes-prueba.sql
+  @s-18-lob-carga-pagos-prueba.sql
+  @s-18-lob-carga-ventas-prueba.sql
   ```
 
 ### To do

@@ -9,7 +9,7 @@ set serveroutput on
 declare 
 	v_correcciones number := 0;
 begin 
-	dbms_output.put_line('Se hace realiza corrección de banderas con base en los registros de las tablas del subtipo de jerarquias')
+	dbms_output.put_line('Se hace realiza corrección de banderas con base en los registros de las tablas del subtipo de jerarquias');
 	p_corrige_banderas(v_correcciones);
 	dbms_output.put_line('Las correcciones realizadas por el Programa fueron: '|| v_correcciones);
 end;
